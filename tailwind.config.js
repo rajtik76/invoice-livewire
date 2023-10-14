@@ -4,9 +4,11 @@ import forms from '@tailwindcss/forms';
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
+        './vendor/ramonrietdijk/livewire-tables/resources/**/*.blade.php',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
+        './app/Livewire/**/*.blade.php',
     ],
 
     theme: {
