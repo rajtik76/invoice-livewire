@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,4 +24,9 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::view('address/table', 'address.address-table')->name('address.table');
+    Route::view('address/{address}/update', 'address.update-address-form')->name('address.update');
+});
+
+require __DIR__ . '/auth.php';

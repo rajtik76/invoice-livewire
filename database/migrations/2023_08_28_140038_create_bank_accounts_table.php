@@ -1,37 +1,30 @@
 <?php
+declare(strict_types=1);
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
+return new class extends Migration {
+    public function up(): void
     {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id();
-
+            $table->foreignIdFor(User::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->string('bank_name');
-            $table->integer('bank_code');
-            $table->bigInteger('number');
+            $table->string('account_number');
+            $table->string('bank_number');
             $table->string('iban');
             $table->string('swift');
-            $table->string('currency');
-
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('bank_accounts');
     }

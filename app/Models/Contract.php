@@ -1,35 +1,31 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Models;
 
+use App\Enums\CurrencyEnum;
+use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Contract extends Model
 {
-    use HasFactory;
+    use HasCurrentUser, HasFactory;
 
     protected $guarded = [];
 
     protected $casts = [
         'signed_at' => 'date',
+        'currency' => CurrencyEnum::class,
     ];
 
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(Customer::class, foreignKey: 'customer_id');
+        return $this->belongsTo(Customer::class);
     }
 
     public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Supplier::class, foreignKey: 'supplier_id');
-    }
-
-    public function bank(): BelongsTo
-    {
-        return $this->belongsTo(BankAccount::class, foreignKey: 'bank_account_id');
+        return $this->belongsTo(Supplier::class);
     }
 }

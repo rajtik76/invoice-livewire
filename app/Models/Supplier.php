@@ -1,26 +1,25 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Models;
 
+use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Supplier extends Model
 {
-    use HasFactory;
+    use HasCurrentUser, HasFactory;
 
     protected $guarded = [];
 
     public function address(): BelongsTo
     {
-        return $this->belongsTo(Address::class, foreignKey: 'address_id');
+        return $this->belongsTo(Address::class);
     }
 
-    public function company(): BelongsTo
+    public function bankAccount(): BelongsTo
     {
-        return $this->belongsTo(CompanyDetail::class, foreignKey: 'company_detail_id');
+        return $this->belongsTo(BankAccount::class);
     }
 }

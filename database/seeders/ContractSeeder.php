@@ -1,17 +1,19 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Seeders;
 
 use App\Models\Contract;
-use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class ContractSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
-        $supplier = Supplier::factory()->create(['name' => 'Vladislav Rajtmajer']);
-
-        Contract::factory(4)->create(['supplier_id' => $supplier]);
+        foreach (User::all() as $user) {
+            // each user have 3 contracts
+            Contract::factory(3)->create(['user_id' => $user->id]);
+        }
     }
 }

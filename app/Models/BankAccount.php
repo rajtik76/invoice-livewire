@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Models\Enums\BankAccountCurrencyEnum;
+use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BankAccount extends Model
 {
-    use HasFactory;
+    use HasCurrentUser, HasFactory;
 
-    protected $guarded = [];
-
-    protected $casts = [
-        'currency' => BankAccountCurrencyEnum::class,
+    protected $fillable = [
+        'user_id',
+        'bank_name',
+        'account_number',
+        'bank_number',
+        'iban',
+        'swift',
     ];
 }

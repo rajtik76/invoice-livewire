@@ -1,41 +1,35 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\BankAccount;
+use App\Enums\CurrencyEnum;
+use App\Models\Contract;
 use App\Models\Customer;
-use App\Models\Enums\BankAccountCurrencyEnum;
 use App\Models\Supplier;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Contract>
- */
 class ContractFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
+    protected $model = Contract::class;
+
+    public function definition(): array
     {
         return [
-            'supplier_id' => Supplier::factory(),
-            'customer_id' => Customer::factory(),
-            'bank_account_id' => BankAccount::factory(),
-            'number' => fake()->creditCardNumber(),
-            'signed_at' => fake()->date(),
-            'price_per_unit' => function (array $attributes) {
-                $bankAccount = BankAccount::findOrFail($attributes['bank_account_id']);
-
-                return match($bankAccount->currency) {
-                    BankAccountCurrencyEnum::CZK => fake()->randomFloat(1, 500, 1500),
-                    default => fake()->randomFloat(1, 10, 50),
-                };
-            },
+            'user_id' => fn() => User::factory(),
+            'customer_id' => fn(array $attributes) => Customer::factory()->create(['user_id' => $attributes['user_id']]),
+            'supplier_id' => fn(array $attributes) => Supplier::factory()->create(['user_id' => $attributes['user_id']]),
+            'name' => $this->faker->slug(4),
+            'signed_at' => $this->faker->unique()->dateTimeBetween(),
+            'currency' => $this->faker->randomElement(CurrencyEnum::cases()),
+            'price_per_hour' => fn(array $attributes) => $attributes['currency'] === CurrencyEnum::CZK
+                ? $this->faker->randomFloat(2, 300, 1000)
+                : $this->faker->randomFloat(2, 10, 50),
+            'active' => true,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

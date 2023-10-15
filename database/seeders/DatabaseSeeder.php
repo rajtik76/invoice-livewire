@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
+//use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,8 +19,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ContractSeeder::class,
             TaskSeeder::class,
-            TaskSpentTimeSeeder::class,
-            InvoiceSeeder::class,
+            TaskHourSeeder::class,
         ]);
     }
 }

@@ -1,29 +1,29 @@
 <?php
+declare(strict_types=1);
 
 namespace Database\Factories;
 
-use App\Models\Enums\BankAccountCurrencyEnum;
+use App\Models\BankAccount;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\BankAccount>
- */
 class BankAccountFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition()
+    protected $model = BankAccount::class;
+
+    public function definition(): array
     {
         return [
-            'bank_name' => fake()->company(),
-            'bank_code' => fake()->randomNumber(4, true),
-            'number' => fake()->randomNumber(9, true),
-            'iban' => fake()->iban(),
-            'swift' => fake()->text(6),
-            'currency' => fake()->randomElement(BankAccountCurrencyEnum::cases()),
+            'user_id' => fn() => User::factory(),
+            'bank_name' => $this->faker->name(),
+            'account_number' => $this->faker->numerify(Str::repeat('#', 10)),
+            'bank_number' => $this->faker->numerify(Str::repeat('#', 4)),
+            'iban' => $this->faker->iban(),
+            'swift' => $this->faker->swiftBicNumber(),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
         ];
     }
 }

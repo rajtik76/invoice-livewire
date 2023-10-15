@@ -1,7 +1,8 @@
 @props([
     'name',
     'show' => false,
-    'maxWidth' => '2xl'
+    'maxWidth' => '2xl',
+    'autoClose' => true
 ])
 
 @php
@@ -17,6 +18,7 @@ $maxWidth = [
 <div
     x-data="{
         show: @js($show),
+        autoClose: @js($autoClose),
         focusables() {
             // All focusable element types...
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
@@ -41,17 +43,17 @@ $maxWidth = [
     })"
     x-on:open-modal.window="$event.detail == '{{ $name }}' ? show = true : null"
     x-on:close.stop="show = false"
-    x-on:keydown.escape.window="show = false"
+    x-on:keydown.escape.window="autoClose ? show = false : null"
     x-on:keydown.tab.prevent="$event.shiftKey || nextFocusable().focus()"
     x-on:keydown.shift.tab.prevent="prevFocusable().focus()"
     x-show="show"
-    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50"
+    class="fixed inset-0 overflow-y-auto px-4 py-6 sm:px-0 z-50 flex min-h-full items-end justify-center sm:items-center"
     style="display: {{ $show ? 'block' : 'none' }};"
 >
     <div
         x-show="show"
         class="fixed inset-0 transform transition-all"
-        x-on:click="show = false"
+        x-on:click="autoClose ? show = false : null"
         x-transition:enter="ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"

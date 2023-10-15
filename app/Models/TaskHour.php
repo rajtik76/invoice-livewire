@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class TaskSpentTime extends Model
+class TaskHour extends Model
 {
-    use HasFactory;
+    use HasCurrentUser, HasFactory;
 
     protected $guarded = [];
 
