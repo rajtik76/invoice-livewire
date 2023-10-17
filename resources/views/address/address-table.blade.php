@@ -19,7 +19,7 @@
                         </x-orange-button>
                     </div>
                     <livewire:table.address-table/>
-                    <livewire:address.update-address-form/>
+                    <livewire:address-form/>
                 </div>
             </div>
         </div>
