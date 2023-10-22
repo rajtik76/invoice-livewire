@@ -6,9 +6,9 @@ use App\Enums\CountryEnum;
 use App\Models\Address;
 use App\Traits\HasFormModalControl;
 use Illuminate\Validation\Rules\Enum;
+use Illuminate\View\View;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
-use View;
 
 class AddressForm extends Component
 {
@@ -63,7 +63,7 @@ class AddressForm extends Component
     public function createAddress(): void
     {
         $validated = $this->validate();
-        $address = auth()->user()->addresses()->create($validated);
+        auth()->user()->addresses()->create($validated);
 
         $this->resetModelData();
         $this->afterUpdate();
@@ -88,7 +88,7 @@ class AddressForm extends Component
         $this->dispatch('model-updated');
     }
 
-    public function render(): \Illuminate\View\View
+    public function render(): View
     {
         return view('livewire.address-form');
     }

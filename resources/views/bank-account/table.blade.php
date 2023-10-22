@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Address
+            Bank accounts
         </h2>
     </x-slot>
 
@@ -15,11 +15,11 @@
                             @click="$dispatch('open-create-form-modal')"
                             type="button"
                             class="mb-6"
-                        >Create New Address
+                        >New Bank Account
                         </x-orange-button>
                     </div>
-                    <livewire:table.address-table/>
-                    <livewire:address-form/>
+                    <livewire:table.bank-account-table/>
+                    <livewire:bank-account-form/>
                 </div>
             </div>
         </div>

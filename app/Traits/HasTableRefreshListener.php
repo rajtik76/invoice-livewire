@@ -4,7 +4,7 @@ namespace App\Traits;
 
 use Livewire\Attributes\On;
 
-trait HasFormModalListener
+trait HasTableRefreshListener
 {
     #[On('model-updated')]
     public function refreshData(): void

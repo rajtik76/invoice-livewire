@@ -32,6 +32,10 @@ $logout = function () {
                     <x-nav-link :href="route('address.table')" :active="request()->routeIs('address.table')" wire:navigate>
                         Address
                     </x-nav-link>
+
+                    <x-nav-link :href="route('bank-account.table')" :active="request()->routeIs('bank-account.table')" wire:navigate>
+                        Bank Account
+                    </x-nav-link>
                 </div>
             </div>
 
