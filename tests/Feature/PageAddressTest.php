@@ -1,11 +1,10 @@
 <?php
 
-
-use Livewire\Livewire;
 use App\Livewire\Table\AddressTable;
 use App\Models\Address;
 use App\Models\User;
-use Livewire\Volt\Volt;
+use Livewire\Livewire;
+
 use function Pest\Laravel\get;
 
 it('page exists', function () {

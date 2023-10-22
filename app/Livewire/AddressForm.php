@@ -15,12 +15,16 @@ class AddressForm extends Component
     use HasFormModalControl;
 
     public int $address;
+
     #[Rule(['required', 'string', 'max:255'])]
-    public string|null $street = null;
+    public ?string $street = null;
+
     #[Rule(['required', 'string', 'max:255'])]
-    public string|null $city = null;
+    public ?string $city = null;
+
     #[Rule(['required', 'string', 'max:255'])]
-    public string|null $zip = null;
+    public ?string $zip = null;
+
     #[Rule(['required', new Enum(CountryEnum::class)])]
     public string|CountryEnum $country = CountryEnum::Germany;
 

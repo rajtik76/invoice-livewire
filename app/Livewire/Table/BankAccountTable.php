@@ -12,7 +12,7 @@ use RamonRietdijk\LivewireTables\Livewire\LivewireTable;
 
 class BankAccountTable extends LivewireTable
 {
-    use HasTableRefreshListener, HasTableDeleteAction, HasTableEdit;
+    use HasTableDeleteAction, HasTableEdit, HasTableRefreshListener;
 
     protected string $model = BankAccount::class;
 

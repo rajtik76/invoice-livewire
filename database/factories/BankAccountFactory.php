@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -16,7 +17,7 @@ class BankAccountFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fn() => User::factory(),
+            'user_id' => fn () => User::factory(),
             'bank_name' => $this->faker->name(),
             'account_number' => $this->faker->numerify(Str::repeat('#', 10)),
             'bank_number' => $this->faker->numerify(Str::repeat('#', 4)),

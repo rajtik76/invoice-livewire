@@ -21,8 +21,8 @@ enum CountryEnum: string
     public static function options(): array
     {
         return collect(self::cases())
-            ->keyBy(fn(self $country) => $country->value)
-            ->map(fn(self $country) => $country->countryName())
+            ->keyBy(fn (self $country) => $country->value)
+            ->map(fn (self $country) => $country->countryName())
             ->toArray();
     }
 }

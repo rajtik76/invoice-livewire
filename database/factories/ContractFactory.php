@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -18,13 +19,13 @@ class ContractFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fn() => User::factory(),
-            'customer_id' => fn(array $attributes) => Customer::factory()->create(['user_id' => $attributes['user_id']]),
-            'supplier_id' => fn(array $attributes) => Supplier::factory()->create(['user_id' => $attributes['user_id']]),
+            'user_id' => fn () => User::factory(),
+            'customer_id' => fn (array $attributes) => Customer::factory()->create(['user_id' => $attributes['user_id']]),
+            'supplier_id' => fn (array $attributes) => Supplier::factory()->create(['user_id' => $attributes['user_id']]),
             'name' => $this->faker->slug(4),
             'signed_at' => $this->faker->unique()->dateTimeBetween(),
             'currency' => $this->faker->randomElement(CurrencyEnum::cases()),
-            'price_per_hour' => fn(array $attributes) => $attributes['currency'] === CurrencyEnum::CZK
+            'price_per_hour' => fn (array $attributes) => $attributes['currency'] === CurrencyEnum::CZK
                 ? $this->faker->randomFloat(2, 300, 1000)
                 : $this->faker->randomFloat(2, 10, 50),
             'active' => true,

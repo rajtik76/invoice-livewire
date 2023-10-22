@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Seeders;
@@ -21,7 +22,7 @@ class TaskSeeder extends Seeder
             Task::factory(fake()->numberBetween(1, 3))->create([
                 'user_id' => $contract->user_id,
                 'contract_id' => $contract->id,
-                'active' => false
+                'active' => false,
             ]);
         }
     }

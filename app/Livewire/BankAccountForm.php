@@ -3,7 +3,6 @@
 namespace App\Livewire;
 
 use App\Models\BankAccount;
-use App\Models\User;
 use App\Traits\HasFormModalControl;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
@@ -13,15 +12,19 @@ class BankAccountForm extends Component
     use HasFormModalControl;
 
     #[Rule(['required', 'max:255'])]
-    public string|null $bank_name = null;
+    public ?string $bank_name = null;
+
     #[Rule(['required', 'max:255'])]
-    public string|null $account_number = null;
+    public ?string $account_number = null;
+
     #[Rule(['required', 'max:255'])]
-    public string|null $bank_number = null;
+    public ?string $bank_number = null;
+
     #[Rule(['required', 'max:255'])]
-    public string|null $iban = null;
+    public ?string $iban = null;
+
     #[Rule(['required', 'max:255'])]
-    public string|null $swift = null;
+    public ?string $swift = null;
 
     public function fetchModelData(): void
     {
@@ -61,7 +64,7 @@ class BankAccountForm extends Component
     {
         $bankAccount = $this->getModel();
 
-        if (!$this->authorize('update', $bankAccount)) {
+        if (! $this->authorize('update', $bankAccount)) {
             abort(403);
         }
 
@@ -72,7 +75,7 @@ class BankAccountForm extends Component
 
     private function createModel()
     {
-        if (!$this->authorize('create', BankAccount::class)) {
+        if (! $this->authorize('create', BankAccount::class)) {
             abort(403);
         }
 

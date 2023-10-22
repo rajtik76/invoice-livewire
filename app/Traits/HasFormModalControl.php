@@ -8,15 +8,11 @@ trait HasFormModalControl
 {
     /**
      * ID of updated model
-     *
-     * @var int|null
      */
-    public int|null $modelId = null;
+    public ?int $modelId = null;
 
     /**
      * Model is open flag
-     *
-     * @var bool
      */
     public bool $isModalOpen = false;
 
@@ -43,5 +39,6 @@ trait HasFormModalControl
     }
 
     abstract public function fetchModelData(): void;
+
     abstract public function resetModelData(): void;
 }

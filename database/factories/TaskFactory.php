@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -16,8 +17,8 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fn() => User::factory(),
-            'contract_id' => fn(array $attributes) => Contract::factory()->create(['user_id' => $attributes['user_id']]),
+            'user_id' => fn () => User::factory(),
+            'contract_id' => fn (array $attributes) => Contract::factory()->create(['user_id' => $attributes['user_id']]),
             'name' => $this->faker->slug(),
             'url' => $this->faker->optional()->url(),
             'note' => $this->faker->optional()->sentence(),

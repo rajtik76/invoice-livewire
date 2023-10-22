@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -16,8 +17,8 @@ class TaskHourFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fn() => User::factory(),
-            'task_id' => fn(array $attributes) => Task::factory()->create(['user_id' => $attributes['user_id']]),
+            'user_id' => fn () => User::factory(),
+            'task_id' => fn (array $attributes) => Task::factory()->create(['user_id' => $attributes['user_id']]),
             'date' => $this->faker->dateTimeBetween(now()->subDays(30)),
             'hours' => $this->faker->randomFloat(1, 0.5, 50),
             'created_at' => Carbon::now(),

@@ -13,7 +13,7 @@ use RamonRietdijk\LivewireTables\Livewire\LivewireTable;
 
 class AddressTable extends LivewireTable
 {
-    use HasTableRefreshListener, HasTableDeleteAction, HasTableEdit;
+    use HasTableDeleteAction, HasTableEdit, HasTableRefreshListener;
 
     protected string $model = Address::class;
 
