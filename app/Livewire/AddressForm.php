@@ -5,8 +5,8 @@ namespace App\Livewire;
 use App\Enums\CountryEnum;
 use App\Models\Address;
 use App\Traits\HasFormModalControl;
+use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rules\Enum;
-use Illuminate\View\View;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
