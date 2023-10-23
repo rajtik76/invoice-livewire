@@ -136,3 +136,18 @@ it('it sees task hours', function () {
         ->assertSee($task->name)
         ->assertSee(999999.99);
 });
+
+it('see task name url', function () {
+    // Arrange
+    $user = User::factory()->create();
+    $task = Task::factory()->create([
+        'user_id' => $user->id,
+        'url' => 'test:://phpunit.test',
+        'active' => false
+    ]);
+
+    // Act & Assert
+    Livewire::actingAs($user)
+        ->test(TaskTable::class)
+        ->assertSee($task->url);
+});
