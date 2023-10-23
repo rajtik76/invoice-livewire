@@ -65,7 +65,7 @@ class SupplierForm extends Component
 
     public function render()
     {
-        return view('livewire.supplier-form');
+        return view('livewire.form.supplier-form');
     }
 
     protected function updateModel(): void

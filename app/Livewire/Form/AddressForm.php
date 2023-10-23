@@ -81,6 +81,6 @@ class AddressForm extends Component
 
     public function render(): View
     {
-        return view('livewire.address-form');
+        return view('livewire.form.address-form');
     }
 }

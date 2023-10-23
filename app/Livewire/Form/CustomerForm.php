@@ -47,7 +47,7 @@ class CustomerForm extends Component
 
     public function render()
     {
-        return view('livewire.customer-form');
+        return view('livewire.form.customer-form');
     }
 
     protected function updateModel(): void

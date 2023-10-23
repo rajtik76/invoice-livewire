@@ -44,7 +44,7 @@ class BankAccountForm extends Component
 
     public function render()
     {
-        return view('livewire.bank-account-form');
+        return view('livewire.form.bank-account-form');
     }
 
     protected function updateModel(): void
