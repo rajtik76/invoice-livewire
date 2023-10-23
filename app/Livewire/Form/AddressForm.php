@@ -4,7 +4,6 @@ namespace App\Livewire\Form;
 
 use App\Enums\CountryEnum;
 use App\Models\Address;
-use App\Traits\HasFormModalControl;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;
@@ -34,7 +33,7 @@ class AddressForm extends Component
 
     public function fetchModelData(): void
     {
-        $address = $this->getAddressModel();
+        $address = $this->getModel();
 
         if (auth()->user()->cannot('update', $address)) {
             abort(403);
@@ -46,10 +45,10 @@ class AddressForm extends Component
         $this->country = $address->country;
     }
 
-    public function updateAddress(): void
+    protected function updateModel(): void
     {
         $validated = $this->validate();
-        $address = $this->getAddressModel();
+        $address = $this->getModel();
 
         if (auth()->user()->cannot('update', $address)) {
             abort(403);
@@ -61,7 +60,7 @@ class AddressForm extends Component
         $this->afterUpdate();
     }
 
-    public function createAddress(): void
+    protected function createModel(): void
     {
         $validated = $this->validate();
         auth()->user()->addresses()->create($validated);
@@ -70,16 +69,7 @@ class AddressForm extends Component
         $this->afterUpdate();
     }
 
-    public function submit(): void
-    {
-        if ($this->modelId) {
-            $this->updateAddress();
-        } else {
-            $this->createAddress();
-        }
-    }
-
-    private function getAddressModel(): Address
+    private function getModel(): Address
     {
         return Address::findOrFail($this->modelId);
     }

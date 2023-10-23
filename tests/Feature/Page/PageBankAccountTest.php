@@ -4,6 +4,7 @@ use App\Livewire\Table\BankAccountTable;
 use App\Models\BankAccount;
 use App\Models\User;
 use Livewire\Livewire;
+
 use function Pest\Laravel\get;
 
 it('page exists', function () {

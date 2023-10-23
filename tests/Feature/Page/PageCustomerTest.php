@@ -4,6 +4,7 @@ use App\Livewire\Table\CustomerTable;
 use App\Models\Customer;
 use App\Models\User;
 use Livewire\Livewire;
+
 use function Pest\Laravel\get;
 
 it('page exists', function () {

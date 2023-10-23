@@ -3,13 +3,15 @@
 namespace App\Livewire\Form;
 
 use App\Models\Customer;
-use Livewire\Attributes\Rule;
 
 class CustomerForm extends Component
 {
     public ?int $address_id = null;
+
     public ?string $name = null;
+
     public ?string $vat_number = null;
+
     public ?string $registration_number = null;
 
     /**
@@ -43,25 +45,16 @@ class CustomerForm extends Component
         $this->vat_number = null;
     }
 
-    public function submit()
-    {
-        if ($this->modelId) {
-            $this->updateModel();
-        } else {
-            $this->createModel();
-        }
-    }
-
     public function render()
     {
         return view('livewire.customer-form');
     }
 
-    private function updateModel()
+    protected function updateModel(): void
     {
         $customer = $this->getModel();
 
-        if (!$this->authorize('update', $customer)) {
+        if (! $this->authorize('update', $customer)) {
             abort(403);
         }
 
@@ -70,9 +63,9 @@ class CustomerForm extends Component
         $this->dispatch('model-updated');
     }
 
-    private function createModel()
+    protected function createModel(): void
     {
-        if (!$this->authorize('create', Customer::class)) {
+        if (! $this->authorize('create', Customer::class)) {
             abort(403);
         }
 

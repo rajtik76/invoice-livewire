@@ -10,11 +10,17 @@ use Illuminate\Validation\Rule;
 class SupplierForm extends Component
 {
     public ?int $address_id = null;
+
     public ?int $bank_account_id = null;
+
     public ?string $name = null;
+
     public ?string $vat_number = null;
+
     public ?string $registration_number = null;
+
     public ?string $email = null;
+
     public ?string $phone = null;
 
     /**
@@ -57,25 +63,16 @@ class SupplierForm extends Component
         $this->email = null;
     }
 
-    public function submit()
-    {
-        if ($this->modelId) {
-            $this->updateModel();
-        } else {
-            $this->createModel();
-        }
-    }
-
     public function render()
     {
         return view('livewire.supplier-form');
     }
 
-    private function updateModel()
+    protected function updateModel(): void
     {
         $supplier = $this->getModel();
 
-        if (!$this->authorize('update', $supplier)) {
+        if (! $this->authorize('update', $supplier)) {
             abort(403);
         }
 
@@ -84,9 +81,9 @@ class SupplierForm extends Component
         $this->dispatch('model-updated');
     }
 
-    private function createModel()
+    protected function createModel(): void
     {
-        if (!$this->authorize('create', Supplier::class)) {
+        if (! $this->authorize('create', Supplier::class)) {
             abort(403);
         }
 

@@ -39,7 +39,7 @@ class Address extends Model implements KeyValueOptionsGetter
             ->orderBy('street')
             ->get()
             ->keyBy('id')
-            ->map(fn(Address $address) => "{$address->street}, {$address->zip} {$address->city}, {$address->country->countryName()}")
+            ->map(fn (Address $address) => "{$address->street}, {$address->zip} {$address->city}, {$address->country->countryName()}")
             ->all();
     }
 }

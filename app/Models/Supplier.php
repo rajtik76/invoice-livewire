@@ -22,4 +22,17 @@ class Supplier extends Model
     {
         return $this->belongsTo(BankAccount::class);
     }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function getOptions(): array
+    {
+        return self::currentUser()
+            ->orderBy('name')
+            ->get()
+            ->keyBy('id')
+            ->map(fn (Supplier $supplier) => $supplier->name)
+            ->toArray();
+    }
 }

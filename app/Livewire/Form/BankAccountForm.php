@@ -3,7 +3,6 @@
 namespace App\Livewire\Form;
 
 use App\Models\BankAccount;
-use App\Traits\HasFormModalControl;
 use Livewire\Attributes\Rule;
 
 class BankAccountForm extends Component
@@ -43,21 +42,12 @@ class BankAccountForm extends Component
         $this->swift = null;
     }
 
-    public function submit()
-    {
-        if ($this->modelId) {
-            $this->updateModel();
-        } else {
-            $this->createModel();
-        }
-    }
-
     public function render()
     {
         return view('livewire.bank-account-form');
     }
 
-    private function updateModel()
+    protected function updateModel(): void
     {
         $bankAccount = $this->getModel();
 
@@ -70,7 +60,7 @@ class BankAccountForm extends Component
         $this->dispatch('model-updated');
     }
 
-    private function createModel()
+    protected function createModel(): void
     {
         if (! $this->authorize('create', BankAccount::class)) {
             abort(403);

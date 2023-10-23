@@ -29,6 +29,10 @@ $logout = function () {
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('table.contract')" :active="request()->routeIs('table.contract')" wire:navigate>
+                        Contract
+                    </x-nav-link>
+
                     <x-nav-link :href="route('table.customer')" :active="request()->routeIs('table.customer')" wire:navigate>
                         Customer
                     </x-nav-link>

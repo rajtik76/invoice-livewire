@@ -34,7 +34,7 @@ class BankAccount extends Model implements KeyValueOptionsGetter
             ->orderBy('account_number')
             ->get()
             ->keyBy('id')
-            ->map(fn(BankAccount $account) => "{$account->account_number}/{$account->bank_number} - {$account->bank_name}")
+            ->map(fn (BankAccount $account) => "{$account->account_number}/{$account->bank_number} - {$account->bank_name}")
             ->toArray();
     }
 }

@@ -12,4 +12,17 @@ abstract class Component extends \Livewire\Component
     {
         $this->resetErrorBag();
     }
+
+    public function submit()
+    {
+        if ($this->modelId) {
+            $this->updateModel();
+        } else {
+            $this->createModel();
+        }
+    }
+
+    abstract protected function createModel(): void;
+
+    abstract protected function updateModel(): void;
 }

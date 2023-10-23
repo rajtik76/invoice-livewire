@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Table;
 
-use App\Models\Customer;
 use App\Models\Supplier;
 use App\Traits\HasTableDeleteAction;
 use App\Traits\HasTableEdit;
