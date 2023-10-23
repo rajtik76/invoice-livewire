@@ -2,15 +2,20 @@
 
 namespace App\Livewire\Form;
 
-use App\Models\Customer;
-use Livewire\Attributes\Rule;
+use App\Models\Address;
+use App\Models\BankAccount;
+use App\Models\Supplier;
+use Illuminate\Validation\Rule;
 
-class CustomerForm extends Component
+class SupplierForm extends Component
 {
     public ?int $address_id = null;
+    public ?int $bank_account_id = null;
     public ?string $name = null;
     public ?string $vat_number = null;
     public ?string $registration_number = null;
+    public ?string $email = null;
+    public ?string $phone = null;
 
     /**
      * @return array<string, array<string>>
@@ -18,10 +23,13 @@ class CustomerForm extends Component
     public function rules(): array
     {
         return [
-            'address_id' => ['required', 'exists:addresses,id'],
+            'address_id' => ['required', Rule::exists(Address::class, 'id')->where('user_id', auth()->id())],
+            'bank_account_id' => ['required', Rule::exists(BankAccount::class, 'id')->where('user_id', auth()->id())],
             'name' => ['required', 'max:255'],
             'vat_number' => ['required', 'max:255'],
-            'registration_number' => ['max:255'],
+            'registration_number' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required', 'max:255'],
         ];
     }
 
@@ -30,17 +38,23 @@ class CustomerForm extends Component
         $model = $this->getModel();
 
         $this->address_id = $model->address_id;
+        $this->bank_account_id = $model->bank_account_id;
         $this->name = $model->name;
         $this->registration_number = $model->registration_number;
         $this->vat_number = $model->vat_number;
+        $this->phone = $model->phone;
+        $this->email = $model->email;
     }
 
     public function resetModelData(): void
     {
         $this->address_id = null;
+        $this->bank_account_id = null;
         $this->name = null;
         $this->registration_number = null;
         $this->vat_number = null;
+        $this->phone = null;
+        $this->email = null;
     }
 
     public function submit()
@@ -54,36 +68,36 @@ class CustomerForm extends Component
 
     public function render()
     {
-        return view('livewire.customer-form');
+        return view('livewire.supplier-form');
     }
 
     private function updateModel()
     {
-        $customer = $this->getModel();
+        $supplier = $this->getModel();
 
-        if (!$this->authorize('update', $customer)) {
+        if (!$this->authorize('update', $supplier)) {
             abort(403);
         }
 
-        $customer->update($this->validate());
+        $supplier->update($this->validate());
 
         $this->dispatch('model-updated');
     }
 
     private function createModel()
     {
-        if (!$this->authorize('create', Customer::class)) {
+        if (!$this->authorize('create', Supplier::class)) {
             abort(403);
         }
 
-        auth()->user()->customers()->create($this->validate());
+        auth()->user()->suppliers()->create($this->validate());
         $this->resetModelData();
 
         $this->dispatch('model-updated');
     }
 
-    private function getModel(): Customer
+    private function getModel(): Supplier
     {
-        return Customer::findOrFail($this->modelId);
+        return Supplier::findOrFail($this->modelId);
     }
 }

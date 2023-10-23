@@ -5,12 +5,9 @@ namespace App\Livewire\Form;
 use App\Models\BankAccount;
 use App\Traits\HasFormModalControl;
 use Livewire\Attributes\Rule;
-use Livewire\Component;
 
 class BankAccountForm extends Component
 {
-    use HasFormModalControl;
-
     #[Rule(['required', 'max:255'])]
     public ?string $bank_name = null;
 

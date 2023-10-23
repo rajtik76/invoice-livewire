@@ -33,6 +33,10 @@ $logout = function () {
                         Customer
                     </x-nav-link>
 
+                    <x-nav-link :href="route('table.supplier')" :active="request()->routeIs('table.supplier')" wire:navigate>
+                        Supplier
+                    </x-nav-link>
+
                     <x-nav-link :href="route('table.address')" :active="request()->routeIs('table.address')" wire:navigate>
                         Address
                     </x-nav-link>

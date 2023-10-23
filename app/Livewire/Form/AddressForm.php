@@ -8,12 +8,9 @@ use App\Traits\HasFormModalControl;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;
-use Livewire\Component;
 
 class AddressForm extends Component
 {
-    use HasFormModalControl;
-
     public int $address;
 
     #[Rule(['required', 'string', 'max:255'])]

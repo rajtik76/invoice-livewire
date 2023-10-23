@@ -4,7 +4,7 @@
     @foreach($options as $key => $value)
         @if(is_null($this->{$name})))
             @if($loop->first)
-                <option value="null" selected disabled>Please select option ...</option>
+                <option value="null" selected disabled hidden="true">Please select option ...</option>
             @endif
                 <option value="{{ $key }}">{{ $value }}</option>
         @else

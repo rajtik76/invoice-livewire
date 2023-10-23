@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('table/address', 'table.address')->name('table.address');
     Route::view('table/bank-account', 'table.bank-account')->name('table.bank-account');
     Route::view('table/customer', 'table.customer')->name('table.customer');
+    Route::view('table/supplier', 'table.supplier')->name('table.supplier');
 });
 
 require __DIR__ . '/auth.php';
