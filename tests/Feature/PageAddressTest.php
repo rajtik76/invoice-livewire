@@ -13,13 +13,13 @@ it('page exists', function () {
 
     // Act & Assert
     $this->actingAs($user);
-    get(route('address.table'))
+    get(route('table.address'))
         ->assertOk();
 });
 
 it('page is secured by auth middleware', function () {
     // Act & Assert
-    get(route('address.table'))
+    get(route('table.address'))
         ->assertRedirectToRoute('login');
 });
 
@@ -29,7 +29,7 @@ it('see address table livewire component', function () {
 
     // Act & Assert
     $this->actingAs($user);
-    get(route('address.table'))
+    get(route('table.address'))
         ->assertOk()
         ->assertSeeLivewire(AddressTable::class);
 });
@@ -64,7 +64,7 @@ it('edit button dispatch event', function () {
     // Act & Assert
     Livewire::actingAs(User::find($address->user_id))
         ->test(AddressTable::class)
-        ->call('editAddress', $address->id)
+        ->call('edit', $address->id)
         ->assertDispatched('open-update-form-modal');
 });
 
@@ -75,7 +75,7 @@ it('edit form listen for event and open modal with data', function () {
 
     // Act & Assert
     Livewire::actingAs($user)
-        ->test('address-form')
+        ->test('form.address-form')
         ->dispatch('open-update-form-modal', $address->id)
         ->assertSet('isModalOpen', true)
         ->assertSet('modelId', $address->id)

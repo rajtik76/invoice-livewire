@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            Bank accounts
+            Bank account list
         </h2>
     </x-slot>
 
@@ -19,7 +19,7 @@
                         </x-orange-button>
                     </div>
                     <livewire:table.bank-account-table/>
-                    <livewire:bank-account-form/>
+                    <livewire:form.bank-account-form/>
                 </div>
             </div>
         </div>
