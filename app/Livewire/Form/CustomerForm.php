@@ -2,12 +2,9 @@
 
 namespace App\Livewire\Form;
 
-use App\Enums\CountryEnum;
 use App\Models\Address;
-use App\Models\BankAccount;
 use App\Models\Customer;
 use App\Traits\HasFormModalControl;
-use Cassandra\Custom;
 use Livewire\Attributes\Rule;
 use Livewire\Component;
 
@@ -75,7 +72,7 @@ class CustomerForm extends Component
     {
         $customer = $this->getModel();
 
-        if (! $this->authorize('update', $customer)) {
+        if (!$this->authorize('update', $customer)) {
             abort(403);
         }
 
@@ -86,7 +83,7 @@ class CustomerForm extends Component
 
     private function createModel()
     {
-        if (! $this->authorize('create', Customer::class)) {
+        if (!$this->authorize('create', Customer::class)) {
             abort(403);
         }
 
