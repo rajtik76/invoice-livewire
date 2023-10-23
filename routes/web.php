@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('table/customer', 'table.customer')->name('table.customer');
     Route::view('table/supplier', 'table.supplier')->name('table.supplier');
     Route::view('table/contract', 'table.contract')->name('table.contract');
+    Route::view('table/task', 'table.task')->name('table.task');
 });
 
 require __DIR__.'/auth.php';

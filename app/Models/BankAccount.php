@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\KeyValueOptionsGetter;
+use App\Contracts\KeyValueOptions;
 use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class BankAccount extends Model implements KeyValueOptionsGetter
+class BankAccount extends Model implements KeyValueOptions
 {
     use HasCurrentUser, HasFactory;
 

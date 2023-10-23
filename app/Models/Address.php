@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\Contracts\KeyValueOptionsGetter;
+use App\Contracts\KeyValueOptions;
 use App\Enums\CountryEnum;
 use App\Traits\HasCurrentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Address extends Model implements KeyValueOptionsGetter
+class Address extends Model implements KeyValueOptions
 {
     use HasCurrentUser, HasFactory;
 

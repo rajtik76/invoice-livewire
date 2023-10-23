@@ -2,7 +2,7 @@
 
 namespace App\Contracts;
 
-interface KeyValueOptionsGetter
+interface KeyValueOptions
 {
     public static function getOptions(): array;
 }
