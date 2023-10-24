@@ -16,13 +16,13 @@ class ContractForm extends BaseForm
 
     public ?int $supplier_id = null;
 
-    public ?string $active = null;
+    public string|bool|null $active = null;
 
     public ?string $name = null;
 
     public ?string $signed_at = null;
 
-    public ?string $price_per_hour = null;
+    public string|float|null $price_per_hour = null;
 
     public ?string $currency = null;
 
@@ -50,7 +50,7 @@ class ContractForm extends BaseForm
         $this->supplier_id = $model->supplier_id;
         $this->active = $model->active;
         $this->name = $model->name;
-        $this->signed_at = $model->signed_at?->toDateString();
+        $this->signed_at = $model->signed_at->toDateString();
         $this->price_per_hour = $model->price_per_hour;
         $this->currency = $model->currency->value;
     }
@@ -80,9 +80,7 @@ class ContractForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (! $this->authorize('create', Supplier::class)) {
-            abort(403);
-        }
+        $this->authorize('create', Supplier::class);
 
         auth()->user()->contracts()->create($this->validate());
     }

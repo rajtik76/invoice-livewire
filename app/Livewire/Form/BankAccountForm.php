@@ -49,9 +49,7 @@ class BankAccountForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (! $this->authorize('create', BankAccount::class)) {
-            abort(403);
-        }
+        $this->authorize('create', BankAccount::class);
 
         auth()->user()->bankAccounts()->create($this->validate());
     }

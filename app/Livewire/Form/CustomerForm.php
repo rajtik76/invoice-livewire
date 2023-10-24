@@ -52,9 +52,7 @@ class CustomerForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (! $this->authorize('create', Customer::class)) {
-            abort(403);
-        }
+        $this->authorize('create', Customer::class);
 
         auth()->user()->customers()->create($this->validate());
     }

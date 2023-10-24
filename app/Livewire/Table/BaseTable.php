@@ -26,7 +26,7 @@ abstract class BaseTable extends LivewireTable
      */
     protected function query(): Builder
     {
-        return parent::query()->currentUser();
+        return parent::query()->where('user_id', auth()->id());
     }
 
     /**

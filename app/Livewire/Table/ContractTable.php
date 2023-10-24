@@ -50,7 +50,7 @@ class ContractTable extends BaseTable
                 ->searchable(),
             Column::make('Signed', 'signed_at')
                 ->displayUsing(function (mixed $value, Contract $model): string {
-                    return $model->signed_at?->toDateString();
+                    return $model->signed_at->toDateString();
                 })
                 ->sortable(),
             Column::make('Price', 'price_per_hour')

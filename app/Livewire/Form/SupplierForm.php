@@ -70,9 +70,7 @@ class SupplierForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (! $this->authorize('create', Supplier::class)) {
-            abort(403);
-        }
+        $this->authorize('create', Supplier::class);
 
         auth()->user()->suppliers()->create($this->validate());
     }

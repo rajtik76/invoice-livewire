@@ -11,7 +11,7 @@ class TaskForm extends BaseForm
 {
     public ?int $contract_id = null;
 
-    public ?string $active = null;
+    public string|bool|null $active = null;
 
     public ?string $name = null;
 
@@ -67,9 +67,7 @@ class TaskForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (! $this->authorize('create', Task::class)) {
-            abort(403);
-        }
+        $this->authorize('create', Task::class);
 
         auth()->user()->tasks()->create($this->validate());
     }

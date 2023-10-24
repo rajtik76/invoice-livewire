@@ -32,9 +32,9 @@ class TaskHourTable extends BaseTable
                     return $model->load('task')->task->name;
                 })
                 ->sortable(function (Builder $builder, Direction $direction) {
-                    $builder->orderBy(
-                        Task::select('id')
-                            ->whereColumn('tasks.id', 'task_hours.task_id'), $direction->value);
+                    /** @var Builder $tasks */
+                    $tasks = Task::select('id')->whereColumn('tasks.id', 'task_hours.task_id');
+                    $builder->orderBy($tasks, $direction->value);
                 })
                 ->searchable(function (Builder $builder, mixed $search): void {
                     $builder->whereIn('task_id',

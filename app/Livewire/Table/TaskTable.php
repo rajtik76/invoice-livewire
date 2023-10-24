@@ -33,9 +33,9 @@ class TaskTable extends BaseTable
                     return $model->load('contract')->contract->name;
                 })
                 ->sortable(function (Builder $builder, Direction $direction) {
-                    $builder->orderBy(
-                        Contract::select('id')
-                            ->whereColumn('contracts.id', 'tasks.contract_id'), $direction->value);
+                    /** @var Builder $contracts */
+                    $contracts = Contract::select('id')->whereColumn('contracts.id', 'tasks.contract_id');
+                    $builder->orderBy($contracts, $direction->value);
                 })
                 ->searchable(function (Builder $builder, mixed $search): void {
                     $builder->whereIn('contract_id',

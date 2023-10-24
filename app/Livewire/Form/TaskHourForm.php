@@ -15,7 +15,7 @@ class TaskHourForm extends BaseForm
 
     public ?string $date = null;
 
-    public ?string $hours = null;
+    public string|float|null $hours = null;
 
     /**
      * @return array<string, array<string>>
@@ -52,9 +52,7 @@ class TaskHourForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (!$this->authorize('create', Task::class)) {
-            abort(403);
-        }
+        $this->authorize('create', Task::class);
 
         auth()->user()->taskHours()->create($this->validate());
     }

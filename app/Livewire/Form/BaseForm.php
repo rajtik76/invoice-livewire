@@ -31,14 +31,13 @@ abstract class BaseForm extends Component
 
     protected function updateModel(): void
     {
-        $task = $this->getModel();
-
-        if (!$this->authorize('update', $task)) {
-            abort(403);
-        }
-
-        $task->update($this->validate());
-
+        // get model
+        $model = $this->getModel();
+        // authorize
+        $this->authorize('update', $model);
+        // update model
+        $model->update($this->validate());
+        // dispatch event to refresh table data
         $this->dispatch('model-updated');
     }
 
@@ -48,7 +47,7 @@ abstract class BaseForm extends Component
         $this->createModel();
         // reset data
         $this->resetModelData();
-        // dispatch model-updated event to refresh table data
+        // dispatch event to refresh table data
         $this->dispatch('model-updated');
     }
 
