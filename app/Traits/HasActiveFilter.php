@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Traits;
+
+use RamonRietdijk\LivewireTables\Filters\BaseFilter;
+use RamonRietdijk\LivewireTables\Filters\BooleanFilter;
+
+trait HasActiveFilter
+{
+    /** @return BaseFilter[] */
+    protected function filters(): array
+    {
+        return [
+            ...parent::filters(),
+            BooleanFilter::make('Active', 'active'),
+        ];
+    }
+}

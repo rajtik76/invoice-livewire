@@ -10,7 +10,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 
-class ContractForm extends Component
+class ContractForm extends BaseForm
 {
     public ?int $customer_id = null;
 

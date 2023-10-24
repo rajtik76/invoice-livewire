@@ -76,3 +76,16 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('email', $supplier->email)
         ->assertViewHas('phone', $supplier->phone);
 });
+
+it('can delete', function() {
+    // Arrange
+    $user = User::factory()->create();
+    Supplier::factory()->create(['user_id' => $user->id]);
+
+    // Act & Assert
+    Livewire::actingAs($user)
+        ->test(SupplierTable::class)
+        ->call('selectPage', true)
+        ->call('executeAction', 'delete');
+    $this->assertDatabaseCount(Supplier::class, 0);
+});

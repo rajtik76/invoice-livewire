@@ -4,7 +4,7 @@ namespace App\Livewire\Form;
 
 use App\Models\Customer;
 
-class CustomerForm extends Component
+class CustomerForm extends BaseForm
 {
     public ?int $address_id = null;
 

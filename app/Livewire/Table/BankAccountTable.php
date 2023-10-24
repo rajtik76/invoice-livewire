@@ -3,25 +3,15 @@
 namespace App\Livewire\Table;
 
 use App\Models\BankAccount;
-use App\Traits\HasTableDeleteAction;
-use App\Traits\HasTableEdit;
-use App\Traits\HasTableRefreshListener;
-use Illuminate\Database\Eloquent\Builder;
+use RamonRietdijk\LivewireTables\Columns\BaseColumn;
 use RamonRietdijk\LivewireTables\Columns\Column;
-use RamonRietdijk\LivewireTables\Livewire\LivewireTable;
 
-class BankAccountTable extends LivewireTable
+class BankAccountTable extends BaseTable
 {
-    use HasTableDeleteAction, HasTableEdit, HasTableRefreshListener;
-
     protected string $model = BankAccount::class;
 
-    protected function query(): Builder
-    {
-        return parent::query()->currentUser();
-    }
-
-    protected function modelColumns(): array
+    /** @return BaseColumn[] */
+    protected function baseColumns(): array
     {
         return [
             Column::make('Bank name', 'bank_name')

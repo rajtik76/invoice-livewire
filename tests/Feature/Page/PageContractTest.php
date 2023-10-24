@@ -78,3 +78,16 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('price_per_hour', $contract->price_per_hour)
         ->assertViewHas('currency', $contract->currency->value);
 });
+
+it('can delete', function() {
+    // Arrange
+    $user = User::factory()->create();
+    Contract::factory()->create(['user_id' => $user->id]);
+
+    // Act & Assert
+    Livewire::actingAs($user)
+        ->test(ContractTable::class)
+        ->call('selectPage', true)
+        ->call('executeAction', 'delete');
+    $this->assertDatabaseCount(Contract::class, 0);
+});

@@ -5,28 +5,21 @@ namespace App\Livewire\Table;
 use App\Models\Contract;
 use App\Models\Customer;
 use App\Models\Supplier;
-use App\Traits\HasTableDeleteAction;
-use App\Traits\HasTableEdit;
-use App\Traits\HasTableRefreshListener;
+use App\Traits\HasActiveActions;
+use App\Traits\HasActiveFilter;
 use Illuminate\Database\Eloquent\Builder;
+use RamonRietdijk\LivewireTables\Columns\BaseColumn;
 use RamonRietdijk\LivewireTables\Columns\Column;
 use RamonRietdijk\LivewireTables\Columns\ViewColumn;
-use RamonRietdijk\LivewireTables\Filters\BaseFilter;
-use RamonRietdijk\LivewireTables\Filters\BooleanFilter;
-use RamonRietdijk\LivewireTables\Livewire\LivewireTable;
 
-class ContractTable extends LivewireTable
+class ContractTable extends BaseTable
 {
-    use HasTableDeleteAction, HasTableEdit, HasTableRefreshListener;
+    use HasActiveActions, HasActiveFilter;
 
     protected string $model = Contract::class;
 
-    protected function query(): Builder
-    {
-        return parent::query()->currentUser();
-    }
-
-    protected function modelColumns(): array
+    /** @return BaseColumn[] */
+    protected function baseColumns(): array
     {
         return [
             ViewColumn::make('Active', 'components.table-state'),
@@ -65,16 +58,6 @@ class ContractTable extends LivewireTable
                     return "{$model->price_per_hour} {$model->currency->getCurrencySymbol()}";
                 })
                 ->sortable(),
-        ];
-    }
-
-    /**
-     * @return array<int, BaseFilter>
-     */
-    protected function filters(): array
-    {
-        return [
-            BooleanFilter::make('Active', 'active'),
         ];
     }
 }

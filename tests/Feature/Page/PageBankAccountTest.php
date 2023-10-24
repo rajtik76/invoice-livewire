@@ -77,3 +77,16 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('iban', $bankAccount->iban)
         ->assertViewHas('swift', $bankAccount->swift);
 });
+
+it('can delete', function() {
+    // Arrange
+    $user = User::factory()->create();
+    BankAccount::factory()->create(['user_id' => $user->id]);
+
+    // Act & Assert
+    Livewire::actingAs($user)
+        ->test(BankAccountTable::class)
+        ->call('selectPage', true)
+        ->call('executeAction', 'delete');
+    $this->assertDatabaseCount(BankAccount::class, 0);
+});

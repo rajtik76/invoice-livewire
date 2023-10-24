@@ -79,7 +79,7 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('note', $task->note);
 });
 
-it('deactivate task action work', function () {
+it('can deactivate task', function () {
     // Arrange
     $user = User::factory()->create();
     $task = Task::factory()->create([
@@ -98,7 +98,7 @@ it('deactivate task action work', function () {
     ]);
 });
 
-it('activate task action work', function () {
+it('can activate task', function () {
     // Arrange
     $user = User::factory()->create();
     $task = Task::factory()->create([
@@ -150,4 +150,17 @@ it('see task name url', function () {
     Livewire::actingAs($user)
         ->test(TaskTable::class)
         ->assertSee($task->url);
+});
+
+it('can delete', function() {
+    // Arrange
+    $user = User::factory()->create();
+    Task::factory()->create(['user_id' => $user->id]);
+
+    // Act & Assert
+    Livewire::actingAs($user)
+        ->test(TaskTable::class)
+        ->call('selectPage', true)
+        ->call('executeAction', 'delete');
+    $this->assertDatabaseCount(Task::class, 0);
 });

@@ -7,7 +7,7 @@ use App\Models\Task;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
 
-class TaskForm extends Component
+class TaskForm extends BaseForm
 {
     public ?int $contract_id = null;
 

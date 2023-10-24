@@ -5,7 +5,7 @@ namespace App\Livewire\Form;
 use App\Models\BankAccount;
 use Livewire\Attributes\Rule;
 
-class BankAccountForm extends Component
+class BankAccountForm extends BaseForm
 {
     #[Rule(['required', 'max:255'])]
     public ?string $bank_name = null;

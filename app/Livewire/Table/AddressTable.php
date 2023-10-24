@@ -4,25 +4,15 @@ namespace App\Livewire\Table;
 
 use App\Enums\CountryEnum;
 use App\Models\Address;
-use App\Traits\HasTableDeleteAction;
-use App\Traits\HasTableEdit;
-use App\Traits\HasTableRefreshListener;
-use Illuminate\Database\Eloquent\Builder;
+use RamonRietdijk\LivewireTables\Columns\BaseColumn;
 use RamonRietdijk\LivewireTables\Columns\Column;
-use RamonRietdijk\LivewireTables\Livewire\LivewireTable;
 
-class AddressTable extends LivewireTable
+class AddressTable extends BaseTable
 {
-    use HasTableDeleteAction, HasTableEdit, HasTableRefreshListener;
-
     protected string $model = Address::class;
 
-    protected function query(): Builder
-    {
-        return parent::query()->currentUser();
-    }
-
-    protected function modelColumns(): array
+    /** @return BaseColumn[] */
+    protected function baseColumns(): array
     {
         return [
             Column::make('Street', 'street')->searchable(),

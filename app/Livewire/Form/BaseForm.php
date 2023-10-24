@@ -3,17 +3,22 @@
 namespace App\Livewire\Form;
 
 use App\Traits\HasFormModalControl;
+use Livewire\Component;
 
-abstract class Component extends \Livewire\Component
+abstract class BaseForm extends Component
 {
     use HasFormModalControl;
 
     public function boot(): void
     {
+        // reset errors on open form
         $this->resetErrorBag();
     }
 
-    public function submit()
+    /**
+     * Form submission. Update when modelId exists otherwise create.
+     */
+    public function submit(): void
     {
         if ($this->modelId) {
             $this->updateModel();

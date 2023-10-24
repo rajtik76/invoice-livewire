@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rules\Enum;
 use Livewire\Attributes\Rule;
 
-class AddressForm extends Component
+class AddressForm extends BaseForm
 {
     public int $address;
 

@@ -7,7 +7,7 @@ use App\Models\BankAccount;
 use App\Models\Supplier;
 use Illuminate\Validation\Rule;
 
-class SupplierForm extends Component
+class SupplierForm extends BaseForm
 {
     public ?int $address_id = null;
 
