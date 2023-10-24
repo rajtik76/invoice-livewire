@@ -20,7 +20,7 @@ trait HasActiveActions
                 foreach ($models as $model) {
                     $model->update(['active' => true]);
                 }
-            })
+            }),
         ];
     }
 }

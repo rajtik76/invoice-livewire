@@ -79,7 +79,7 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('currency', $contract->currency->value);
 });
 
-it('can delete', function() {
+it('can delete', function () {
     // Arrange
     $user = User::factory()->create();
     Contract::factory()->create(['user_id' => $user->id]);

@@ -85,7 +85,7 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('country', $address->country);
 });
 
-it('can delete', function() {
+it('can delete', function () {
     // Arrange
     $user = User::factory()->create();
     Address::factory()->create(['user_id' => $user->id]);

@@ -60,7 +60,7 @@ class TaskForm extends BaseForm
 
     protected function prepareForValidation($attributes)
     {
-        $attributes['active'] = (bool)$attributes['active'];
+        $attributes['active'] = (bool) $attributes['active'];
 
         return $attributes;
     }
@@ -69,7 +69,7 @@ class TaskForm extends BaseForm
     {
         $task = $this->getModel();
 
-        if (!$this->authorize('update', $task)) {
+        if (! $this->authorize('update', $task)) {
             abort(403);
         }
 
@@ -80,7 +80,7 @@ class TaskForm extends BaseForm
 
     protected function createModel(): void
     {
-        if (!$this->authorize('create', Task::class)) {
+        if (! $this->authorize('create', Task::class)) {
             abort(403);
         }
 

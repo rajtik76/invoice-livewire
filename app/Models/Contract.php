@@ -29,7 +29,7 @@ class Contract extends Model implements KeyValueOptions
             ->orderBy('name')
             ->get()
             ->keyBy('id')
-            ->map(fn(Contract $contract) => $contract->name)
+            ->map(fn (Contract $contract) => $contract->name)
             ->toArray();
     }
 

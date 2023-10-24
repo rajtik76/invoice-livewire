@@ -73,7 +73,7 @@ it('edit form listen for event and open modal with data', function () {
         ->assertViewHas('vat_number', $customer->vat_number);
 });
 
-it('can delete', function() {
+it('can delete', function () {
     // Arrange
     $user = User::factory()->create();
     Customer::factory()->create(['user_id' => $user->id]);

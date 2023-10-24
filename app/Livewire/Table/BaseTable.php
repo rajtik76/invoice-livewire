@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Table;
 
-use App\Livewire\Form\BaseForm;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Enumerable;

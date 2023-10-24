@@ -7,6 +7,7 @@ use App\Models\Task;
 use App\Models\TaskHour;
 use App\Models\User;
 use Livewire\Livewire;
+
 use function Pest\Laravel\get;
 
 it('page exists', function () {
@@ -84,7 +85,7 @@ it('can deactivate task', function () {
     $user = User::factory()->create();
     $task = Task::factory()->create([
         'user_id' => $user->id,
-        'active' => true
+        'active' => true,
     ]);
 
     // Act & Assert
@@ -103,7 +104,7 @@ it('can activate task', function () {
     $user = User::factory()->create();
     $task = Task::factory()->create([
         'user_id' => $user->id,
-        'active' => false
+        'active' => false,
     ]);
 
     // Act & Assert
@@ -122,12 +123,12 @@ it('it sees task hours', function () {
     $user = User::factory()->create();
     $task = Task::factory()->create([
         'user_id' => $user->id,
-        'active' => false
+        'active' => false,
     ]);
     TaskHour::factory()->create([
         'user_id' => $user->id,
         'task_id' => $task->id,
-        'hours' => 999999.99
+        'hours' => 999999.99,
     ]);
 
     // Act & Assert
@@ -143,7 +144,7 @@ it('see task name url', function () {
     $task = Task::factory()->create([
         'user_id' => $user->id,
         'url' => 'test:://phpunit.test',
-        'active' => false
+        'active' => false,
     ]);
 
     // Act & Assert
@@ -152,7 +153,7 @@ it('see task name url', function () {
         ->assertSee($task->url);
 });
 
-it('can delete', function() {
+it('can delete', function () {
     // Arrange
     $user = User::factory()->create();
     Task::factory()->create(['user_id' => $user->id]);
