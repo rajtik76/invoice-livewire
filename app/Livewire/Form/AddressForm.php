@@ -22,13 +22,14 @@ class AddressForm extends BaseForm
     public ?string $zip = null;
 
     #[Rule(['required', new Enum(CountryEnum::class)])]
-    public string|CountryEnum $country = CountryEnum::Germany;
+    public null|string|CountryEnum $country = null;
 
     public function resetModelData(): void
     {
         $this->street = null;
         $this->city = null;
         $this->zip = null;
+        $this->country = null;
     }
 
     public function fetchModelData(): void
@@ -45,38 +46,15 @@ class AddressForm extends BaseForm
         $this->country = $address->country;
     }
 
-    protected function updateModel(): void
-    {
-        $validated = $this->validate();
-        $address = $this->getModel();
-
-        if (auth()->user()->cannot('update', $address)) {
-            abort(403);
-        }
-
-        $address->fill($validated);
-        $address->save();
-
-        $this->afterUpdate();
-    }
-
     protected function createModel(): void
     {
         $validated = $this->validate();
         auth()->user()->addresses()->create($validated);
-
-        $this->resetModelData();
-        $this->afterUpdate();
     }
 
-    private function getModel(): Address
+    protected function getModel(): Address
     {
         return Address::findOrFail($this->modelId);
-    }
-
-    private function afterUpdate(): void
-    {
-        $this->dispatch('model-updated');
     }
 
     public function render(): View

@@ -18,6 +18,11 @@ class TaskTable extends BaseTable
 
     protected string $model = Task::class;
 
+    public function redirectToTaskHour(string $task): void
+    {
+        $this->redirect(route('table.taskHour', intval($task)), true);
+    }
+
     /** @return BaseColumn[] */
     protected function baseColumns(): array
     {

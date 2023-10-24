@@ -78,19 +78,6 @@ class ContractForm extends BaseForm
         return $attributes;
     }
 
-    protected function updateModel(): void
-    {
-        $supplier = $this->getModel();
-
-        if (! $this->authorize('update', $supplier)) {
-            abort(403);
-        }
-
-        $supplier->update($this->validate());
-
-        $this->dispatch('model-updated');
-    }
-
     protected function createModel(): void
     {
         if (! $this->authorize('create', Supplier::class)) {
@@ -98,13 +85,9 @@ class ContractForm extends BaseForm
         }
 
         auth()->user()->contracts()->create($this->validate());
-
-        $this->resetModelData();
-
-        $this->dispatch('model-updated');
     }
 
-    private function getModel(): Contract
+    protected function getModel(): Contract
     {
         return Contract::findOrFail($this->modelId);
     }

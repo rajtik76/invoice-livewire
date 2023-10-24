@@ -47,19 +47,6 @@ class BankAccountForm extends BaseForm
         return view('livewire.form.bank-account-form');
     }
 
-    protected function updateModel(): void
-    {
-        $bankAccount = $this->getModel();
-
-        if (! $this->authorize('update', $bankAccount)) {
-            abort(403);
-        }
-
-        $bankAccount->update($this->validate());
-
-        $this->dispatch('model-updated');
-    }
-
     protected function createModel(): void
     {
         if (! $this->authorize('create', BankAccount::class)) {
@@ -67,12 +54,9 @@ class BankAccountForm extends BaseForm
         }
 
         auth()->user()->bankAccounts()->create($this->validate());
-        $this->resetModelData();
-
-        $this->dispatch('model-updated');
     }
 
-    private function getModel(): BankAccount
+    protected function getModel(): BankAccount
     {
         return BankAccount::findOrFail($this->modelId);
     }

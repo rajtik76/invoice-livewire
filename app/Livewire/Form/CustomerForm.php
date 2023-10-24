@@ -50,19 +50,6 @@ class CustomerForm extends BaseForm
         return view('livewire.form.customer-form');
     }
 
-    protected function updateModel(): void
-    {
-        $customer = $this->getModel();
-
-        if (! $this->authorize('update', $customer)) {
-            abort(403);
-        }
-
-        $customer->update($this->validate());
-
-        $this->dispatch('model-updated');
-    }
-
     protected function createModel(): void
     {
         if (! $this->authorize('create', Customer::class)) {
@@ -70,12 +57,9 @@ class CustomerForm extends BaseForm
         }
 
         auth()->user()->customers()->create($this->validate());
-        $this->resetModelData();
-
-        $this->dispatch('model-updated');
     }
 
-    private function getModel(): Customer
+    protected function getModel(): Customer
     {
         return Customer::findOrFail($this->modelId);
     }

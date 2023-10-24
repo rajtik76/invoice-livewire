@@ -33,6 +33,10 @@ $logout = function () {
                         Task
                     </x-nav-link>
 
+                    <x-nav-link :href="route('table.taskHour')" :active="request()->routeIs('table.taskHour')" wire:navigate>
+                        Task hours
+                    </x-nav-link>
+
                     <x-nav-link :href="route('table.contract')" :active="request()->routeIs('table.contract')" wire:navigate>
                         Contract
                     </x-nav-link>

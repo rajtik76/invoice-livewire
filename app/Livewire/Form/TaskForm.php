@@ -65,19 +65,6 @@ class TaskForm extends BaseForm
         return $attributes;
     }
 
-    protected function updateModel(): void
-    {
-        $task = $this->getModel();
-
-        if (! $this->authorize('update', $task)) {
-            abort(403);
-        }
-
-        $task->update($this->validate());
-
-        $this->dispatch('model-updated');
-    }
-
     protected function createModel(): void
     {
         if (! $this->authorize('create', Task::class)) {
@@ -85,13 +72,9 @@ class TaskForm extends BaseForm
         }
 
         auth()->user()->tasks()->create($this->validate());
-
-        $this->resetModelData();
-
-        $this->dispatch('model-updated');
     }
 
-    private function getModel(): Task
+    protected function getModel(): Task
     {
         return Task::findOrFail($this->modelId);
     }

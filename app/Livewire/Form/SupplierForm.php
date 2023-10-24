@@ -68,19 +68,6 @@ class SupplierForm extends BaseForm
         return view('livewire.form.supplier-form');
     }
 
-    protected function updateModel(): void
-    {
-        $supplier = $this->getModel();
-
-        if (! $this->authorize('update', $supplier)) {
-            abort(403);
-        }
-
-        $supplier->update($this->validate());
-
-        $this->dispatch('model-updated');
-    }
-
     protected function createModel(): void
     {
         if (! $this->authorize('create', Supplier::class)) {
@@ -88,12 +75,9 @@ class SupplierForm extends BaseForm
         }
 
         auth()->user()->suppliers()->create($this->validate());
-        $this->resetModelData();
-
-        $this->dispatch('model-updated');
     }
 
-    private function getModel(): Supplier
+    protected function getModel(): Supplier
     {
         return Supplier::findOrFail($this->modelId);
     }
