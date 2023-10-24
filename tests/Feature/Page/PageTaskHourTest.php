@@ -3,9 +3,7 @@
 use App\Livewire\Form\TaskHourForm;
 use App\Livewire\Table\ContractTable;
 use App\Livewire\Table\TaskHourTable;
-use App\Livewire\Table\TaskTable;
 use App\Models\Contract;
-use App\Models\Task;
 use App\Models\TaskHour;
 use App\Models\User;
 use Livewire\Livewire;
@@ -102,6 +100,5 @@ it('task select is disabled when task is provided', function () {
         ->test(TaskHourForm::class)
         ->set('task', $taskHour->task_id)
         ->call('openCreateModal')
-        ->assertSeeHtml("disabled=\"{$taskHour->task_id}\"")
-    ;
+        ->assertSeeHtml("disabled=\"{$taskHour->task_id}\"");
 });
