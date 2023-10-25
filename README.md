@@ -3,8 +3,7 @@ I am actually using this application for my private purposes, but I have decided
 This application is used to record the time spent on individual tasks and to generate invoices and a monthly clock report.
 
 ## Technology
-Laravel 10 framework ❤️  
-TALL stack  
+TALL stack ❤️   
 Laravel Breeze  
 Laravel Volt  
 Laravel Sail  
@@ -19,7 +18,7 @@ php artisan migrate:fresh --seed &&
 npm run dev
 ```
 
-Or if you want to use Laravel Sail:
+Or if you want to use Laravel Sail (use .env.sail):
 ```shell
 ./vendor/bin/sail up -d &&
 ./vendor/bin/sail composer install && 
