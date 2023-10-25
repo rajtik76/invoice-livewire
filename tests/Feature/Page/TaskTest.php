@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Policies\TaskPolicy;
 use Livewire\Livewire;
 use Mockery\MockInterface;
-
 use function Pest\Laravel\get;
 
 beforeEach(function () {
@@ -236,7 +235,7 @@ describe('authorization & visibility 👀', function () {
             ->assertDontSee($anotherUserTask->name);
     });
 
-    it('forbidden to delete task because of delete policy', function () {
+    it('forbidden to delete because of delete policy', function () {
         // Arrange
         $this->partialMock(TaskPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('delete')
@@ -250,9 +249,10 @@ describe('authorization & visibility 👀', function () {
             ->call('selectPage', true)
             ->call('executeAction', 'delete')
             ->assertForbidden();
+        $this->assertDatabaseCount(Task::class, 1);
     });
 
-    it('forbidden to edit task because of update policy', function () {
+    it('forbidden to open form because of update policy', function () {
         // Arrange
         $this->partialMock(TaskPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')
@@ -268,7 +268,7 @@ describe('authorization & visibility 👀', function () {
             ->assertForbidden();
     });
 
-    it('forbidden to update task because of update policy', function () {
+    it('forbidden to update because of update policy', function () {
         // Arrange
         $this->partialMock(TaskPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')
@@ -284,7 +284,7 @@ describe('authorization & visibility 👀', function () {
             ->assertForbidden();
     });
 
-    it('forbidden to activate task because of update policy', function () {
+    it('forbidden to activate because of update policy', function () {
         // Arrange
         $this->partialMock(TaskPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')
@@ -304,7 +304,7 @@ describe('authorization & visibility 👀', function () {
         ]);
     });
 
-    it('forbidden to deactivate task because of update policy', function () {
+    it('forbidden to deactivate because of update policy', function () {
         // Arrange
         $this->partialMock(TaskPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')

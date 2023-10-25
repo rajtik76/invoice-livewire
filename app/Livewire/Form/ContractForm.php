@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Livewire\Form;
 
@@ -16,7 +17,7 @@ class ContractForm extends BaseForm
 
     public ?int $supplier_id = null;
 
-    public string|bool|null $active = null;
+    public int|null $active = null;
 
     public ?string $name = null;
 
@@ -48,7 +49,7 @@ class ContractForm extends BaseForm
 
         $this->customer_id = $model->customer_id;
         $this->supplier_id = $model->supplier_id;
-        $this->active = $model->active;
+        $this->active = intval($model->active);
         $this->name = $model->name;
         $this->signed_at = $model->signed_at->toDateString();
         $this->price_per_hour = $model->price_per_hour;
@@ -59,7 +60,7 @@ class ContractForm extends BaseForm
     {
         $this->customer_id = null;
         $this->supplier_id = null;
-        $this->active = true;
+        $this->active = 1;
         $this->name = null;
         $this->signed_at = now()->toDateString();
         $this->price_per_hour = null;

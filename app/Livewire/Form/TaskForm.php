@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Livewire\Form;
 
@@ -11,7 +12,7 @@ class TaskForm extends BaseForm
 {
     public ?int $contract_id = null;
 
-    public string|bool|null $active = null;
+    public int|null $active = null;
 
     public ?string $name = null;
 
@@ -38,7 +39,7 @@ class TaskForm extends BaseForm
         $model = $this->getModel();
 
         $this->contract_id = $model->contract_id;
-        $this->active = $model->active;
+        $this->active = intval($model->active);
         $this->name = $model->name;
         $this->url = $model->url;
         $this->note = $model->note;
@@ -47,7 +48,7 @@ class TaskForm extends BaseForm
     public function setDataForCreate(): void
     {
         $this->contract_id = null;
-        $this->active = true;
+        $this->active = 1;
         $this->name = null;
         $this->url = null;
         $this->note = null;

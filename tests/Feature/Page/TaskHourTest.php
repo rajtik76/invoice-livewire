@@ -163,7 +163,7 @@ describe('authorization & visibility 👀', function () {
             ->assertDontSee($anotherUserTaskHour->hours);
     });
 
-    it('forbidden to delete taskHour because of delete policy', function () {
+    it('forbidden to delete because of delete policy', function () {
         // Arrange
         $this->partialMock(TaskHourPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('delete')
@@ -177,9 +177,10 @@ describe('authorization & visibility 👀', function () {
             ->call('selectPage', true)
             ->call('executeAction', 'delete')
             ->assertForbidden();
+        $this->assertDatabaseCount(TaskHour::class, 1);
     });
 
-    it('forbidden to edit task because of update policy', function () {
+    it('forbidden to open form because of update policy', function () {
         // Arrange
         $this->partialMock(TaskHourPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')
@@ -195,7 +196,7 @@ describe('authorization & visibility 👀', function () {
             ->assertForbidden();
     });
 
-    it('forbidden to update task because of update policy', function () {
+    it('forbidden to update because of update policy', function () {
         // Arrange
         $this->partialMock(TaskHourPolicy::class, function (MockInterface $mock) {
             $mock->shouldReceive('update')
