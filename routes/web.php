@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::get('/', fn() => to_route('login'));
 
 Route::get('dashboard', DashboardController::class)
     ->middleware(['auth', 'verified'])
