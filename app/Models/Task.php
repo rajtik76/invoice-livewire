@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Contracts\KeyValueOptions;
-use App\Traits\HasCurrentUser;
+use App\Traits\HasActiveScope;
+use App\Traits\HasCurrentUserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model implements KeyValueOptions
 {
-    use HasCurrentUser, HasFactory;
+    use HasCurrentUserScope, HasFactory, HasActiveScope;
 
     protected $guarded = [];
 

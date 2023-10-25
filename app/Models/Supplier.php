@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Traits\HasCurrentUser;
+use App\Traits\HasCurrentUserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Supplier extends Model
 {
-    use HasCurrentUser, HasFactory;
+    use HasCurrentUserScope, HasFactory;
 
     protected $guarded = [];
 

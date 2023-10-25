@@ -33,7 +33,7 @@ class TaskForm extends BaseForm
         ];
     }
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $model = $this->getModel();
 
@@ -44,7 +44,7 @@ class TaskForm extends BaseForm
         $this->note = $model->note;
     }
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->contract_id = null;
         $this->active = true;
@@ -67,8 +67,6 @@ class TaskForm extends BaseForm
 
     protected function createModel(): void
     {
-        $this->authorize('create', Task::class);
-
         auth()->user()->tasks()->create($this->validate());
     }
 

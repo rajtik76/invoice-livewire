@@ -13,11 +13,13 @@ trait HasActiveActions
             ...parent::actions(),
             Action::make('Deactivate', 'deactivate', function (Enumerable $models): void {
                 foreach ($models as $model) {
+                    $this->authorize('update', $model);
                     $model->update(['active' => false]);
                 }
             }),
             Action::make('Activate', 'activate', function (Enumerable $models): void {
                 foreach ($models as $model) {
+                    $this->authorize('update', $model);
                     $model->update(['active' => true]);
                 }
             }),

@@ -39,7 +39,7 @@ class SupplierForm extends BaseForm
         ];
     }
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $model = $this->getModel();
 
@@ -52,7 +52,7 @@ class SupplierForm extends BaseForm
         $this->email = $model->email;
     }
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->address_id = null;
         $this->bank_account_id = null;

@@ -27,7 +27,7 @@ class CustomerForm extends BaseForm
         ];
     }
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $model = $this->getModel();
 
@@ -37,7 +37,7 @@ class CustomerForm extends BaseForm
         $this->vat_number = $model->vat_number;
     }
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->address_id = null;
         $this->name = null;

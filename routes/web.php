@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', DashboardController::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
@@ -33,4 +34,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('table/taskHour/{task?}', 'table.taskHour')->name('table.taskHour');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

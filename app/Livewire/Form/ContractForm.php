@@ -42,7 +42,7 @@ class ContractForm extends BaseForm
         ];
     }
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $model = $this->getModel();
 
@@ -55,7 +55,7 @@ class ContractForm extends BaseForm
         $this->currency = $model->currency->value;
     }
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->customer_id = null;
         $this->supplier_id = null;

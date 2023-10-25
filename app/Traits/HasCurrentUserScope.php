@@ -6,7 +6,7 @@ namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 
-trait HasCurrentUser
+trait HasCurrentUserScope
 {
     public function scopeCurrentUser(Builder $builder): void
     {

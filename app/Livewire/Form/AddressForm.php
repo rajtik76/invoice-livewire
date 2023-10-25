@@ -24,7 +24,7 @@ class AddressForm extends BaseForm
     #[Rule(['required', new Enum(CountryEnum::class)])]
     public null|string|CountryEnum $country = null;
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->street = null;
         $this->city = null;
@@ -32,7 +32,7 @@ class AddressForm extends BaseForm
         $this->country = null;
     }
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $address = $this->getModel();
 

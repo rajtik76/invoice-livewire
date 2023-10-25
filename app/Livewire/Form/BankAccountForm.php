@@ -22,7 +22,7 @@ class BankAccountForm extends BaseForm
     #[Rule(['required', 'max:255'])]
     public ?string $swift = null;
 
-    public function fetchModelData(): void
+    public function setDataForUpdate(): void
     {
         $bankAccount = $this->getModel();
 
@@ -33,7 +33,7 @@ class BankAccountForm extends BaseForm
         $this->swift = $bankAccount->swift;
     }
 
-    public function resetModelData(): void
+    public function setDataForCreate(): void
     {
         $this->bank_name = null;
         $this->account_number = null;

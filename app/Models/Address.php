@@ -6,13 +6,13 @@ namespace App\Models;
 
 use App\Contracts\KeyValueOptions;
 use App\Enums\CountryEnum;
-use App\Traits\HasCurrentUser;
+use App\Traits\HasCurrentUserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model implements KeyValueOptions
 {
-    use HasCurrentUser, HasFactory;
+    use HasCurrentUserScope, HasFactory;
 
     protected $fillable = [
         'user_id',

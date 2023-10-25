@@ -48,10 +48,7 @@ abstract class BaseTable extends LivewireTable
             ...$this->baseActions(),
             Action::make('Delete', 'delete', function (Enumerable $models) {
                 $models->each(function (Model $model) {
-                    if (auth()->user()->cannot('delete', $model)) {
-                        abort(403);
-                    }
-
+                    $this->authorize('delete', $model);
                     return $model->delete();
                 });
             }),
