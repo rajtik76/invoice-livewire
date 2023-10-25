@@ -2,41 +2,47 @@
 
 use App\Models\Address;
 use App\Models\BankAccount;
+use App\Models\Contract;
 use App\Models\Customer;
+use App\Models\Supplier;
+use App\Models\Task;
+use App\Models\TaskHour;
 use App\Models\User;
 
-it('has addresss', function () {
-    // Arrange
+/**
+ * @param  class-string  $model
+ */
+function seedModel(string $model, int $count = 3): User
+{
     $user = User::factory()->create();
-    $address = Address::factory(3)->create(['user_id' => $user->id]);
+    $model::factory($count)
+        ->recycle($user)
+        ->create();
+
+    return $user;
+}
+
+it('user sees all necessary relations', function () {
+    // Arrange
+    $models = [
+        Address::class,
+        BankAccount::class,
+        Customer::class,
+        Supplier::class,
+        Contract::class,
+        Task::class,
+        TaskHour::class,
+    ];
 
     // Assert & Act
-    expect($user->addresses)
-        ->toHaveCount(3)
-        ->each()
-        ->toBeInstanceOf(Address::class);
-});
+    foreach ($models as $model) {
+        $relation = str((new ReflectionClass($model))->getShortName())
+            ->plural()
+            ->lcfirst();
 
-it('has bank accounts', function () {
-    // Arrange
-    $user = User::factory()->create();
-    $address = BankAccount::factory(3)->create(['user_id' => $user->id]);
-
-    // Assert & Act
-    expect($user->bankAccounts)
-        ->toHaveCount(3)
-        ->each()
-        ->toBeInstanceOf(BankAccount::class);
-});
-
-it('has customers', function () {
-    // Arrange
-    $user = User::factory()->create();
-    $address = Customer::factory(3)->create(['user_id' => $user->id]);
-
-    // Assert & Act
-    expect($user->customers)
-        ->toHaveCount(3)
-        ->each()
-        ->toBeInstanceOf(Customer::class);
+        expect(seedModel($model)->$relation)
+            ->toHaveCount(3)
+            ->each()
+            ->toBeInstanceOf($model);
+    }
 });

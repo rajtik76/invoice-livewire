@@ -1,7 +1,6 @@
 <?php
 
 use App\Livewire\Form\TaskForm;
-use App\Livewire\Table\ContractTable;
 use App\Livewire\Table\TaskTable;
 use App\Models\Contract;
 use App\Models\Task;
@@ -9,13 +8,20 @@ use App\Models\TaskHour;
 use App\Models\User;
 use App\Policies\TaskPolicy;
 use Livewire\Livewire;
-
 use Mockery\MockInterface;
+
 use function Pest\Laravel\get;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
 });
+
+function getTask(User $user, array $attributes = [])
+{
+    return Task::factory()
+        ->recycle($user)
+        ->create($attributes);
+}
 
 it('task table page exists', function () {
     // Arrange & Act & Assert
@@ -34,56 +40,50 @@ it('see TaskTable component', function () {
 
 it('see current user task in table component', function () {
     // Arrange
-    $task = Contract::factory()->create();
+    $task = getTask($this->user);
 
-    // Act & Assert
-    Livewire::actingAs(User::find($task->user_id))
-        ->test(ContractTable::class)
+    //  & Act & Assert
+    Livewire::actingAs($this->user)
+        ->test(TaskTable::class)
+        ->assertOk()
+        ->assertSee($task->contract_id)
         ->assertSee($task->name)
-        ->assertSee($task->customer->name)
-        ->assertSee($task->supplier->name)
-        ->assertSee($task->signed_at->toDateString())
-        ->assertSee($task->price_per_hour)
-        ->assertOk();
+        ->assertSee($task->url);
 });
 
 it('table component dispatch event on edit button click', function () {
     // Arrange
-    $task = Contract::factory()->create();
+    $task = getTask($this->user);
 
     // Act & Assert
-    Livewire::actingAs(User::find($task->user_id))
-        ->test(ContractTable::class)
+    Livewire::actingAs($this->user)
+        ->test(TaskTable::class)
         ->call('edit', $task->id)
-        ->assertDispatched('open-update-form-modal')
-        ->assertOk();
+        ->assertOk()
+        ->assertDispatched('open-update-form-modal');
 });
 
 it('form component listen for event and open modal with task data', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create();
+    $task = getTask($this->user);
 
     // Act & Assert
     Livewire::actingAs($this->user)
         ->test(TaskForm::class)
         ->dispatch('open-update-form-modal', $task->id)
+        ->assertOk()
         ->assertSet('isModalOpen', true)
         ->assertSet('modelId', $task->id)
         ->assertViewHas('contract_id', $task->contract_id)
         ->assertViewHas('active', $task->active)
         ->assertViewHas('name', $task->name)
         ->assertViewHas('url', $task->url)
-        ->assertViewHas('note', $task->note)
-        ->assertOk();
+        ->assertViewHas('note', $task->note);
 });
 
 it('form component update task successfully', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create(['active' => true]);
+    $task = getTask($this->user, ['active' => true]);
     $newContract = Contract::factory()
         ->recycle($this->user)
         ->create();
@@ -99,8 +99,8 @@ it('form component update task successfully', function () {
         ->set('note', 'new test note')
         ->set('active', false)
         ->call('submit')
-        ->assertHasNoErrors()
-        ->assertOk();
+        ->assertOk()
+        ->assertHasNoErrors();
     $this->assertDatabaseCount(Task::class, 1);
     $this->assertDatabaseHas(Task::class, [
         'id' => $task->id,
@@ -141,9 +141,7 @@ it('form component create task successfully', function () {
 
 it('table component can deactivate task', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create(['active' => true]);
+    $task = getTask($this->user, ['active' => true]);
 
     // Act & Assert
     Livewire::actingAs($this->user)
@@ -159,9 +157,7 @@ it('table component can deactivate task', function () {
 
 it('table component can activate task', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create(['active' => false]);
+    $task = getTask($this->user, ['active' => false]);
 
     // Act & Assert
     Livewire::actingAs($this->user)
@@ -177,9 +173,7 @@ it('table component can activate task', function () {
 
 it('table component can delete task successfully', function () {
     // Arrange
-    Task::factory()
-        ->recycle($this->user)
-        ->create();
+    getTask($this->user);
 
     // Act & Assert
     Livewire::actingAs($this->user)
@@ -192,14 +186,12 @@ it('table component can delete task successfully', function () {
 
 it('table component see task hours', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create(['active' => false]);
+    $task = getTask($this->user, ['active' => false]);
     TaskHour::factory()
         ->recycle($this->user)
         ->create([
             'task_id' => $task->id,
-            'hours' => 999999.99
+            'hours' => 999999.99,
         ]);
 
     // Act & Assert
@@ -212,9 +204,7 @@ it('table component see task hours', function () {
 
 it('table component see task name url', function () {
     // Arrange
-    $task = Task::factory()
-        ->recycle($this->user)
-        ->create([
+    $task = getTask($this->user, [
         'url' => 'test:://phpunit.test',
         'active' => false,
     ]);
@@ -235,17 +225,12 @@ describe('authorization & visibility 👀', function () {
 
     it('table display only current user tasks', function () {
         // Arrange
-        $currentUser = $this->user;
+        $currentUserTask = getTask($this->user);
         $anotherUser = User::factory()->create();
-        $currentUserTask = Task::factory()
-            ->recycle($currentUser)
-            ->create();
-        $anotherUserTask = Task::factory()
-            ->recycle($anotherUser)
-            ->create();
+        $anotherUserTask = getTask($anotherUser);
 
         // Act & Assert
-        Livewire::actingAs($currentUser)
+        Livewire::actingAs($this->user)
             ->test(TaskTable::class)
             ->assertSee($currentUserTask->name)
             ->assertDontSee($anotherUserTask->name);
@@ -257,9 +242,7 @@ describe('authorization & visibility 👀', function () {
             $mock->shouldReceive('delete')
                 ->andReturnFalse();
         });
-        Task::factory()
-            ->recycle($this->user)
-            ->create();
+        getTask($this->user);
 
         // Act & Assert
         Livewire::actingAs($this->user)
@@ -275,9 +258,7 @@ describe('authorization & visibility 👀', function () {
             $mock->shouldReceive('update')
                 ->andReturnFalse();
         });
-        $task = Task::factory()
-            ->recycle($this->user)
-            ->create();
+        $task = getTask($this->user);
 
         // Act & Assert
         Livewire::actingAs($this->user)
@@ -293,9 +274,7 @@ describe('authorization & visibility 👀', function () {
             $mock->shouldReceive('update')
                 ->andReturnFalse();
         });
-        $task = Task::factory()
-            ->recycle($this->user)
-            ->create();
+        $task = getTask($this->user);
 
         // Act & Assert
         Livewire::actingAs($this->user)
@@ -311,10 +290,7 @@ describe('authorization & visibility 👀', function () {
             $mock->shouldReceive('update')
                 ->andReturnFalse();
         });
-        $task = Task::factory()->create([
-            'user_id' => $this->user->id,
-            'active' => false,
-        ]);
+        $task = getTask($this->user, ['active' => false]);
 
         // Act & Assert
         Livewire::actingAs($this->user)
@@ -334,9 +310,7 @@ describe('authorization & visibility 👀', function () {
             $mock->shouldReceive('update')
                 ->andReturnFalse();
         });
-        $task = Task::factory()
-            ->recycle($this->user)
-            ->create(['active' => true]);
+        $task = getTask($this->user, ['active' => true]);
 
         // Act & Assert
         Livewire::actingAs($this->user)
