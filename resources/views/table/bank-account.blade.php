@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Bank account list
+        {{ __('base.bank_account_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        New Bank Account
+        {{ __('base.new_bank_account') }}
     </x-slot>
 
     <livewire:table.bank-account-table/>

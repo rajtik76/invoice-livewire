@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -21,18 +22,18 @@ class DashboardController extends Controller
             ->get()
             ->groupBy('task.contract.currency')
             ->map(
-                fn(Collection $items) => $items->sum(
-                    fn(TaskHour $taskHour) => $taskHour->task->contract->price_per_hour * $taskHour->hours
+                fn (Collection $items) => $items->sum(
+                    fn (TaskHour $taskHour) => $taskHour->task->contract->price_per_hour * $taskHour->hours
                 )
             );
 
         return view('dashboard', [
-                'tasks' => Task::currentUser()
-                    ->active()
-                    ->count(),
-                'hours' => $taskHours->sum('hours'),
-                'amount' => $amount
-            ]
+            'tasks' => Task::currentUser()
+                ->active()
+                ->count(),
+            'hours' => $taskHours->sum('hours'),
+            'amount' => $amount,
+        ]
         );
     }
 }

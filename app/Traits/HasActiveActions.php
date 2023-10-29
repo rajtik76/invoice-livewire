@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Traits;
@@ -12,13 +13,13 @@ trait HasActiveActions
     {
         return [
             ...parent::actions(),
-            Action::make('Deactivate', 'deactivate', function (Enumerable $models): void {
+            Action::make(__('base.deactivate'), 'deactivate', function (Enumerable $models): void {
                 foreach ($models as $model) {
                     $this->authorize('update', $model);
                     $model->update(['active' => false]);
                 }
             }),
-            Action::make('Activate', 'activate', function (Enumerable $models): void {
+            Action::make(__('base.activate'), 'activate', function (Enumerable $models): void {
                 foreach ($models as $model) {
                     $this->authorize('update', $model);
                     $model->update(['active' => true]);

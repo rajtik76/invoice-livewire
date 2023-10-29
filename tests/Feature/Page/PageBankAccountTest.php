@@ -43,7 +43,7 @@ it('see bank account', function () {
         ->test(BankAccountTable::class)
         ->assertSee($bankAccount->user_id)
         ->assertSee($bankAccount->bank_name)
-        ->assertSee($bankAccount->bank_number)
+        ->assertSee($bankAccount->bank_code)
         ->assertSee($bankAccount->account_number)
         ->assertSee($bankAccount->swift)
         ->assertSee($bankAccount->iban);
@@ -73,7 +73,7 @@ it('edit form listen for event and open modal with data', function () {
         ->assertSet('modelId', $bankAccount->id)
         ->assertViewHas('bank_name', $bankAccount->bank_name)
         ->assertViewHas('account_number', $bankAccount->account_number)
-        ->assertViewHas('bank_number', $bankAccount->bank_number)
+        ->assertViewHas('bank_code', $bankAccount->bank_code)
         ->assertViewHas('iban', $bankAccount->iban)
         ->assertViewHas('swift', $bankAccount->swift);
 });

@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Contract list
+        {{ __('base.contract_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        New Contract
+        {{ __('base.new_contract') }}
     </x-slot>
 
     <livewire:table.contract-table :filters="['active' => 1]"/>

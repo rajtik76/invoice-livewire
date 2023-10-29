@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -47,9 +48,10 @@ abstract class BaseTable extends LivewireTable
     {
         return [
             ...$this->baseActions(),
-            Action::make('Delete', 'delete', function (Enumerable $models) {
+            Action::make(__('base.delete'), 'delete', function (Enumerable $models) {
                 $models->each(function (Model $model) {
                     $this->authorize('delete', $model);
+
                     return $model->delete();
                 });
             }),
@@ -90,7 +92,7 @@ abstract class BaseTable extends LivewireTable
     {
         return [
             ...$this->baseColumns(),
-            ViewColumn::make('Edit', 'components.table-edit-button')
+            ViewColumn::make(__('base.edit'), 'components.table-edit-button')
                 ->clickable(false),
         ];
     }

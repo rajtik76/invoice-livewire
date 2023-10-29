@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('bank_name');
             $table->string('account_number');
-            $table->string('bank_number');
+            $table->string('bank_code');
             $table->string('iban');
             $table->string('swift');
             $table->timestamps();

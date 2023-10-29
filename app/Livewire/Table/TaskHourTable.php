@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -12,7 +13,6 @@ use RamonRietdijk\LivewireTables\Columns\Column;
 use RamonRietdijk\LivewireTables\Enums\Direction;
 use RamonRietdijk\LivewireTables\Filters\BaseFilter;
 use RamonRietdijk\LivewireTables\Filters\SelectFilter;
-use SebastianBergmann\CodeCoverage\Filter;
 
 class TaskHourTable extends BaseTable
 {
@@ -22,13 +22,13 @@ class TaskHourTable extends BaseTable
     protected function baseColumns(): array
     {
         return [
-            Column::make('Date', 'date')
+            Column::make(__('base.date'), 'date')
                 ->sortable()
                 ->searchable()
                 ->displayUsing(function (Carbon $value): string {
                     return $value->toDateString();
                 }),
-            Column::make('Task', 'task_id')
+            Column::make(__('base.task'), 'task_id')
                 ->displayUsing(function (mixed $value, TaskHour $model): string {
                     return $model->load('task')->task->name;
                 })
@@ -44,7 +44,7 @@ class TaskHourTable extends BaseTable
                             ->pluck('id')
                     );
                 }),
-            Column::make('Hours', 'hours')
+            Column::make(__('base.hours'), 'hours')
                 ->sortable()
                 ->searchable(),
         ];
@@ -54,7 +54,7 @@ class TaskHourTable extends BaseTable
     protected function baseFilters(): array
     {
         return [
-            SelectFilter::make('Task', 'task_id')
+            SelectFilter::make(__('base.task'), 'task_id')
                 ->options(Task::getOptions()),
         ];
     }

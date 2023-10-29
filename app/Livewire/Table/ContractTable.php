@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -23,7 +24,7 @@ class ContractTable extends BaseTable
     protected function baseColumns(): array
     {
         return [
-            ViewColumn::make('Active', 'components.table-state'),
+            ViewColumn::make(__('base.active'), 'components.table-state'),
             Column::make('Customer', 'customer_id')
                 ->displayUsing(function (mixed $value, Contract $model): string {
                     return $model->load('customer')->customer->name;
@@ -35,7 +36,7 @@ class ContractTable extends BaseTable
                             ->pluck('id')
                     );
                 }),
-            Column::make('Supplier', 'supplier_id')
+            Column::make(__('base.supplier'), 'supplier_id')
                 ->displayUsing(function (mixed $value, Contract $model): string {
                     return $model->load('supplier')->supplier->name;
                 })
@@ -46,7 +47,7 @@ class ContractTable extends BaseTable
                             ->pluck('id')
                     );
                 }),
-            Column::make('Name', 'name')
+            Column::make(__('base.name'), 'name')
                 ->sortable()
                 ->searchable(),
             Column::make('Signed', 'signed_at')
@@ -54,7 +55,7 @@ class ContractTable extends BaseTable
                     return $model->signed_at->toDateString();
                 })
                 ->sortable(),
-            Column::make('Price', 'price_per_hour')
+            Column::make(__('base.price'), 'price_per_hour')
                 ->displayUsing(function (mixed $value, Contract $model): string {
                     return "{$model->price_per_hour} {$model->currency->getCurrencySymbol()}";
                 })

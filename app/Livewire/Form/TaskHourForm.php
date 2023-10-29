@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -39,7 +40,7 @@ class TaskHourForm extends BaseForm
         $this->hours = $model->hours;
     }
 
-    public function setDataForCreate(): void
+    public function setDataForStore(): void
     {
         $this->task_id = $this->task;
         $this->date = now()->toDateString();

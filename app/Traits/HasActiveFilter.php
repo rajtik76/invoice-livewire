@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Traits;
@@ -13,7 +14,7 @@ trait HasActiveFilter
     {
         return [
             ...parent::filters(),
-            BooleanFilter::make('Active', 'active'),
+            BooleanFilter::make(__('base.active'), 'active'),
         ];
     }
 }

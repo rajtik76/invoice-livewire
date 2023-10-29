@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -61,7 +62,7 @@ abstract class BaseForm extends Component
         $this->modelId = null;
 
         // reset model data to default values
-        $this->setDataForCreate();
+        $this->setDataForStore();
 
         // open modal window
         $this->isModalOpen = true;
@@ -101,7 +102,7 @@ abstract class BaseForm extends Component
      */
     protected function updateModelAction(): void
     {
-        // get model data
+        // get model
         $model = $this->getModel();
 
         // authorize user action
@@ -120,7 +121,7 @@ abstract class BaseForm extends Component
         $this->createModel();
 
         // sets the data to the necessary values to create a new model
-        $this->setDataForCreate();
+        $this->setDataForStore();
     }
 
     /**
@@ -141,5 +142,5 @@ abstract class BaseForm extends Component
     /**
      * Sets the data to the necessary values to create a new model
      */
-    abstract public function setDataForCreate(): void;
+    abstract public function setDataForStore(): void;
 }

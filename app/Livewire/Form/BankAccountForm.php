@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -15,7 +16,7 @@ class BankAccountForm extends BaseForm
     public ?string $account_number = null;
 
     #[Rule(['required', 'max:255'])]
-    public ?string $bank_number = null;
+    public ?string $bank_code = null;
 
     #[Rule(['required', 'max:255'])]
     public ?string $iban = null;
@@ -29,16 +30,16 @@ class BankAccountForm extends BaseForm
 
         $this->bank_name = $bankAccount->bank_name;
         $this->account_number = $bankAccount->account_number;
-        $this->bank_number = $bankAccount->bank_number;
+        $this->bank_code = $bankAccount->bank_code;
         $this->iban = $bankAccount->iban;
         $this->swift = $bankAccount->swift;
     }
 
-    public function setDataForCreate(): void
+    public function setDataForStore(): void
     {
         $this->bank_name = null;
         $this->account_number = null;
-        $this->bank_number = null;
+        $this->bank_code = null;
         $this->iban = null;
         $this->swift = null;
     }

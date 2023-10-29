@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -16,10 +17,10 @@ class AddressTable extends BaseTable
     protected function baseColumns(): array
     {
         return [
-            Column::make('Street', 'street')->searchable(),
-            Column::make('City', 'city'),
-            Column::make('Zip', 'zip'),
-            Column::make('Country', 'country')->displayUsing(function (CountryEnum $value) {
+            Column::make(__('base.street'), 'street')->searchable(),
+            Column::make(__('base.city'), 'city'),
+            Column::make(__('base.zip'), 'zip'),
+            Column::make(__('base.country'), 'country')->displayUsing(function (CountryEnum $value) {
                 return $value->countryName();
             }),
         ];

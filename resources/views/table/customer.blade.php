@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Customer list
+        {{ __('base.customer_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        New Customer
+        {{ __('base.new_customer') }}
     </x-slot>
 
     <livewire:table.customer-table/>

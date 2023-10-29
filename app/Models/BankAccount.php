@@ -17,7 +17,7 @@ class BankAccount extends Model implements KeyValueOptions
         'user_id',
         'bank_name',
         'account_number',
-        'bank_number',
+        'bank_code',
         'iban',
         'swift',
     ];
@@ -34,7 +34,7 @@ class BankAccount extends Model implements KeyValueOptions
             ->orderBy('account_number')
             ->get()
             ->keyBy('id')
-            ->map(fn (BankAccount $account) => "{$account->account_number}/{$account->bank_number} - {$account->bank_name}")
+            ->map(fn (BankAccount $account) => "{$account->account_number}/{$account->bank_code} - {$account->bank_name}")
             ->toArray();
     }
 }

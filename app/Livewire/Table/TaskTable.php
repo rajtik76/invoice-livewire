@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -28,8 +29,8 @@ class TaskTable extends BaseTable
     protected function baseColumns(): array
     {
         return [
-            ViewColumn::make('Active', 'components.table-state'),
-            Column::make('Contract', 'contract_id')
+            ViewColumn::make(__('base.active'), 'components.table-state'),
+            Column::make(__('base.contract'), 'contract_id')
                 ->displayUsing(function (mixed $value, Task $model): string {
                     return $model->load('contract')->contract->name;
                 })
@@ -45,7 +46,7 @@ class TaskTable extends BaseTable
                             ->pluck('id')
                     );
                 }),
-            Column::make('Name', 'name')
+            Column::make(__('base.name'), 'name')
                 ->sortable()
                 ->searchable()
                 ->displayUsing(function (mixed $value, Task $model): string {
@@ -58,7 +59,7 @@ class TaskTable extends BaseTable
                 })
                 ->asHtml()
                 ->clickable(false),
-            ViewColumn::make('Hours', 'components.table-task-hours-button')
+            ViewColumn::make(__('base.hours'), 'components.table-task-hours-button')
                 ->sortable(function (Builder $builder, Direction $direction) {
                     $builder->withSum('taskHour', 'hours')->orderBy('task_hour_sum_hours', $direction->value);
                 })

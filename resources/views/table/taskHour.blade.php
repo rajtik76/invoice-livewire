@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Task hour list
+        {{ __('base.task_hour_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        Log New Task Hours
+        {{ __('base.new_task_hour') }}
     </x-slot>
 
     <livewire:table.task-hour-table

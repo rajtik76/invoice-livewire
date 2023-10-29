@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -17,7 +18,7 @@ class ContractForm extends BaseForm
 
     public ?int $supplier_id = null;
 
-    public int|null $active = null;
+    public ?int $active = null;
 
     public ?string $name = null;
 
@@ -56,7 +57,7 @@ class ContractForm extends BaseForm
         $this->currency = $model->currency->value;
     }
 
-    public function setDataForCreate(): void
+    public function setDataForStore(): void
     {
         $this->customer_id = null;
         $this->supplier_id = null;

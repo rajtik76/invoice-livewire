@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Task extends Model implements KeyValueOptions
 {
-    use HasCurrentUserScope, HasFactory, HasActiveScope;
+    use HasActiveScope, HasCurrentUserScope, HasFactory;
 
     protected $guarded = [];
 

@@ -20,7 +20,7 @@ class BankAccountFactory extends Factory
             'user_id' => fn () => User::factory(),
             'bank_name' => $this->faker->name(),
             'account_number' => $this->faker->numerify(Str::repeat('#', 10)),
-            'bank_number' => $this->faker->numerify(Str::repeat('#', 4)),
+            'bank_code' => $this->faker->numerify(Str::repeat('#', 4)),
             'iban' => $this->faker->iban(),
             'swift' => $this->faker->swiftBicNumber(),
             'created_at' => Carbon::now(),

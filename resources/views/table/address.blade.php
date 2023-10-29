@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Address list
+        {{ __('base.address_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        New Address
+        {{ __('base.new_address') }}
     </x-slot>
 
     <livewire:table.address-table/>

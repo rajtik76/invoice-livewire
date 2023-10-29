@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -38,7 +39,7 @@ class CustomerForm extends BaseForm
         $this->vat_number = $model->vat_number;
     }
 
-    public function setDataForCreate(): void
+    public function setDataForStore(): void
     {
         $this->address_id = null;
         $this->name = null;

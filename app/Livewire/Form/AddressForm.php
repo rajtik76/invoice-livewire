@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Form;
@@ -25,7 +26,7 @@ class AddressForm extends BaseForm
     #[Rule(['required', new Enum(CountryEnum::class)])]
     public null|string|CountryEnum $country = null;
 
-    public function setDataForCreate(): void
+    public function setDataForStore(): void
     {
         $this->street = null;
         $this->city = null;

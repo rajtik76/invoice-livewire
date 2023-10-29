@@ -1,10 +1,10 @@
 <x-table-page>
     <x-slot name="title">
-        Task list
+        {{ __('base.task_list') }}
     </x-slot>
 
     <x-slot name="createButton">
-        New Task
+        {{ __('base.new_task') }}
     </x-slot>
 
     <livewire:table.task-table :filters="['active' => 1]"

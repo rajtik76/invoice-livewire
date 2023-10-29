@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('base.dashboard') }}
         </h2>
     </x-slot>
 
@@ -9,10 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="grid grid-cols-3 gap-5">
+                    <div class="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
                         <x-info-widget>
                             <x-slot name="header">
-                                Active tasks
+                                {{ __('base.active_task') }}
                             </x-slot>
                             <x-slot name="content">
                                 {{ $tasks }}
@@ -21,7 +21,7 @@
 
                         <x-info-widget>
                             <x-slot name="header">
-                                Hours this month
+                                {{ __('base.current_month_hours', ['year' => now()->year, 'month' => now()->monthName]) }}
                             </x-slot>
                             <x-slot name="content">
                                 {{ $hours }}
@@ -30,7 +30,7 @@
 
                         <x-info-widget>
                             <x-slot name="header">
-                                This month invoice amount
+                                {{ __('base.current_month_amount', ['year' => now()->year, 'month' => now()->monthName]) }}
                             </x-slot>
                             <x-slot name="content">
                                 @foreach($amount as $currency => $amount)

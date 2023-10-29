@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Livewire\Table;
@@ -15,10 +16,10 @@ class CustomerTable extends BaseTable
     protected function baseColumns(): array
     {
         return [
-            Column::make('Name', 'name')
+            Column::make(__('base.name'), 'name')
                 ->sortable()
                 ->searchable(),
-            Column::make('Registration #', 'registration_number')
+            Column::make(__('base.registration').' #', 'registration_number')
                 ->sortable()
                 ->searchable(),
         ];

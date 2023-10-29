@@ -1,70 +1,48 @@
-<div>
-    @if($isModalOpen)
-        <x-modal name="submit" :show="true" :auto-close="false">
-            <div class="p-4">
-                <section>
-                    <header>
-                        <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                            Bank account information
-                        </h2>
+<x-base-form>
+    <x-slot name="head">
+        {{ __('base.bank_account_head') }}
+    </x-slot>
 
-                        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                            Your customer or supplier bank account information.
-                        </p>
-                    </header>
+    <x-slot name="paragraph">
+        {{ __('base.bank_account_paragraph') }}
+    </x-slot>
 
-                    <form wire:submit.prevent="submit" class="mt-6 space-y-6">
-                        <div>
-                            <x-input-label for="bank_name" value="Bank name"/>
-                            <x-text-input wire:model="bank_name" id="bank_name" name="bank_name" type="text"
-                                          class="mt-1 block w-full"
-                                          required autofocus/>
-                            <x-input-error class="mt-2" :messages="$errors->get('bank_name')"/>
-                        </div>
+    <div>
+        <x-input-label for="bank_name" :value="__('base.bank_name')"/>
+        <x-text-input wire:model="bank_name" id="bank_name" name="bank_name" type="text"
+                      class="mt-1 block w-full"
+                      required autofocus/>
+        <x-input-error class="mt-2" :messages="$errors->get('bank_name')"/>
+    </div>
 
-                        <div class="grid grid-cols-2 gap-4 w-full">
-                            <div>
-                                <x-input-label for="account_number" value="Account number"/>
-                                <x-text-input wire:model="account_number" id="account_number" name="account_number" type="text"
-                                              class="mt-1 block w-full"
-                                              required/>
-                                <x-input-error class="mt-2" :messages="$errors->get('account_number')"/>
-                            </div>
+    <div class="grid grid-cols-2 gap-4 w-full">
+        <div>
+            <x-input-label for="account_number" :value="__('base.account')"/>
+            <x-text-input wire:model="account_number" id="account_number" name="account_number" type="text"
+                          class="mt-1 block w-full"
+                          required/>
+            <x-input-error class="mt-2" :messages="$errors->get('account_number')"/>
+        </div>
 
-                            <div>
-                                <x-input-label for="bank_number" value="Bank number"/>
-                                <x-text-input wire:model="bank_number" id="bank_number" name="bank_number" type="text" class="mt-1 block w-full"
-                                              required/>
-                                <x-input-error class="mt-2" :messages="$errors->get('bank_number')"/>
-                            </div>
-                        </div>
+        <div>
+            <x-input-label for="bank_code" :value="__('base.bank_code')"/>
+            <x-text-input wire:model="bank_code" id="bank_code" name="bank_code" type="text" class="mt-1 block w-full"
+                          required/>
+            <x-input-error class="mt-2" :messages="$errors->get('bank_code')"/>
+        </div>
+    </div>
 
-                        <div>
-                            <x-input-label for="iban" value="IBAN"/>
-                            <x-text-input wire:model="iban" id="iban" name="iban" type="text" class="mt-1 block w-full"
-                                          required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('iban')"/>
-                        </div>
+    <div>
+        <x-input-label for="iban" :value="__('base.iban')"/>
+        <x-text-input wire:model="iban" id="iban" name="iban" type="text" class="mt-1 block w-full"
+                      required/>
+        <x-input-error class="mt-2" :messages="$errors->get('iban')"/>
+    </div>
 
-                        <div>
-                            <x-input-label for="swift" value="SWIFT"/>
-                            <x-text-input wire:model="swift" id="swift" name="swift" type="text" class="mt-1 block w-full"
-                                          required/>
-                            <x-input-error class="mt-2" :messages="$errors->get('swift')"/>
-                        </div>
-
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-4">
-                                <x-primary-button>{{ __('Save') }}</x-primary-button>
-                                <x-action-message class="mr-3" on="model-updated">
-                                    {{ __('Saved.') }}
-                                </x-action-message>
-                            </div>
-                            <x-secondary-button wire:click="closeModal">Close</x-secondary-button>
-                        </div>
-                    </form>
-                </section>
-            </div>
-        </x-modal>
-    @endif
-</div>
+    <div>
+        <x-input-label for="swift" :value="__('base.swift')"/>
+        <x-text-input wire:model="swift" id="swift" name="swift" type="text" class="mt-1 block w-full"
+                      required/>
+        <x-input-error class="mt-2" :messages="$errors->get('swift')"/>
+    </div>
+</x-base-form>

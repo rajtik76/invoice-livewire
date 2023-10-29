@@ -1,18 +1,11 @@
 <?php
 
-use App\Enums\CurrencyEnum;
-use App\Livewire\Form\ContractForm;
 use App\Livewire\Form\CustomerForm;
-use App\Livewire\Table\ContractTable;
 use App\Livewire\Table\CustomerTable;
 use App\Models\Address;
-use App\Models\Contract;
 use App\Models\Customer;
-use App\Models\Supplier;
 use App\Models\User;
-use App\Policies\ContractPolicy;
 use App\Policies\CustomerPolicy;
-use Carbon\Carbon;
 use Livewire\Livewire;
 use Mockery\MockInterface;
 
