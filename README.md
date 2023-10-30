@@ -1,4 +1,4 @@
-# Invoicing
+# <img src="https://www.svgrepo.com/show/289648/invoice-receipt.svg" width=36 height=36 alt="Invoice logo"></img> Invoicing
 I am actually using this application for my private purposes, but I have decided to release it as freely available to everyone.  
 This application is used to record the time spent on individual tasks and to generate invoices and a monthly clock report.
 
