@@ -16,10 +16,8 @@ class InvoiceFactory extends Factory
     public function definition(): array
     {
         return [
-            'user_id' => fn (array $attributes) => $attributes['contract_id']
-                ? User::find(Contract::find($attributes['contract_id'])->user_id)
-                : User::factory(),
-            'contract_id' => fn (array $attributes) => Contract::factory()->create(['user_id' => $attributes['user_id']])->id,
+            'user_id' => fn () => User::factory(),
+            'contract_id' => fn () => Contract::factory(),
             'issue_date' => $this->faker->dateTimeBetween('2000-01-01'),
             'due_date' => fn (array $attributes) => \Carbon\Carbon::parse($attributes['issue_date'])->addDays(7),
             'year' => fn (array $attributes) => \Carbon\Carbon::parse($attributes['issue_date'])->year,

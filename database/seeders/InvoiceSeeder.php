@@ -12,22 +12,23 @@ class InvoiceSeeder extends Seeder
 {
     public function run(): void
     {
-        TaskHour::all()
-            // I need only task_id + year + month
+        TaskHour::with('task')->get()
+            // I need only task + year + month
             ->map(fn (TaskHour $taskHour) => [
-                'task_id' => $taskHour->task_id,
+                'task' => $taskHour->task,
                 'year' => sprintf('%04d', $taskHour->date->year),
                 'month' => sprintf('%02d', $taskHour->date->month),
             ])
             // group by by task + year + month
-            ->groupBy(fn ($item) => $item['task_id'].$item['year'].$item['month'])
+            ->groupBy(fn ($item) => "{$item['task']->id}{$item['year']}{$item['month']}")
             ->each(function (Collection $item) {
                 // take first item
                 $firstItem = $item->first();
 
                 // and create invoice model
                 Invoice::factory()->create([
-                    'contract_id' => Task::find($firstItem['task_id'])->contract->id,
+                    'user_id' => $firstItem['task']->user_id,
+                    'contract_id' => $firstItem['task']->contract->id,
                     'year' => $firstItem['year'],
                     'month' => $firstItem['month'],
                 ]);
