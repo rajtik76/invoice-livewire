@@ -85,4 +85,9 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
     {
         return $this->hasMany(Invoice::class);
     }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
+    }
 }

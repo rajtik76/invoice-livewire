@@ -53,8 +53,8 @@ it('see address country as enum country name', function () {
     // Act & Assert
     Livewire::actingAs(User::find($address->user_id))
         ->test(AddressTable::class)
-        ->assertSee($address->country->countryName())
-        ->assertDontSee($address->country->value);
+        ->assertSeeText($address->country->countryName())
+        ->assertDontSeeText($address->country->value);
 });
 
 it('edit button dispatch event', function () {

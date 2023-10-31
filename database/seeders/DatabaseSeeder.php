@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             ContractSeeder::class,
             TaskSeeder::class,
             TaskHourSeeder::class,
+            ReportSeeder::class,
             InvoiceSeeder::class,
         ]);
     }

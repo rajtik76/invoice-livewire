@@ -18,7 +18,7 @@ class Task extends Model implements KeyValueOptions
 
     protected $guarded = [];
 
-    public function taskHour(): HasMany
+    public function taskHours(): HasMany
     {
         return $this->hasMany(TaskHour::class);
     }

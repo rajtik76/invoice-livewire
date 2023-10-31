@@ -13,6 +13,7 @@ return [
     'supplier' => 'Supplier',
     'address' => 'Address',
     'bank_account' => 'Bank Account',
+    'report' => 'Report',
     'profile' => 'Profile',
     'logout' => 'Logout',
 
@@ -30,6 +31,7 @@ return [
     'supplier_list' => 'Supplier list',
     'address_list' => 'Address list',
     'bank_account_list' => 'Bank account list',
+    'report_list' => 'Monthly report list',
 
     // Create new item buttons
     'new_invoice' => 'New invoice',
@@ -40,6 +42,7 @@ return [
     'new_supplier' => 'New supplier',
     'new_address' => 'New address',
     'new_bank_account' => 'New bank account',
+    'new_report' => 'New report',
 
     // Fields displayed across project
     'number' => 'Number',
@@ -70,10 +73,12 @@ return [
     'bank_code' => 'Bank code',
     'iban' => 'IBAN',
     'swift' => 'SWIFT',
+    'pdf' => 'PDF',
 
     // Actions
     'delete' => 'Delete',
     'edit' => 'Edit',
+    'download' => 'Download',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
 

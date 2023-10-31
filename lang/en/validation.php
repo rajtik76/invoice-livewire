@@ -167,6 +167,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'report' => [
+            'unique' => 'Report with current combination of contract + year + month already exists.',
+        ]
     ],
 
     /*

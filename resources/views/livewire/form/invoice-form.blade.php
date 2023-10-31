@@ -27,7 +27,7 @@
     <div class="flex gap-1">
         <div>
             <x-input-label for="year" :value="__('base.year')"/>
-            <x-text-input wire:model="year" id="year" name="year" type="number" step="1" min="2000"
+            <x-text-input wire:model="year" id="year" name="year" type="number" step="1" min="1900"
                           max="{{ now()->year }}"
                           class="mt-1 block w-full"
                           required/>

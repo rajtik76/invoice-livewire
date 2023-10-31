@@ -23,19 +23,19 @@ readonly class InvoiceComputedData
      */
     public function getContent(): array
     {
-        return Task::with(['taskHour' => fn ($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
+        return Task::with(['taskHours' => fn ($query) => $query->whereYear('date', $this->year)->whereMonth('date', $this->month)])
             ->where('contract_id', $this->contractId)
             ->orderBy('name')
             ->get()
             // filter only task with hours
-            ->filter(fn (Task $task) => $task->taskHour->sum('hours'))
+            ->filter(fn (Task $task) => $task->taskHours->sum('hours'))
             // key by task id
             ->keyBy('id')
             // and transform array to desired output
             ->map(fn (Task $task) => [
                 'name' => $task->name,
                 'url' => $task->url,
-                'hours' => $task->taskHour->sum('hours'),
+                'hours' => $task->taskHours->sum('hours'),
             ])
             ->toArray();
     }
