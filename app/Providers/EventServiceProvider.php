@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Invoice;
 use App\Models\Report;
+use App\Observers\InvoiceObserver;
 use App\Observers\ReportObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -30,6 +32,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         Report::class => [ReportObserver::class],
+        Invoice::class => [InvoiceObserver::class],
     ];
 
     /**

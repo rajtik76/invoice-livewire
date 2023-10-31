@@ -6,7 +6,6 @@ namespace App\Livewire\Form;
 
 use App\Models\Contract;
 use App\Models\Invoice;
-use App\Services\InvoiceComputedData;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\Rule;
@@ -40,7 +39,7 @@ class InvoiceForm extends BaseForm
                     ->where('contract_id', $this->contract_id)
                     ->ignore($this->modelId),
             ],
-            'year' => ['required', 'int', 'between:1900,'.now()->year],
+            'year' => ['required', 'int', 'between:1900,' . now()->year],
             'month' => ['required', 'int', 'between:1,12'],
             'issue_date' => ['required', 'date'],
             'due_date' => ['required', 'date'],
@@ -76,50 +75,13 @@ class InvoiceForm extends BaseForm
         return view('livewire.form.invoice-form');
     }
 
-    protected function updateModelAction(): void
-    {
-        // get model
-        $model = $this->getModel();
-
-        // authorize user action
-        $this->authorize('update', $model);
-
-        $invoiceService = $this->getInvoiceComputedService();
-
-        $data = [
-            ...$this->validate(),
-            'content' => $invoiceService->getContent(),
-            'total_amount' => $invoiceService->getTotalAmount(),
-        ];
-
-        // update model data
-        $model->update($data);
-    }
-
     protected function createModel(): void
     {
-        $invoiceService = $this->getInvoiceComputedService();
-
-        $data = [
-            ...$this->validate(),
-            'content' => $invoiceService->getContent(),
-            'total_amount' => $invoiceService->getTotalAmount(),
-        ];
-
-        auth()->user()->invoices()->create($data);
+        auth()->user()->invoices()->create($this->validate());
     }
 
     protected function getModel(): Invoice
     {
         return Invoice::findOrFail($this->modelId);
-    }
-
-    private function getInvoiceComputedService(): InvoiceComputedData
-    {
-        return app(InvoiceComputedData::class, [
-            'contractId' => $this->contract_id,
-            'year' => $this->year,
-            'month' => $this->month,
-        ]);
     }
 }

@@ -25,10 +25,8 @@ return new class extends Migration
             $table->unsignedTinyInteger('month');
             $table->date('issue_date');
             $table->date('due_date');
-            $table->jsonb('content');
-            //            $table->float('price_per_unit');
-            $table->float('total_amount');
-            //            $table->string('currency');
+            $table->jsonb('content')->default('[]');
+            $table->unsignedDecimal('total_amount')->default(0);
 
             $table->unique(['user_id', 'contract_id', 'number']);
 
