@@ -50,4 +50,9 @@ class Contract extends Model implements KeyValueOptions
     {
         return $this->hasMany(Task::class);
     }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

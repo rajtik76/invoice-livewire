@@ -9,8 +9,10 @@ use App\Models\TaskHour;
 use App\Models\User;
 use App\Policies\InvoicePolicy;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Livewire\Livewire;
 use Mockery\MockInterface;
+
 use function Pest\Laravel\get;
 
 beforeEach(function () {
@@ -183,7 +185,7 @@ it('calculate invoice content and amount properly', function () {
                 'url' => $task->url,
                 'hours' => $taskHours->hours,
             ],
-        ])
+        ]),
     ]);
 });
 
@@ -198,6 +200,82 @@ it('table component can delete invoice successfully', function () {
         ->call('executeAction', 'delete')
         ->assertOk();
     $this->assertDatabaseCount(Invoice::class, 0);
+});
+
+it('calculate content and total_amount on create properly', function () {
+    // Arrange & Act
+    $contract = Contract::factory()
+        ->recycle($this->user)
+        ->has(Task::factory()
+            ->has(TaskHour::factory()->state([
+                'date' => Carbon::create(2000),
+                'hours' => 10,
+            ]))
+        )
+        ->has(Invoice::factory()->state([
+            'year' => 2000,
+            'month' => 1,
+            'content' => [],
+            'total_amount' => 0,
+        ]))
+        ->create(['price_per_hour' => 10]);
+
+    // Assert
+    $this->assertDatabaseHas(Invoice::class, [
+        'year' => 2000,
+        'month' => 1,
+        'content->1->name' => $contract->tasks()->first()->name,
+        'content->1->url' => $contract->tasks()->first()->url,
+        'content->1->hours' => 10,
+        'total_amount' => 100,
+    ]);
+});
+
+it('re-calculate content and total_amount on update properly', function () {
+    // Arrange & Act
+    $contract = Contract::factory()
+        ->recycle($this->user)
+        ->has(Task::factory(2)
+            ->has(TaskHour::factory()->state(new Sequence(
+                [
+                    'date' => Carbon::create(2000),
+                    'hours' => 20,
+                ],
+                [
+                    'date' => Carbon::create(2000, 2),
+                    'hours' => 10,
+                ],
+            )))
+        )
+        ->has(Invoice::factory()->state([
+            'year' => 2000,
+            'month' => 1,
+            'content' => [],
+            'total_amount' => 0,
+        ]))
+        ->create(['price_per_hour' => 10]);
+
+    // Assert created
+    $this->assertDatabaseCount(Invoice::class, 1);
+    $this->assertDatabaseHas(Invoice::class, [
+        'year' => 2000,
+        'month' => 1,
+        'content->1->hours' => 20,
+        'total_amount' => 200,
+    ]);
+
+    // Act - update
+    $contract->invoices()->first()->update([
+        'month' => 2,
+    ]);
+
+    // Assert updated
+    $this->assertDatabaseHas(Invoice::class, [
+        'year' => 2000,
+        'month' => 2,
+        'content->2->hours' => 10,
+        'total_amount' => 100,
+    ]);
 });
 
 describe('authorization & visibility 👀', function () {

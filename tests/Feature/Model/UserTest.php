@@ -4,13 +4,15 @@ use App\Models\Address;
 use App\Models\BankAccount;
 use App\Models\Contract;
 use App\Models\Customer;
+use App\Models\Invoice;
+use App\Models\Report;
 use App\Models\Supplier;
 use App\Models\Task;
 use App\Models\TaskHour;
 use App\Models\User;
 
 /**
- * @param  class-string  $model
+ * @param class-string $model
  */
 function seedModel(string $model, int $count = 3): User
 {
@@ -32,6 +34,8 @@ it('user sees all necessary relations', function () {
         Contract::class,
         Task::class,
         TaskHour::class,
+        Invoice::class,
+        Report::class,
     ];
 
     // Assert & Act
