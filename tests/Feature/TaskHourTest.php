@@ -101,7 +101,7 @@ it('form component update taskHour successfully', function () {
     $this->assertDatabaseHas(TaskHour::class, [
         'id' => $taskHour->id,
         'task_id' => $newTask->id,
-        'date' => new Carbon('2020-05-05'),
+        'date' => Carbon::create(2020, 5, 5),
         'hours' => 999.99,
     ]);
 });
@@ -125,7 +125,7 @@ it('form component create taskHour successfully', function () {
     $this->assertDatabaseHas(TaskHour::class, [
         'user_id' => $this->user->id,
         'task_id' => $task->id,
-        'date' => new Carbon('2020-02-02'),
+        'date' => Carbon::create(2020, 2, 2),
         'hours' => 888.88,
     ]);
 });
