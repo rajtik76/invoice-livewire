@@ -1,10 +1,6 @@
-@php use Carbon\Carbon; @endphp
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>{{ __('base.invoice') }}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+@extends('layouts.pdf')
 
+@section('style')
     <style>
         table {
             width: 100%;
@@ -40,40 +36,40 @@
             padding: 0 0.5rem;
         }
     </style>
-</head>
-<body>
-<div class="text-center">
-    <h1>Time log report {{ Carbon::create($report->year, $report->month)->monthName }} {{ $report->year }}</h1>
-    <h2>Contract: {{ $report->contract->name }}</h2>
-    <h3>Total: {{ collect($report->content)->sum(fn($items) => collect($items)->sum('hours')) }} hours</h3>
-</div>
+@endsection
 
-<div>
-    <table>
-        <tr class="highlight">
-            <th>{{ __('base.date') }}</th>
-            <th>{{ __('base.task') }}</th>
-            <th>{{ __('base.hours') }}</th>
-        </tr>
-        <tbody>
-        @foreach($report->content as $date => $tasks)
-            @foreach($tasks as $task)
-                <tr>
-                    <td>{{ $task['date'] }}</td>
-                    <td>
-                        @if($task['url'])
-                            <a href="{{ $task['url'] }}">{{ $task['name'] }}</a>
-                        @else
-                            {{ $task['name'] }}
-                        @endif
-                    </td>
-                    <td>{{ $task['hours'] }}</td>
-                </tr>
+@section('content')
+    <div class="text-center">
+        <h1>{{ __('base.time_log_report') }} {{ \Carbon\Carbon::create($report->year, $report->month)->monthName }} {{ $report->year }}</h1>
+        <h2>{{ __('base.contract') }}: {{ $report->contract->name }}</h2>
+        <h3>{{ __('base.total') }}: {{ collect($report->content)->sum(fn($items) => collect($items)->sum('hours')) }} {{ __('base.hours') }}</h3>
+    </div>
+
+    <div>
+        <table>
+            <tr class="highlight">
+                <th>{{ __('base.date') }}</th>
+                <th>{{ __('base.task') }}</th>
+                <th>{{ __('base.hours') }}</th>
+            </tr>
+            <tbody>
+            @foreach($report->content as $date => $tasks)
+                @foreach($tasks as $task)
+                    <tr>
+                        <td>{{ $task['date'] }}</td>
+                        <td>
+                            @if($task['url'])
+                                <a href="{{ $task['url'] }}">{{ $task['name'] }}</a>
+                            @else
+                                {{ $task['name'] }}
+                            @endif
+                        </td>
+                        <td>{{ $task['hours'] }}</td>
+                    </tr>
+                @endforeach
+                <x-report-day-summary :date="$date" :sum="collect($tasks)->sum('hours')"/>
             @endforeach
-            <x-report-day-summary :date="$date" :sum="collect($tasks)->sum('hours')" />
-        @endforeach
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
+            </tbody>
+        </table>
+    </div>
+@endsection

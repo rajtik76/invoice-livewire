@@ -74,6 +74,7 @@ return [
     'iban' => 'IBAN',
     'swift' => 'SWIFT',
     'pdf' => 'PDF',
+    'total' => 'Total',
 
     // Actions
     'delete' => 'Delete',
@@ -107,4 +108,7 @@ return [
 
     // Input select translation
     'select_option' => 'Please select option ...',
+
+    // PDF
+    'time_log_report' => 'Time log report',
 ];

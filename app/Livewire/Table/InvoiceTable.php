@@ -6,10 +6,14 @@ namespace App\Livewire\Table;
 
 use App\Models\Contract;
 use App\Models\Invoice;
+use App\Models\Report;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Database\Eloquent\Builder;
 use RamonRietdijk\LivewireTables\Columns\BaseColumn;
 use RamonRietdijk\LivewireTables\Columns\Column;
+use RamonRietdijk\LivewireTables\Columns\ViewColumn;
 use RamonRietdijk\LivewireTables\Enums\Direction;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class InvoiceTable extends BaseTable
 {
@@ -52,6 +56,19 @@ class InvoiceTable extends BaseTable
                 })
                 ->sortable()
                 ->searchable(),
+            ViewColumn::make(__('base.pdf'), 'components.table-download-button')->clickable(false),
         ];
+    }
+
+    public function download(int $invoiceId): StreamedResponse
+    {
+        $invoice = Invoice::find($invoiceId);
+
+        return response()->streamDownload(function () use ($invoice) {
+            $pdf = Pdf::loadView('pdf.invoice', [
+                'invoice' => $invoice->load(['contract.supplier', 'contract.customer']),
+            ]);
+            echo $pdf->stream();
+        }, name: "invoice-{$invoice->contract->name}-{$invoice->year}" . sprintf('%02d', $invoice->month) . ".pdf");
     }
 }
