@@ -15,20 +15,20 @@ class InvoiceSeeder extends Seeder
         TaskHour::with('task')->get()
             // I need only task + year + month
             ->map(fn (TaskHour $taskHour) => [
-                'task' => $taskHour->task,
+                'contract' => $taskHour->task->contract,
                 'year' => sprintf('%04d', $taskHour->date->year),
                 'month' => sprintf('%02d', $taskHour->date->month),
             ])
-            // group by by task + year + month
-            ->groupBy(fn ($item) => "{$item['task']->id}{$item['year']}{$item['month']}")
+            // group by task + year + month
+            ->groupBy(fn ($item) => "{$item['contract']->id}{$item['year']}{$item['month']}")
             ->each(function (Collection $item) {
                 // take first item
                 $firstItem = $item->first();
 
                 // and create invoice model
                 Invoice::factory()->create([
-                    'user_id' => $firstItem['task']->user_id,
-                    'contract_id' => $firstItem['task']->contract->id,
+                    'user_id' => $firstItem['contract']->user_id,
+                    'contract_id' => $firstItem['contract']->id,
                     'year' => $firstItem['year'],
                     'month' => $firstItem['month'],
                 ]);

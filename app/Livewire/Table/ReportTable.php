@@ -64,6 +64,6 @@ class ReportTable extends BaseTable
                 'report' => $report,
             ]);
             echo $pdf->stream();
-        }, name: "invoice-{$report->contract->name}-{$report->year}" . sprintf('%02d', $report->month) . ".pdf");
+        }, name: "report-{$report->contract->name}-{$report->year}" . sprintf('%02d', $report->month) . ".pdf");
     }
 }

@@ -6,7 +6,7 @@
 
     <style>
         body {
-            font-family: Verdana, Arial, sans-serif;
+            font-family: DejaVu Sans;
         }
     </style>
 

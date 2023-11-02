@@ -19,7 +19,7 @@ class TaskHourFactory extends Factory
         return [
             'user_id' => fn () => User::factory(),
             'task_id' => fn (array $attributes) => Task::factory()->create(['user_id' => $attributes['user_id']]),
-            'date' => $this->faker->dateTimeBetween(now()->subDays(30)),
+            'date' => $this->faker->dateTimeBetween(now()->subMonths(6)),
             'hours' => $this->faker->randomFloat(1, 0.5, 8),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

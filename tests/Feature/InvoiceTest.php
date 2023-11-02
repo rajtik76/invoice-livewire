@@ -178,12 +178,13 @@ it('calculate invoice content and amount properly', function () {
         'month' => 12,
         'issue_date' => Carbon::create(2000, 12, 12),
         'due_date' => Carbon::create(2000, 12, 31),
-        'total_amount' => $taskHours->sum('hours') * $contract->price_per_hour,
+        'total_amount' => round($taskHours->hours * $contract->price_per_hour, 2),
         'content' => json_encode([
             1 => [
                 'name' => $task->name,
                 'url' => $task->url,
                 'hours' => $taskHours->hours,
+                'amount' => round($taskHours->hours * $contract->price_per_hour, 2),
             ],
         ]),
     ]);
@@ -276,6 +277,17 @@ it('re-calculate content and total_amount on update properly', function () {
         'content->2->hours' => 10,
         'total_amount' => 100,
     ]);
+});
+
+it('download pdf file successfully', function () {
+    // Arrange
+    $invoice = getInvoice($this->user);
+
+    // Act & Assert
+    Livewire::actingAs($this->user)
+        ->test(InvoiceTable::class)
+        ->call('download', $invoice->id)
+        ->assertFileDownloaded("invoice-{$invoice->contract->name}-{$invoice->year}" . sprintf('%02d', $invoice->month) . ".pdf");
 });
 
 describe('authorization & visibility 👀', function () {

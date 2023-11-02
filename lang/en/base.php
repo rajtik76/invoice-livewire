@@ -111,4 +111,7 @@ return [
 
     // PDF
     'time_log_report' => 'Time log report',
+    'payment_advice' => 'Payment advice',
+    'dates' => 'Dates',
+    'reference_id' => 'Reference ID',
 ];

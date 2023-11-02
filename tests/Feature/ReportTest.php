@@ -149,7 +149,7 @@ it('can download report', function () {
         ->test(ReportTable::class)
         ->call('download', $report->id)
         ->assertOk()
-        ->assertFileDownloaded("invoice-{$report->contract->name}-{$report->year}" . sprintf('%02d', $report->month) . '.pdf');
+        ->assertFileDownloaded("report-{$report->contract->name}-{$report->year}" . sprintf('%02d', $report->month) . '.pdf');
 });
 
 describe('authorization & visibility 👀', function () {
