@@ -12,7 +12,7 @@ use App\Models\TaskHour;
 use App\Models\User;
 
 /**
- * @param class-string $model
+ * @param  class-string  $model
  */
 function seedModel(string $model, int $count = 3): User
 {

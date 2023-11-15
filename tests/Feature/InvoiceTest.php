@@ -287,7 +287,7 @@ it('download pdf file successfully', function () {
     Livewire::actingAs($this->user)
         ->test(InvoiceTable::class)
         ->call('download', $invoice->id)
-        ->assertFileDownloaded("invoice-{$invoice->contract->name}-{$invoice->year}" . sprintf('%02d', $invoice->month) . ".pdf");
+        ->assertFileDownloaded("invoice-{$invoice->contract->name}-{$invoice->year}".sprintf('%02d', $invoice->month).'.pdf');
 });
 
 describe('authorization & visibility 👀', function () {

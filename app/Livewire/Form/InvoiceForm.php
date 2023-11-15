@@ -39,7 +39,7 @@ class InvoiceForm extends BaseForm
                     ->where('contract_id', $this->contract_id)
                     ->ignore($this->modelId),
             ],
-            'year' => ['required', 'int', 'between:1900,' . now()->year],
+            'year' => ['required', 'int', 'between:1900,'.now()->year],
             'month' => ['required', 'int', 'between:1,12'],
             'issue_date' => ['required', 'date'],
             'due_date' => ['required', 'date'],

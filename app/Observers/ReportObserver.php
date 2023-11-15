@@ -17,7 +17,7 @@ class ReportObserver
     public function updated(Report $report): void
     {
         if ($report->isDirty(['contract_id', 'year', 'month'])) {
-           $this->updateContent($report);
+            $this->updateContent($report);
         }
     }
 
@@ -42,14 +42,14 @@ class ReportObserver
                 ->whereMonth('date', strval($report->month))
                 ->orderBy('date')
                 ->get()
-                ->map(fn(TaskHour $taskHour) => [
+                ->map(fn (TaskHour $taskHour) => [
                     'name' => $taskHour->task->name,
                     'url' => $taskHour->task->url,
                     'date' => $taskHour->date->toDateString(),
                     'hours' => $taskHour->hours,
                 ])
                 ->groupBy('date')
-                ->toArray()
+                ->toArray(),
         ]);
     }
 }

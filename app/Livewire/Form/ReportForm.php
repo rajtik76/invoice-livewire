@@ -31,14 +31,14 @@ class ReportForm extends BaseForm
                     if (Report::where('contract_id', $value)
                         ->where('year', Arr::first($this->validateOnly('year')))
                         ->where('month', Arr::first($this->validateOnly('month')))
-                        ->when($this->modelId, function($query, $value) {
-                            $query->where('id' ,'!=', $value);
+                        ->when($this->modelId, function ($query, $value) {
+                            $query->where('id', '!=', $value);
                         })
                         ->exists()) {
                         $fail(trans('validation.custom.report.unique'));
                     }
                 }],
-            'year' => ['required', 'numeric', 'between:1900,' . now()->year],
+            'year' => ['required', 'numeric', 'between:1900,'.now()->year],
             'month' => ['required', 'numeric', 'between:1,12'],
         ];
     }

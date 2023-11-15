@@ -44,10 +44,10 @@ class InvoiceTable extends BaseTable
             Column::make(__('base.year'), 'year')->sortable(),
             Column::make(__('base.month'), 'month')->sortable(),
             Column::make(__('base.issue_date'), 'issue_date')
-                ->displayUsing(fn(mixed $value, Invoice $model): string => $model->issue_date->toDateString())
+                ->displayUsing(fn (mixed $value, Invoice $model): string => $model->issue_date->toDateString())
                 ->sortable(),
             Column::make(__('base.due_date'), 'due_date')
-                ->displayUsing(fn(mixed $value, Invoice $model): string => $model->due_date->toDateString())
+                ->displayUsing(fn (mixed $value, Invoice $model): string => $model->due_date->toDateString())
                 ->sortable(),
             Column::make(__('base.amount'), 'total_amount')
                 ->displayUsing(function (mixed $value, Invoice $model): string {
@@ -66,6 +66,6 @@ class InvoiceTable extends BaseTable
         return response()->streamDownload(function () use ($invoice) {
             $pdf = Pdf::loadView('pdf.invoice', ['invoice' => $invoice->load(['contract.supplier', 'contract.customer'])], [], 'utf-8');
             echo $pdf->stream();
-        }, name: "invoice-{$invoice->contract->name}-{$invoice->year}" . sprintf('%02d', $invoice->month) . ".pdf");
+        }, name: "invoice-{$invoice->contract->name}-{$invoice->year}".sprintf('%02d', $invoice->month).'.pdf');
     }
 }

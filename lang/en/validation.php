@@ -169,7 +169,7 @@ return [
         ],
         'report' => [
             'unique' => 'Report with current combination of contract + year + month already exists.',
-        ]
+        ],
     ],
 
     /*

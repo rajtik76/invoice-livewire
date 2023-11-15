@@ -50,7 +50,7 @@ class InvoiceObserver
                 'name' => $task->name,
                 'url' => $task->url,
                 'hours' => round($task->taskHours->sum('hours'), 1),
-                'amount' => round($task->taskHours->sum('hours') * $invoice->contract->price_per_hour,2)
+                'amount' => round($task->taskHours->sum('hours') * $invoice->contract->price_per_hour, 2),
             ]);
 
         // Calculate amount from content
@@ -59,7 +59,7 @@ class InvoiceObserver
         // Update invoice with content + total_amount
         $invoice->updateQuietly([
             'content' => $content,
-            'total_amount' => $amount
+            'total_amount' => $amount,
         ]);
     }
 }
