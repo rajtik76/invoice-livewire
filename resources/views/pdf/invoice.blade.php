@@ -180,7 +180,7 @@
             <p class="text-xl upper">
                 <strong>
                     {{ __('base.total') }}
-                    : {{ number_format($invoice->total_amount) }} {{ $invoice->contract->currency->getCurrencySymbol() }}
+                    : {{ number_format($invoice->total_amount, 2) }} {{ $invoice->contract->currency->getCurrencySymbol() }}
                 </strong>
             </p>
         </div>

@@ -1,3 +1,4 @@
+@php use App\Enums\CurrencyEnum; @endphp
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -33,11 +34,15 @@
                                 {{ __('base.current_month_amount', ['year' => now()->year, 'month' => now()->monthName]) }}
                             </x-slot>
                             <x-slot name="content">
-                                @foreach($amount as $currency => $amount)
-                                    <div>
-                                        {{ number_format($amount, 2) }} {{ \App\Enums\CurrencyEnum::from($currency)->getCurrencySymbol() }}
-                                    </div>
-                                @endforeach
+                                @if($amount->count())
+                                    @foreach($amount as $currency => $amount)
+                                        <div>
+                                            {{ number_format($amount, 2) }} {{ CurrencyEnum::from($currency)->getCurrencySymbol() }}
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div>0.00 €</div>
+                                @endif
                             </x-slot>
                         </x-info-widget>
                     </div>
