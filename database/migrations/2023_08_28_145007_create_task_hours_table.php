@@ -24,6 +24,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->dateTime('date');
             $table->unsignedDecimal(column: 'hours', places: 1);
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

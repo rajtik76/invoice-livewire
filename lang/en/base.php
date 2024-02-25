@@ -54,6 +54,7 @@ return [
     'active' => 'Active',
     'name' => 'Name',
     'hours' => 'Hours',
+    'comment' => 'Comment',
     'url' => 'URL',
     'note' => 'Note',
     'date' => 'Date',

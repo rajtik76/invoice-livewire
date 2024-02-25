@@ -1,3 +1,4 @@
+@php use App\Models\Task; @endphp
 <x-base-form>
     <x-slot name="head">
         {{ __('base.task_hour_head') }}
@@ -12,7 +13,7 @@
         <x-select-input wire:model="task_id" id="task_id" name="task_id"
                         class="mt-1 block w-full"
                         :disabled="$task"
-                        :options="\App\Models\Task::getOptions()"
+                        :options="Task::getOptions()"
                         required autofocus/>
         <x-input-error class="mt-2" :messages="$errors->get('task_id')"/>
     </div>
@@ -30,5 +31,11 @@
         <x-text-input wire:model="hours" id="hours" name="hours" type="number" step="0.1"
                       class="mt-1 block w-full"/>
         <x-input-error class="mt-2" :messages="$errors->get('hours')"/>
+    </div>
+
+    <div>
+        <x-input-label for="comment" value="Comment"/>
+        <x-text-input wire:model="comment" id="comment" name="comment" class="mt-1 block w-full"/>
+        <x-input-error class="mt-2" :messages="$errors->get('comment')"/>
     </div>
 </x-base-form>

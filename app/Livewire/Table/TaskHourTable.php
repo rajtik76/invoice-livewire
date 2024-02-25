@@ -47,6 +47,7 @@ class TaskHourTable extends BaseTable
             Column::make(__('base.hours'), 'hours')
                 ->sortable()
                 ->searchable(),
+            Column::make(__('base.comment'), 'comment'),
         ];
     }
 
