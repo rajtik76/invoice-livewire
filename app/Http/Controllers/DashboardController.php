@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function __invoke(): View
     {
         // get task hours for current month
-        $taskHours = TaskHour::currentUser()->whereBetween('date', [Carbon::parse('midnight first day of this month'), now()]);
+        $taskHours = TaskHour::currentUser()->whereBetween('date', [Carbon::parse('midnight first day of this month'), Carbon::parse('midnight last day of this month')]);
 
         // get invoice amount for current month
         $amount = $taskHours
