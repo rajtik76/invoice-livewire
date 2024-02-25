@@ -54,7 +54,6 @@ jobs:
           **/vendor/**
           **/.git*
           **/.git*/**
-          **/node_modules/**
           **/.env
           **/DOCKER_ENV
           **/docker_tag
