@@ -52,6 +52,7 @@ jobs:
         protocol: ftps
         exclude: | 
           **/vendor/**
+          **/node_modules/**
           **/.git*
           **/.git*/**
           **/.env
