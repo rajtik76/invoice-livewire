@@ -55,9 +55,9 @@ class ReportTable extends BaseTable
         ];
     }
 
-    public function download(int $report): StreamedResponse
+    public function download(int $reportId): StreamedResponse
     {
-        $report = Report::with('contract')->find($report);
+        $report = Report::with('contract')->find($reportId);
 
         return response()->streamDownload(function () use ($report) {
             $pdf = Pdf::loadView('pdf.report', [

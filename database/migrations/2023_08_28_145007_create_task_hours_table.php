@@ -22,7 +22,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->dateTime('date');
+            $table->date('date');
             $table->unsignedDecimal(column: 'hours', places: 1);
             $table->text('comment')->nullable();
             $table->timestamps();

@@ -1,3 +1,4 @@
+@php use Carbon\Carbon; @endphp
 @extends('layouts.pdf')
 
 @section('style')
@@ -40,9 +41,10 @@
 
 @section('content')
     <div class="text-center">
-        <h1>{{ __('base.time_log_report') }} {{ \Carbon\Carbon::create($report->year, $report->month)->monthName }} {{ $report->year }}</h1>
+        <h1>{{ __('base.time_log_report') }} {{ Carbon::create($report->year, $report->month)->monthName }} {{ $report->year }}</h1>
         <h2>{{ __('base.contract') }}: {{ $report->contract->name }}</h2>
-        <h3>{{ __('base.total') }}: {{ collect($report->content)->sum(fn($items) => collect($items)->sum('hours')) }} {{ __('base.hours') }}</h3>
+        <h3>{{ __('base.total') }}
+            : {{ collect($report->content)->sum(fn($items) => collect($items)->sum('hours')) }} {{ __('base.hours') }}</h3>
     </div>
 
     <div>
@@ -63,6 +65,7 @@
                             @else
                                 {{ $task['name'] }}
                             @endif
+                            <br><i><small>{{ $task['comment'] }}</i></small>
                         </td>
                         <td>{{ $task['hours'] }}</td>
                     </tr>

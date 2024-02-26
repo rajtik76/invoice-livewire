@@ -47,6 +47,7 @@ class ReportObserver
                     'url' => $taskHour->task->url,
                     'date' => $taskHour->date->toDateString(),
                     'hours' => $taskHour->hours,
+                    'comment' => $taskHour->comment,
                 ])
                 ->groupBy('date')
                 ->toArray(),
