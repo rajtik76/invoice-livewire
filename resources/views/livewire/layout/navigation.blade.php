@@ -11,6 +11,21 @@ $logout = function () {
 
 ?>
 
+@php
+    $navigationLinks = [
+    ['name' => trans('base.dashboard'), 'link' => route('dashboard'), 'active' => request()->routeIs('dashboard')],
+    ['name' => trans('base.invoice'), 'link' => route('table.invoice'), 'active' => request()->routeIs('table.invoice')],
+    ['name' => trans('base.report'), 'link' => route('table.report'), 'active' => request()->routeIs('table.report')],
+    ['name' => trans('base.task'), 'link' => route('table.task'), 'active' => request()->routeIs('table.task')],
+    ['name' => trans('base.task_hour'), 'link' => route('table.taskHour'), 'active' => request()->routeIs('table.taskHour')],
+    ['name' => trans('base.contract'), 'link' => route('table.contract'), 'active' => request()->routeIs('table.contract')],
+    ['name' => trans('base.customer'), 'link' => route('table.customer'), 'active' => request()->routeIs('table.customer')],
+    ['name' => trans('base.supplier'), 'link' => route('table.supplier'), 'active' => request()->routeIs('table.supplier')],
+    ['name' => trans('base.address'), 'link' => route('table.address'), 'active' => request()->routeIs('table.address')],
+    ['name' => trans('base.bank_account'), 'link' => route('table.bank-account'), 'active' => request()->routeIs('table.bank-account')],
+];
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -25,52 +40,11 @@ $logout = function () {
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-2 xl:space-x-8 sm:-my-px md:ml-10 md:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('base.dashboard') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.invoice')" :active="request()->routeIs('table.invoice')"
-                                wire:navigate>
-                        {{ __('base.invoice') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.task')" :active="request()->routeIs('table.task')" wire:navigate>
-                        {{ __('base.task') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.taskHour')" :active="request()->routeIs('table.taskHour')"
-                                wire:navigate>
-                        {{ __('base.task_hour') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.contract')" :active="request()->routeIs('table.contract')"
-                                wire:navigate>
-                        {{ __('base.contract') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.customer')" :active="request()->routeIs('table.customer')"
-                                wire:navigate>
-                        {{ __('base.customer') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.supplier')" :active="request()->routeIs('table.supplier')"
-                                wire:navigate>
-                        {{ __('base.supplier') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.address')" :active="request()->routeIs('table.address')"
-                                wire:navigate>
-                        {{ __('base.address') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.bank-account')" :active="request()->routeIs('table.bank-account')"
-                                wire:navigate>
-                        {{ __('base.bank_account') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('table.report')" :active="request()->routeIs('table.report')" wire:navigate>
-                        {{ __('base.report') }}
-                    </x-nav-link>
+                    @foreach($navigationLinks as $link)
+                        <x-nav-link :href="$link['link']" :active="$link['active']" wire:navigate>
+                            {{ $link['name'] }}
+                        </x-nav-link>
+                    @endforeach
                 </div>
             </div>
 
@@ -128,45 +102,11 @@ $logout = function () {
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden md:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
-                {{ __('base.dashboard') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.invoice')" :active="request()->routeIs('table.invoice')" wire:navigate>
-                {{ __('base.invoice') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.task')" :active="request()->routeIs('table.task')" wire:navigate>
-                {{ __('base.task') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.taskHour')" :active="request()->routeIs('table.taskHour')" wire:navigate>
-                {{ __('base.task_hour') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.contract')" :active="request()->routeIs('table.contract')" wire:navigate>
-                {{ __('base.contract') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.customer')" :active="request()->routeIs('table.customer')" wire:navigate>
-                {{ __('base.customer') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.supplier')" :active="request()->routeIs('table.supplier')" wire:navigate>
-                {{ __('base.supplier') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.address')" :active="request()->routeIs('table.address')" wire:navigate>
-                {{ __('base.address') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.bank-account')" :active="request()->routeIs('table.bank-account')" wire:navigate>
-                {{ __('base.bank_account') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="route('table.report')" :active="request()->routeIs('table.report')" wire:navigate>
-                {{ __('base.report') }}
-            </x-responsive-nav-link>
+            @foreach($navigationLinks as $link)
+                <x-responsive-nav-link :href="$link['link']" :active="$link['active']" wire:navigate>
+                    {{ $link['name'] }}
+                </x-responsive-nav-link>
+            @endforeach
         </div>
 
         <!-- Responsive Settings Options -->
