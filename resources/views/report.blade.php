@@ -50,7 +50,7 @@
                     <tr class="uppercase bg-slate-100 rounded-lg border border-slate-200">
                         <td class="pl-2">{{ $date }}</td>
                         <td>{{ __('base.total') }}</td>
-                        <td>{{ collect($items)->sum('hours') }}</td>
+                        <td>{{ number_format(collect($items)->sum('hours'), 1) }}</td>
                     </tr>
                 @endforeach
             </table>
