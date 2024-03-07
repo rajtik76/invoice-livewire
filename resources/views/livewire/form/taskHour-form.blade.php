@@ -18,19 +18,21 @@
         <x-input-error class="mt-2" :messages="$errors->get('task_id')"/>
     </div>
 
-    <div>
-        <x-input-label for="date" value="Date"/>
-        <x-text-input wire:model="date" id="date" date="date" type="date"
-                      class="mt-1 block w-full"
-                      required/>
-        <x-input-error class="mt-2" :messages="$errors->get('date')"/>
-    </div>
+    <div class="flex gap-2">
+        <div>
+            <x-input-label for="date" value="Date"/>
+            <x-text-input wire:model="date" id="date" date="date" type="date"
+                          class="mt-1 block"
+                          required/>
+            <x-input-error class="mt-2" :messages="$errors->get('date')"/>
+        </div>
 
-    <div>
-        <x-input-label for="hours" value="Hours"/>
-        <x-text-input wire:model="hours" id="hours" name="hours" type="number" step="0.1"
-                      class="mt-1 block w-full"/>
-        <x-input-error class="mt-2" :messages="$errors->get('hours')"/>
+        <div>
+            <x-input-label for="hours" value="Hours"/>
+            <x-text-input wire:model="hours" id="hours" name="hours" type="number" step="0.1"
+                          class="mt-1 block w-32"/>
+            <x-input-error class="mt-2" :messages="$errors->get('hours')"/>
+        </div>
     </div>
 
     <div>
