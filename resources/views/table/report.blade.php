@@ -7,6 +7,6 @@
         {{ __('base.new_report') }}
     </x-slot>
 
-    <livewire:table.report-table />
+    <livewire:table.report-table sort-column="year" sort-direction="desc"/>
     <livewire:form.report-form/>
 </x-table-page>

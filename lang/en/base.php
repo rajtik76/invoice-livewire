@@ -81,6 +81,7 @@ return [
     'delete' => 'Delete',
     'edit' => 'Edit',
     'download' => 'Download',
+    'view' => 'View',
     'activate' => 'Activate',
     'deactivate' => 'Deactivate',
 

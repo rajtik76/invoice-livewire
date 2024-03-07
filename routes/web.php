@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ViewReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Route::view('profile', 'profile')
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', DashboardController::class)->name('dashboard');
+    Route::get('report/{report}', ViewReportController::class)->name('report');
+
     Route::view('table/address', 'table.address')->name('table.address');
     Route::view('table/bank-account', 'table.bank-account')->name('table.bank-account');
     Route::view('table/customer', 'table.customer')->name('table.customer');
