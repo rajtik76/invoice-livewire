@@ -11,6 +11,6 @@ class ViewReportController extends Controller
 {
     public function __invoke(Report $report): View
     {
-        return view('report', ['report' => $report]);
+        return view('view.report', ['report' => $report]);
     }
 }

@@ -117,4 +117,12 @@ return [
     'payment_advice' => 'Payment advice',
     'dates' => 'Dates',
     'reference_id' => 'Reference ID',
+
+    // Invoice
+    'supplier_is_registered_in_trade_register' => 'The supplier is registered in the Trade Register.',
+    'vat_reverse_charge_mode' => 'VAT is handled in reverse charge mode. The amount of VAT is obligated to be added and declared by the customer.',
+    'description' => 'Description',
+    'unit_price' => 'Unit price',
+    'quantity' => 'QTY',
+    'invoice_content_note' => 'On the basis of the contract of work dated: :date, I invoice you for the work done on the following tasks. This invoice includes an attachment with a monthly overview of the hours worked.',
 ];

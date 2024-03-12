@@ -179,7 +179,7 @@ describe('authorization & visibility 👀', function () {
             ->recycle($this->user)
             ->for(Contract::factory()
                 ->has(Task::factory()
-                    ->has(TaskHour::factory(10)->state(['hours' => 100.1]))
+                    ->has(TaskHour::factory()->state(['hours' => 100.1]))
                 )
             )
             ->create();
