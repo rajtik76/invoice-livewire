@@ -179,9 +179,9 @@
                             {{ $content['name'] }}
                         @endif
                     </x-slot:item>
-                    <x-slot:price>{{ $invoice->contract->price_per_hour }} {{ $invoiceCurrencySymbol }}</x-slot:price>
-                    <x-slot:quantity>{{ $content['hours'] }}</x-slot:quantity>
-                    <x-slot:subTotal>{{ $content['amount'] }} {{ $invoiceCurrencySymbol }}</x-slot:subTotal>
+                    <x-slot:price>{{ Number::format($invoice->contract->price_per_hour, 2) }} {{ $invoiceCurrencySymbol }}</x-slot:price>
+                    <x-slot:quantity>{{ Number::format($content['hours'], 1) }}</x-slot:quantity>
+                    <x-slot:subTotal>{{ Number::format($content['amount'], 2) }} {{ $invoiceCurrencySymbol }}</x-slot:subTotal>
                 </x-invoice-grid-content>
             @endforeach
 
@@ -190,10 +190,10 @@
                 <div class="grid grid-cols-12">
                     <div class="col-span-10">{{ __('subtotal') }}</div>
                     <div class="border-x border-gray-300 px-1 text-center">
-                        {{ $invoiceTotalHours }}
+                        {{ Number::format($invoiceTotalHours, 1) }}
                     </div>
                     <div class="text-right normal-case">
-                        {{ $invoiceTotalAmount }} {{ $invoiceCurrencySymbol }}
+                        {{ Number::format($invoiceTotalAmount, 2) }} {{ $invoiceCurrencySymbol }}
                     </div>
                 </div>
             </x-slot:footer>
@@ -203,7 +203,7 @@
     <!-- TOTAL -->
     <div class="flex justify-end mr-4 py-4">
         <div class="font-bold text-5xl border-4 border-gray-500 rounded-xl p-4 text-right bg-gray-200">
-            <span class="uppercase">{{ __('base.total') }}: {{ $invoiceTotalAmount }}</span>
+            <span class="uppercase">{{ __('base.total') }}: {{ Number::format($invoiceTotalAmount, 2) }}</span>
             {{ $invoiceCurrencySymbol }}
         </div>
     </div>
