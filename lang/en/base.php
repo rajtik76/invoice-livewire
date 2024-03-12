@@ -21,6 +21,7 @@ return [
     'active_task' => 'Active task',
     'current_month_hours' => 'Hours (:month :year)',
     'current_month_amount' => 'Amount (:month :year)',
+    'top_three_tasks' => 'This month (:month :year) top :count tasks',
 
     // Endpoint titles
     'invoice_list' => 'Invoice list',

@@ -46,6 +46,39 @@
                             </x-slot>
                         </x-info-widget>
                     </div>
+                    @if(true)
+                        <div class="mt-5">
+                            <x-widget-overlay>
+                                <div class="flex flex-col gap-3">
+                                    <div class="font-bold text-2xl text-yellow-200 text-center">{{ __('base.top_three_tasks', ['count' => $topThreeTaskCount, 'year' => now()->year, 'month' => now()->monthName]) }}</div>
+                                    <div>
+                                        <table class="m-auto w-full">
+                                            <tr class="text-left text-yellow-100">
+                                                <th>{{ __('base.customer') }}</th>
+                                                <th>{{ __('base.task') }}</th>
+                                                <th>{{ __('base.hours') }}</th>
+                                                <th>{{ __('base.amount') }}</th>
+                                            </tr>
+                                            @foreach($topThreeTask as $task)
+                                                <tr>
+                                                    <td>{{ $task->contract->customer->name }}</td>
+                                                    <td>
+                                                        @if($task->url)
+                                                            <a href="{{ $task->url }}" class="underline" target="_blank">{{ $task->name }}</a>
+                                                        @else
+                                                            {{ $task->name }}
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ Number::format($task->task_hours_sum_hours, 1) }}</td>
+                                                    <td>{{ Number::format($task->task_hours_sum_hours * $task->contract->price_per_hour, 2) }} {{ $task->contract->currency->getCurrencySymbol() }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    </div>
+                                </div>
+                            </x-widget-overlay>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
