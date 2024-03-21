@@ -4,13 +4,10 @@ use App\Livewire\Form\ReportForm;
 use App\Livewire\Table\ReportTable;
 use App\Models\Contract;
 use App\Models\Report;
-use App\Models\Task;
-use App\Models\TaskHour;
 use App\Models\User;
 use App\Policies\ReportPolicy;
 use Livewire\Livewire;
 use Mockery\MockInterface;
-
 use function Pest\Laravel\get;
 
 beforeEach(function () {
@@ -150,7 +147,7 @@ it('can download report', function () {
         ->test(ReportTable::class)
         ->call('download', $report->id)
         ->assertOk()
-        ->assertFileDownloaded("report-{$report->contract->name}-{$report->year}".sprintf('%02d', $report->month).'.pdf');
+        ->assertFileDownloaded("report-{$report->contract->name}-{$report->year}" . sprintf('%02d', $report->month) . '.pdf');
 });
 
 describe('authorization & visibility 👀', function () {
@@ -175,19 +172,27 @@ describe('authorization & visibility 👀', function () {
 
     it('display correct report hours', function () {
         // Arrange
-        Report::factory()
+        $report = Report::factory()
             ->recycle($this->user)
-            ->for(Contract::factory()
-                ->has(Task::factory()
-                    ->has(TaskHour::factory()->state(['hours' => 100.1]))
-                )
-            )
-            ->create();
+            ->create([
+                'year' => 2000,
+                'month' => 1,
+            ]);
+        $report->content = [
+            '2000-01-01' => [[
+                'date' => '2000-01-01',
+                'name' => 'Task name',
+                'url' => 'Task URL',
+                'hours' => 100.1,
+                'comment' => null
+            ]]
+        ];
+        $report->save();
 
         // Act & Assert
         Livewire::actingAs($this->user)
             ->test(ReportTable::class)
-            ->assertSeeText(1001.00);
+            ->assertSeeText(100.1);
     });
 
     it('forbidden to delete because of delete policy', function () {

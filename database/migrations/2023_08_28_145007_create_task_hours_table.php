@@ -23,7 +23,7 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->date('date');
-            $table->unsignedDecimal(column: 'hours', places: 1);
+            $table->decimal(column: 'hours', places: 1)->unsigned();
             $table->text('comment')->nullable();
             $table->timestamps();
         });
