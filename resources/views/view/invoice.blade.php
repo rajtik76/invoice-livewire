@@ -1,6 +1,10 @@
 @php use App\Enums\CurrencyEnum; @endphp
 
 <x-report-layout>
+    <x-slot:title>
+        {{ __('base.invoice') }} {{ $invoice->number }}
+    </x-slot:title>
+
     <div class="grid grid-cols-2 gap-4 p-4">
         <!-- INVOICE -->
         <div class="col-span-2 uppercase font-bold text-6xl">{{ __('base.invoice') }} # {{ $invoice->number }}</div>

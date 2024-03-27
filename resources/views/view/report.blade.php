@@ -1,4 +1,8 @@
 <x-report-layout>
+    <x-slot:title>
+        {{ __('base.report_list') }} {{ $report->year }}_{{ $report->month }}
+    </x-slot:title>
+
     <div class="p-6">
         <div class="border-8 border-gray-400 rounded-lg p-8">
             <!-- Title -->
