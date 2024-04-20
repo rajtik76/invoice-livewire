@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', fn () => to_route('login'));
+/*Route::get('/', fn () => to_route('login'));
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
@@ -38,4 +38,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('table/report', 'table.report')->name('table.report');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__.'/auth.php';*/

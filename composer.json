@@ -7,13 +7,15 @@
     "require": {
         "php": "^8.3",
         "barryvdh/laravel-dompdf": "^2.0",
+        "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^11.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.0",
-        "ramonrietdijk/livewire-tables": "^4.0"
+        "ramonrietdijk/livewire-tables": "^4.0",
+        "spatie/laravel-ray": "^1.36"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
@@ -23,7 +25,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^8.1",
-        "nunomaduro/larastan": "^2.6",
+        "larastan/larastan": "^2.0",
         "pestphp/pest": "^2.0",
         "pestphp/pest-plugin-laravel": "^2.0",
         "spatie/laravel-ignition": "^2.0"
@@ -43,7 +45,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

@@ -1,0 +1,8 @@
+.fi-logo {
+    scale: 1.5;
+    padding-right: 0.5rem;
+}
+
+.fi-logo:hover {
+    scale: 1.75;
+}

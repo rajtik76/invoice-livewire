@@ -18,6 +18,7 @@ class InvoiceSeeder extends Seeder
                 'contract' => $taskHour->task->contract,
                 'year' => sprintf('%04d', $taskHour->date->year),
                 'month' => sprintf('%02d', $taskHour->date->month),
+                'date' => $taskHour->date,
             ])
             // group by task + year + month
             ->groupBy(fn ($item) => "{$item['contract']->id}{$item['year']}{$item['month']}")
@@ -29,8 +30,7 @@ class InvoiceSeeder extends Seeder
                 Invoice::factory()->create([
                     'user_id' => $firstItem['contract']->user_id,
                     'contract_id' => $firstItem['contract']->id,
-                    'year' => $firstItem['year'],
-                    'month' => $firstItem['month'],
+                    'issue_date' => $firstItem['date'],
                 ]);
             });
     }
