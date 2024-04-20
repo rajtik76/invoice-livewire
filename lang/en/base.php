@@ -77,6 +77,7 @@ return [
     'swift' => 'SWIFT',
     'pdf' => 'PDF',
     'total' => 'Total',
+    'period' => 'Period',
 
     // Actions
     'delete' => 'Delete',

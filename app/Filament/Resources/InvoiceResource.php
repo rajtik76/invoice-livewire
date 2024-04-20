@@ -30,17 +30,21 @@ class InvoiceResource extends Resource
                 Section::make()
                     ->schema([
                         Select::make('contract_id')
+                            ->label(trans('base.contract'))
                             ->options(Contract::where('user_id', auth()->id())->pluck('name', 'id'))
                             ->nullable(false),
                         Split::make([
                             TextInput::make('number')
+                                ->label(trans('base.number'))
                                 ->numeric()
                                 ->required(),
                             TextInput::make('year')
+                                ->label(trans('base.year'))
                                 ->numeric()
                                 ->required()
                                 ->default(now()->year),
                             TextInput::make('month')
+                                ->label(trans('base.month'))
                                 ->numeric()
                                 ->required()
                                 ->minValue(1)
@@ -49,9 +53,11 @@ class InvoiceResource extends Resource
                         ]),
                         Split::make([
                             DatePicker::make('issue_date')
+                                ->label(trans('base.issue_date'))
                                 ->required()
                                 ->default(now()),
                             DatePicker::make('due_date')
+                                ->label(trans('base.due_date'))
                                 ->required()
                                 ->default(now()->addDays(7)),
                         ]),
@@ -64,24 +70,30 @@ class InvoiceResource extends Resource
         return $table
             ->defaultSort('number', 'desc')
             ->columns([
-                Tables\Columns\TextColumn::make('contract.name'),
+                Tables\Columns\TextColumn::make('contract.name')
+                    ->label(trans('base.contract')),
                 Tables\Columns\TextColumn::make('number')
                     ->label(trans('base.invoice').' #')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('year')
-                    ->label('Period')
+                    ->label(trans('base.period'))
                     ->sortable(['month', 'year'])
                     ->formatStateUsing(function ($state, Invoice $invoice) {
                         return "{$invoice->year}/{$invoice->month}";
                     }),
-                Tables\Columns\TextColumn::make('issue_date')->date('d.m.Y'),
-                Tables\Columns\TextColumn::make('due_date')->date('d.m.Y'),
-                Tables\Columns\TextColumn::make('due_date')->date('d.m.Y'),
-                Tables\Columns\TextColumn::make('total_amount')->money(
-                    currency: fn (Invoice $invoice) => $invoice->contract->currency->value,
-                    locale: fn (Invoice $invoice) => $invoice->contract->currency === CurrencyEnum::EUR ? 'de' : 'cs'
-                ),
+                Tables\Columns\TextColumn::make('issue_date')
+                    ->label(trans('base.issue_date'))
+                    ->date('d.m.Y'),
+                Tables\Columns\TextColumn::make('due_date')
+                    ->label(trans('base.due_date'))
+                    ->date('d.m.Y'),
+                Tables\Columns\TextColumn::make('total_amount')
+                    ->label(trans('base.amount'))
+                    ->money(
+                        currency: fn (Invoice $invoice) => $invoice->contract->currency->value,
+                        locale: fn (Invoice $invoice) => $invoice->contract->currency === CurrencyEnum::EUR ? 'de' : 'cs'
+                    ),
             ])
             ->filters([
                 //
@@ -108,8 +120,6 @@ class InvoiceResource extends Resource
     {
         return [
             'index' => Pages\ListInvoices::route('/'),
-            //            'create' => Pages\CreateInvoice::route('/create'),
-            //            'edit' => Pages\EditInvoice::route('/{record}/edit'),
         ];
     }
 
