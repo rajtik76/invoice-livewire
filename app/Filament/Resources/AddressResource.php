@@ -5,12 +5,12 @@ namespace App\Filament\Resources;
 use App\Enums\CountryEnum;
 use App\Filament\Resources\AddressResource\Pages;
 use App\Models\Address;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class AddressResource extends Resource
 {
@@ -22,25 +22,7 @@ class AddressResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('street')
-                    ->label(trans('base.street'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('city')
-                    ->label(trans('base.city'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('zip')
-                    ->label(trans('base.zip'))
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Select::make('country')
-                    ->label(trans('base.country'))
-                    ->required()
-                    ->options(CountryEnum::class),
-            ]);
+        return $form->schema(Address::getForm());
     }
 
     public static function table(Table $table): Table
@@ -94,5 +76,15 @@ class AddressResource extends Resource
     {
         return parent::getEloquentQuery()
             ->where('user_id', auth()->id());
+    }
+
+    /**
+     * Create address record for current user
+     *
+     * @param  array<string, mixed>  $data
+     */
+    public static function createAddressForCurrentUser(array $data): Address
+    {
+        return Address::create(Arr::add($data, 'user_id', auth()->id()));
     }
 }

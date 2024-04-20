@@ -15,6 +15,8 @@ enum CountryEnum: string
     }
 
     /**
+     * Get translated options
+     *
      * @return array<string, string>
      */
     public static function options(): array
@@ -22,6 +24,7 @@ enum CountryEnum: string
         return collect(self::cases())
             ->keyBy(fn (self $country) => $country->value)
             ->map(fn (self $country) => $country->countryName())
+            ->sort()
             ->toArray();
     }
 }
