@@ -126,4 +126,9 @@ return [
     'unit_price' => 'Unit price',
     'quantity' => 'QTY',
     'invoice_content_note' => 'On the basis of the contract of work dated: :date, I invoice you for the work done on the following tasks. This invoice includes an attachment with a monthly overview of the hours worked.',
+
+    'country_name' => [
+        'germany' => 'Germany',
+        'czech' => 'Czech Republic',
+    ],
 ];

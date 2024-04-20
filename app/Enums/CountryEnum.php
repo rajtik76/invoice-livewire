@@ -11,10 +11,7 @@ enum CountryEnum: string
 
     public function countryName(): string
     {
-        return match ($this) {
-            self::Germany => 'Germany',
-            self::Czech => 'Czech Republic',
-        };
+        return trans('base.country_name.'.str($this->name)->lower());
     }
 
     /**
