@@ -3,11 +3,9 @@
 namespace App\Filament\Resources\CustomerResource\Pages;
 
 use App\Filament\Resources\CustomerResource;
-use App\Models\Customer;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Arr;
 
 class ListCustomers extends ListRecords
 {
@@ -21,7 +19,7 @@ class ListCustomers extends ListRecords
                 ->label(trans('base.create_customer'))
                 ->modalHeading(trans('base.create_customer'))
                 ->using(function (array $data): void {
-                    Customer::create(Arr::add($data, 'user_id', auth()->id()));
+                    CustomerResource::createRecordForCurrentUser($data);
                 }),
         ];
     }

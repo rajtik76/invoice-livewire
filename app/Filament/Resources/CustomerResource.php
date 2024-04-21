@@ -3,14 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
-use App\Models\Address;
 use App\Models\Customer;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class CustomerResource extends Resource
 {
@@ -23,30 +22,7 @@ class CustomerResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Grid::make()
-                    ->columns(1)
-                    ->schema([
-                        Address::getSelectWithNewOption(),
-
-                        Forms\Components\Split::make([
-                            Forms\Components\TextInput::make('name')
-                                ->label(trans('base.customer'))
-                                ->required()
-                                ->maxLength(255),
-
-                            Forms\Components\TextInput::make('registration_number')
-                                ->label(trans('base.registration_number'))
-                                ->maxLength(255)
-                                ->default(null),
-
-                            Forms\Components\TextInput::make('vat_number')
-                                ->label(trans('base.vat'))
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-                    ]),
-            ]);
+            ->schema(Customer::getForm());
     }
 
     public static function table(Table $table): Table
@@ -110,5 +86,15 @@ class CustomerResource extends Resource
     public static function getNavigationLabel(): string
     {
         return trans('navigation.customers');
+    }
+
+    /**
+     * Create customer record
+     *
+     * @param  array  $data  <string, mixed>
+     */
+    public static function createRecordForCurrentUser(array $data): Customer
+    {
+        return Customer::create(Arr::add($data, 'user_id', auth()->id()));
     }
 }

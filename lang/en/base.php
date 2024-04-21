@@ -5,6 +5,7 @@ declare(strict_types=1);
 return [
     'invoice' => 'Invoice',
     'contract' => 'Contract',
+    'contract_name' => 'Contract name',
     'customer' => 'Customer',
     'supplier' => 'Supplier',
     'address' => 'Address',
@@ -27,6 +28,10 @@ return [
     'bank_code' => 'Bank code',
     'period' => 'Period',
     'email' => 'Email',
+    'signed_at' => 'Signed at',
+    'active' => 'Active',
+    'price_per_hour' => 'Price per hour',
+    'currency' => 'Currency',
 
     'edit_invoice' => 'Edit invoice',
     'create_invoice' => 'Create invoice',
@@ -38,6 +43,8 @@ return [
     'create_address' => 'Create address',
     'edit_bank_account' => 'Edit bank account',
     'create_bank_account' => 'Create bank account',
+    'edit_contract' => 'Edit contract',
+    'create_contract' => 'Create contract',
 
     'country_name' => [
         'germany' => 'Germany',

@@ -18,8 +18,8 @@ class ListInvoices extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label(trans('base.create_invoice'))
-                ->slideOver()
                 ->modalHeading(trans('base.create_invoice'))
+                ->slideOver()
                 ->using(function (array $data): Invoice {
                     return Invoice::create(Arr::add($data, 'user_id', auth()->id()));
                 }),

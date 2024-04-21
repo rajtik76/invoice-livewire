@@ -19,7 +19,7 @@ class ListSuppliers extends ListRecords
                 ->label(trans('base.create_supplier'))
                 ->modalHeading(trans('base.create_supplier'))
                 ->using(function (array $data): void {
-                    self::$resource::createSupplierForCurrentUser($data);
+                    SupplierResource::createRecordForCurrentUser($data);
                 }),
         ];
     }

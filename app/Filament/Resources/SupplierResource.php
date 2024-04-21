@@ -3,12 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SupplierResource\Pages;
-use App\Models\Address;
-use App\Models\BankAccount;
 use App\Models\Supplier;
-use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -27,68 +22,7 @@ class SupplierResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Grid::make()
-                    ->columns(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('name')
-                            ->label(trans('base.name'))
-                            ->required()
-                            ->maxLength(255),
-
-                        Forms\Components\Split::make([
-                            Forms\Components\TextInput::make('email')
-                                ->label(trans('base.email'))
-                                ->email()
-                                ->required()
-                                ->maxLength(255),
-
-                            Forms\Components\TextInput::make('phone')
-                                ->label(trans('base.phone'))
-                                ->tel()
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-
-                        Forms\Components\Split::make([
-                            Forms\Components\TextInput::make('registration_number')
-                                ->label(trans('base.registration_number'))
-                                ->required()
-                                ->maxLength(255),
-
-                            Forms\Components\TextInput::make('vat_number')
-                                ->label(trans('base.vat'))
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-
-                        Forms\Components\Split::make([
-                            Address::getSelectWithNewOption(),
-                        ]),
-
-                        Forms\Components\Split::make([
-                            Select::make('bank_account_id')
-                                ->label(trans('base.bank_account'))
-                                ->relationship(
-                                    name: 'bankAccount',
-                                    modifyQueryUsing: function (Builder $query): void {
-                                        $query->where('user_id', auth()->id())
-                                            ->orderBy('bank_code')
-                                            ->orderBy('bank_name');
-                                    }
-                                )
-                                ->getOptionLabelFromRecordUsing(fn (BankAccount $record): string => "{$record->bank_name}, {$record->account_number} / {$record->bank_code}")
-                                ->createOptionForm(BankAccount::getForm())
-                                ->createOptionUsing(function (array $data): void {
-                                    BankAccountResource::createRecordForCurrentUser($data);
-                                })
-                                ->createOptionAction(fn (Action $action) => $action->slideOver())
-                                ->searchable()
-                                ->preload()
-                                ->required(),
-                        ]),
-                    ]),
-            ]);
+            ->schema(Supplier::getForm());
     }
 
     public static function table(Table $table): Table
@@ -149,16 +83,6 @@ class SupplierResource extends Resource
         ];
     }
 
-    /**
-     * Create supplier record for current user
-     *
-     * @param  array<string, mixed>  $data
-     */
-    public static function createSupplierForCurrentUser(array $data): Supplier
-    {
-        return Supplier::create(Arr::add($data, 'user_id', auth()->id()));
-    }
-
     public static function getEloquentQuery(): Builder
     {
         return parent::getEloquentQuery()
@@ -168,5 +92,13 @@ class SupplierResource extends Resource
     public static function getNavigationLabel(): string
     {
         return trans('navigation.suppliers');
+    }
+
+    /**
+     * Create supplier record for current user
+     */
+    public static function createRecordForCurrentUser(array $data): Supplier
+    {
+        return Supplier::create(Arr::add($data, 'user_id', auth()->id()));
     }
 }

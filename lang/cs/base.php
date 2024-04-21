@@ -3,8 +3,9 @@
 declare(strict_types=1);
 
 return [
-    'contract' => 'Smlouva',
     'invoice' => 'Faktura',
+    'contract' => 'Smlouva',
+    'contract_name' => 'Název smlouvy',
     'period' => 'Období',
     'issue_date' => 'Datum vystavení',
     'due_date' => 'Datum platnosti',
@@ -27,6 +28,10 @@ return [
     'country' => 'Země',
     'bank_name' => 'Název banky',
     'bank_code' => 'Kód banky',
+    'signed_at' => 'Podepsáno dne',
+    'active' => 'Aktivní',
+    'price_per_hour' => 'Sazba',
+    'currency' => 'Měna',
 
     'edit_invoice' => 'Upravit fakturu',
     'create_invoice' => 'Vytvořit fakturu',
@@ -38,6 +43,8 @@ return [
     'create_address' => 'Vytvořit adresu',
     'edit_bank_account' => 'Upravit bankovní účet',
     'create_bank_account' => 'Vytvořit bankovní účet',
+    'edit_contract' => 'Upravit smlouvu',
+    'create_contract' => 'Vytvořit smlouvu',
 
     'country_name' => [
         'germany' => 'Německo',
