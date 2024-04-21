@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\DatePicker;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,5 +39,7 @@ class AppServiceProvider extends ServiceProvider
             $datePicker->displayFormat('d.m.Y')
                 ->native(false);
         });
+
+        Model::preventLazyLoading(! $this->app->isProduction());
     }
 }

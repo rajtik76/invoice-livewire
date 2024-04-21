@@ -13,6 +13,8 @@ use Illuminate\Support\Arr;
 
 class CustomerResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = Customer::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
@@ -81,11 +83,6 @@ class CustomerResource extends Resource
         return parent::getEloquentQuery()
             ->with(['address'])
             ->where('user_id', auth()->id());
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('navigation.customers');
     }
 
     /**

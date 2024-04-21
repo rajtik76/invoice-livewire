@@ -14,6 +14,8 @@ use Illuminate\Support\Arr;
 
 class AddressResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = Address::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-envelope';
@@ -86,10 +88,5 @@ class AddressResource extends Resource
     public static function createAddressForCurrentUser(array $data): Address
     {
         return Address::create(Arr::add($data, 'user_id', auth()->id()));
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('navigation.addresses');
     }
 }

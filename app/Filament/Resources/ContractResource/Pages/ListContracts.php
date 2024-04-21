@@ -7,7 +7,6 @@ use App\Models\Contract;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Arr;
 
 class ListContracts extends ListRecords
 {
@@ -21,7 +20,7 @@ class ListContracts extends ListRecords
                 ->modalHeading(trans('base.create_contract'))
                 ->slideOver()
                 ->using(function (array $data): Contract {
-                    return Contract::create(Arr::add($data, 'user_id', auth()->id()));
+                    return ContractResource::createRecordForCurrentUser($data);
                 }),
         ];
     }

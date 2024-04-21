@@ -13,6 +13,8 @@ use Illuminate\Support\Arr;
 
 class SupplierResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = Supplier::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
@@ -87,11 +89,6 @@ class SupplierResource extends Resource
     {
         return parent::getEloquentQuery()
             ->where('user_id', auth()->id());
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('navigation.suppliers');
     }
 
     /**

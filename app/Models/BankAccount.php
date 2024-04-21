@@ -16,14 +16,7 @@ class BankAccount extends Model implements KeyValueOptions
 {
     use HasCurrentUserScope, HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'bank_name',
-        'account_number',
-        'bank_code',
-        'iban',
-        'swift',
-    ];
+    protected $guarded = [];
 
     /**
      * Key => value options for bank account

@@ -96,6 +96,7 @@ class Address extends Model implements KeyValueOptions
                 }
             )
             ->getOptionLabelFromRecordUsing(fn (Address $record): string => "{$record->street}, {$record->zip} {$record->city}, {$record->country->countryName()}")
+            ->createOptionModalHeading(trans('base.create_address'))
             ->createOptionForm(Address::getForm())
             ->createOptionUsing(function (array $data): void {
                 AddressResource::createAddressForCurrentUser($data);

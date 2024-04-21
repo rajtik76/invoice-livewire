@@ -6,6 +6,7 @@ use App\Enums\CurrencyEnum;
 use App\Filament\Resources\InvoiceResource\Pages;
 use App\Models\Contract;
 use App\Models\Invoice;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InvoiceResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = Invoice::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -31,18 +34,36 @@ class InvoiceResource extends Resource
                     ->schema([
                         Select::make('contract_id')
                             ->label(trans('base.contract'))
-                            ->options(Contract::where('user_id', auth()->id())->pluck('name', 'id'))
-                            ->nullable(false),
+                            ->relationship(
+                                name: 'contract',
+                                titleAttribute: 'name',
+                                modifyQueryUsing: function (Builder $query): void {
+                                    $query->where('user_id', auth()->id())
+                                        ->orderBy('name');
+                                }
+                            )
+                            ->createOptionModalHeading(trans('base.create_contract'))
+                            ->createOptionForm(Contract::getForm())
+                            ->createOptionUsing(function (array $data): void {
+                                ContractResource::createRecordForCurrentUser($data);
+                            })
+                            ->createOptionAction(fn (Action $action) => $action->slideOver())
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+
                         Split::make([
                             TextInput::make('number')
                                 ->label(trans('base.invoice_number'))
                                 ->numeric()
                                 ->required(),
+
                             TextInput::make('year')
                                 ->label(trans('base.year'))
                                 ->numeric()
                                 ->required()
                                 ->default(now()->year),
+
                             TextInput::make('month')
                                 ->label(trans('base.month'))
                                 ->numeric()
@@ -51,11 +72,13 @@ class InvoiceResource extends Resource
                                 ->maxValue(12)
                                 ->default(now()->month),
                         ]),
+
                         Split::make([
                             DatePicker::make('issue_date')
                                 ->label(trans('base.issue_date'))
                                 ->required()
                                 ->default(now()),
+
                             DatePicker::make('due_date')
                                 ->label(trans('base.due_date'))
                                 ->required()
@@ -72,22 +95,27 @@ class InvoiceResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('contract.name')
                     ->label(trans('base.contract')),
+
                 Tables\Columns\TextColumn::make('number')
                     ->label(trans('base.invoice_number'))
                     ->sortable()
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('year')
                     ->label(trans('base.period'))
                     ->sortable(['month', 'year'])
                     ->formatStateUsing(function ($state, Invoice $invoice) {
                         return "{$invoice->year}/{$invoice->month}";
                     }),
+
                 Tables\Columns\TextColumn::make('issue_date')
                     ->label(trans('base.issue_date'))
                     ->date('d.m.Y'),
+
                 Tables\Columns\TextColumn::make('due_date')
                     ->label(trans('base.due_date'))
                     ->date('d.m.Y'),
+
                 Tables\Columns\TextColumn::make('total_amount')
                     ->label(trans('base.amount'))
                     ->money(
@@ -129,10 +157,5 @@ class InvoiceResource extends Resource
         return parent::getEloquentQuery()
             ->with(['contract'])
             ->where('user_id', auth()->id());
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('navigation.invoices');
     }
 }

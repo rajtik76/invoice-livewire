@@ -13,6 +13,8 @@ use Illuminate\Support\Arr;
 
 class BankAccountResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = BankAccount::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
@@ -93,10 +95,5 @@ class BankAccountResource extends Resource
     public static function createRecordForCurrentUser(array $data): BankAccount
     {
         return BankAccount::create(Arr::add($data, 'user_id', auth()->id()));
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return trans('navigation.bank_accounts');
     }
 }

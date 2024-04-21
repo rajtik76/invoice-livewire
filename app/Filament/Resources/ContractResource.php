@@ -2,22 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\CurrencyEnum;
 use App\Filament\Resources\ContractResource\Pages;
 use App\Models\Contract;
-use App\Models\Customer;
-use App\Models\Supplier;
-use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Number;
 
 class ContractResource extends Resource
 {
+    use HasTranslatedBreadcrumbAndTitle;
+
     protected static ?string $model = Contract::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
@@ -27,70 +25,7 @@ class ContractResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Select::make('customer_id')
-                    ->label(trans('base.customer'))
-                    ->relationship(
-                        name: 'customer',
-                        titleAttribute: 'name',
-                        modifyQueryUsing: function (Builder $query): void {
-                            $query->where('user_id', auth()->id())
-                                ->orderBy('name');
-                        }
-                    )
-                    ->createOptionForm(Customer::getForm())
-                    ->createOptionUsing(function (array $data): void {
-                        CustomerResource::createRecordForCurrentUser($data);
-                    })
-                    ->createOptionAction(fn (Action $action) => $action->slideOver())
-                    ->searchable()
-                    ->preload()
-                    ->required(),
-
-                Forms\Components\Select::make('supplier_id')
-                    ->label(trans('base.supplier'))
-                    ->relationship(
-                        name: 'supplier',
-                        titleAttribute: 'name',
-                        modifyQueryUsing: function (Builder $query): void {
-                            $query->where('user_id', auth()->id())
-                                ->orderBy('name');
-                        }
-                    )
-                    ->createOptionForm(Supplier::getForm())
-                    ->createOptionUsing(function (array $data): void {
-                        SupplierResource::createRecordForCurrentUser($data);
-                    })
-                    ->createOptionAction(fn (Action $action) => $action->slideOver())
-                    ->searchable()
-                    ->preload()
-                    ->required(),
-
-                Forms\Components\TextInput::make('name')
-                    ->label(trans('base.contract_name'))
-                    ->required()
-                    ->maxLength(255),
-
-                Forms\Components\DatePicker::make('signed_at')
-                    ->label(trans('base.signed_at'))
-                    ->required()
-                    ->default(now()),
-
-                Forms\Components\TextInput::make('price_per_hour')
-                    ->label(trans('base.price_per_hour'))
-                    ->required()
-                    ->numeric(),
-
-                Forms\Components\Select::make('currency')
-                    ->label(trans('base.currency'))
-                    ->required()
-                    ->options(CurrencyEnum::class),
-
-                Forms\Components\Toggle::make('active')
-                    ->label(trans('base.active'))
-                    ->required()
-                    ->default(true),
-            ]);
+            ->schema(Contract::getForm());
     }
 
     public static function table(Table $table): Table
@@ -159,8 +94,11 @@ class ContractResource extends Resource
             ->where('user_id', auth()->id());
     }
 
-    public static function getNavigationLabel(): string
+    /**
+     * Create contract for current user
+     */
+    public static function createRecordForCurrentUser(array $data): Contract
     {
-        return trans('navigation.contracts');
+        return Contract::create(Arr::add($data, 'user_id', auth()->id()));
     }
 }

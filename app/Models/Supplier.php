@@ -101,6 +101,7 @@ class Supplier extends Model
                                 }
                             )
                             ->getOptionLabelFromRecordUsing(fn (BankAccount $record): string => "{$record->bank_name}, {$record->account_number} / {$record->bank_code}")
+                            ->createOptionModalHeading(trans('base.create_bank_account'))
                             ->createOptionForm(BankAccount::getForm())
                             ->createOptionUsing(function (array $data): void {
                                 BankAccountResource::createRecordForCurrentUser($data);

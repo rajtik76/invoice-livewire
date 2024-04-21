@@ -6,7 +6,7 @@ return [
     'invoices' => 'Faktury',
     'contracts' => 'Smlouvy',
     'suppliers' => 'Dodavatelé',
-    'customers' => 'Odběratelé',
+    'customers' => 'Zákazník',
     'addresses' => 'Adresy',
     'bank_accounts' => 'Bankovní účty',
 ];
