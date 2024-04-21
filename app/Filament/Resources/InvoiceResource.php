@@ -35,7 +35,7 @@ class InvoiceResource extends Resource
                             ->nullable(false),
                         Split::make([
                             TextInput::make('number')
-                                ->label(trans('base.number'))
+                                ->label(trans('base.invoice_number'))
                                 ->numeric()
                                 ->required(),
                             TextInput::make('year')
@@ -73,7 +73,7 @@ class InvoiceResource extends Resource
                 Tables\Columns\TextColumn::make('contract.name')
                     ->label(trans('base.contract')),
                 Tables\Columns\TextColumn::make('number')
-                    ->label(trans('base.invoice').' #')
+                    ->label(trans('base.invoice_number'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('year')
@@ -100,6 +100,7 @@ class InvoiceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make('edit')
+                    ->modalHeading(trans('base.edit_invoice'))
                     ->slideOver(),
             ])
             ->bulkActions([
@@ -128,5 +129,10 @@ class InvoiceResource extends Resource
         return parent::getEloquentQuery()
             ->with(['contract'])
             ->where('user_id', auth()->id());
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('navigation.invoices');
     }
 }

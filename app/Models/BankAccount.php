@@ -61,7 +61,7 @@ class BankAccount extends Model implements KeyValueOptions
                     Split::make([
                         Split::make([
                             TextInput::make('account_number')
-                                ->label(trans('base.account'))
+                                ->label(trans('base.bank_account'))
                                 ->required()
                                 ->maxLength(255),
                             TextInput::make('bank_code')
@@ -73,11 +73,11 @@ class BankAccount extends Model implements KeyValueOptions
                     ]),
                     Split::make([
                         TextInput::make('iban')
-                            ->label(trans('base.iban'))
+                            ->label('IBAN')
                             ->required()
                             ->maxLength(255),
                         TextInput::make('swift')
-                            ->label(trans('base.swift'))
+                            ->label('SWIFT')
                             ->required()
                             ->maxLength(255),
                     ]),

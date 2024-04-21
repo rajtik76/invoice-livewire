@@ -36,7 +36,7 @@ class CustomerResource extends Resource
                                 ->maxLength(255),
 
                             Forms\Components\TextInput::make('registration_number')
-                                ->label(trans('base.registration'))
+                                ->label(trans('base.registration_number'))
                                 ->maxLength(255)
                                 ->default(null),
 
@@ -59,7 +59,7 @@ class CustomerResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('registration_number')
-                    ->label(trans('base.registration'))
+                    ->label(trans('base.registration_number'))
                     ->sortable()
                     ->searchable(),
 
@@ -73,7 +73,8 @@ class CustomerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->slideOver(),
+                    ->slideOver()
+                    ->modalHeading(trans('base.edit_customer')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -104,5 +105,10 @@ class CustomerResource extends Resource
         return parent::getEloquentQuery()
             ->with(['address'])
             ->where('user_id', auth()->id());
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('navigation.customers');
     }
 }

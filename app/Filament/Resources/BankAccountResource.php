@@ -34,7 +34,7 @@ class BankAccountResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('account_number')
-                    ->label(trans('base.account'))
+                    ->label(trans('base.bank_account'))
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bank_code')
@@ -42,11 +42,11 @@ class BankAccountResource extends Resource
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('iban')
-                    ->label(trans('base.iban'))
+                    ->label('IBAN')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('swift')
-                    ->label(trans('base.swift'))
+                    ->label('SWIFT')
                     ->sortable()
                     ->searchable(),
             ])
@@ -55,7 +55,8 @@ class BankAccountResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->slideOver(),
+                    ->slideOver()
+                    ->modalHeading(trans('base.edit_bank_account')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -92,5 +93,10 @@ class BankAccountResource extends Resource
     public static function createRecordForCurrentUser(array $data): BankAccount
     {
         return BankAccount::create(Arr::add($data, 'user_id', auth()->id()));
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('navigation.bank_accounts');
     }
 }

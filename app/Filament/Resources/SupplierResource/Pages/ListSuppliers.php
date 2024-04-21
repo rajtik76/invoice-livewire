@@ -15,9 +15,9 @@ class ListSuppliers extends ListRecords
     {
         return [
             Actions\CreateAction::make()
-                ->label(trans('page.create_supplier'))
-                ->modalHeading(trans('page.create_supplier'))
                 ->slideOver()
+                ->label(trans('base.create_supplier'))
+                ->modalHeading(trans('base.create_supplier'))
                 ->using(function (array $data): void {
                     self::$resource::createSupplierForCurrentUser($data);
                 }),

@@ -52,7 +52,7 @@ class SupplierResource extends Resource
 
                         Forms\Components\Split::make([
                             Forms\Components\TextInput::make('registration_number')
-                                ->label(trans('base.registration'))
+                                ->label(trans('base.registration_number'))
                                 ->required()
                                 ->maxLength(255),
 
@@ -101,7 +101,7 @@ class SupplierResource extends Resource
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('registration_number')
-                    ->label(trans('base.registration'))
+                    ->label(trans('base.registration_number'))
                     ->sortable()
                     ->searchable(),
 
@@ -125,7 +125,7 @@ class SupplierResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->modalHeading(trans('page.edit_supplier'))
+                    ->modalHeading(trans('base.edit_supplier'))
                     ->slideOver(),
             ])
             ->bulkActions([

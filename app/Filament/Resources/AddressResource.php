@@ -52,8 +52,8 @@ class AddressResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->slideOver(),
-                Tables\Actions\DeleteAction::make(),
+                    ->slideOver()
+                    ->modalHeading(trans('base.edit_address')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -65,7 +65,7 @@ class AddressResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageAddresses::route('/'),
+            'index' => Pages\ListAddresses::route('/'),
         ];
     }
 
@@ -86,5 +86,10 @@ class AddressResource extends Resource
     public static function createAddressForCurrentUser(array $data): Address
     {
         return Address::create(Arr::add($data, 'user_id', auth()->id()));
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return trans('navigation.addresses');
     }
 }
