@@ -4,14 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BankAccountResource\Pages;
 use App\Models\BankAccount;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Split;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Arr;
 
 class BankAccountResource extends Resource
 {
@@ -24,41 +22,7 @@ class BankAccountResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Grid::make()
-                    ->columns(1)
-                    ->schema([
-                        Split::make([
-                            TextInput::make('bank_name')
-                                ->label(trans('base.bank_name'))
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-                        Split::make([
-                            Split::make([
-                                TextInput::make('account_number')
-                                    ->label(trans('base.account'))
-                                    ->required()
-                                    ->maxLength(255),
-                                TextInput::make('bank_code')
-                                    ->label(trans('base.bank_code'))
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->grow(false),
-                            ]),
-                        ]),
-                        Split::make([
-                            TextInput::make('iban')
-                                ->label(trans('base.iban'))
-                                ->required()
-                                ->maxLength(255),
-                            TextInput::make('swift')
-                                ->label(trans('base.swift'))
-                                ->required()
-                                ->maxLength(255),
-                        ]),
-                    ]),
-            ]);
+            ->schema(BankAccount::getForm());
     }
 
     public static function table(Table $table): Table
@@ -118,5 +82,15 @@ class BankAccountResource extends Resource
     {
         return parent::getEloquentQuery()
             ->where('user_id', auth()->id());
+    }
+
+    /**
+     * Create bank account record for current user
+     *
+     * @param  array  $data  <string, mixed>
+     */
+    public static function createRecordForCurrentUser(array $data): BankAccount
+    {
+        return BankAccount::create(Arr::add($data, 'user_id', auth()->id()));
     }
 }

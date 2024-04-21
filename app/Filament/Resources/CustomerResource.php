@@ -6,7 +6,6 @@ use App\Filament\Resources\CustomerResource\Pages;
 use App\Models\Address;
 use App\Models\Customer;
 use Filament\Forms;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,7 +16,7 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
 
     protected static ?int $navigationSort = 8;
 
@@ -28,26 +27,7 @@ class CustomerResource extends Resource
                 Forms\Components\Grid::make()
                     ->columns(1)
                     ->schema([
-                        Forms\Components\Select::make('address_id')
-                            ->label(trans('base.address'))
-                            ->relationship(
-                                name: 'address',
-                                modifyQueryUsing: function (Builder $query): void {
-                                    $query->where('user_id', auth()->id())
-                                        ->orderBy('country')
-                                        ->orderBy('city')
-                                        ->orderBy('street');
-                                }
-                            )
-                            ->getOptionLabelFromRecordUsing(fn (Address $record): string => "{$record->street}, {$record->zip} {$record->city}, {$record->country->countryName()}")
-                            ->createOptionForm(Address::getForm())
-                            ->createOptionUsing(function (array $data): void {
-                                AddressResource::createAddressForCurrentUser($data);
-                            })
-                            ->createOptionAction(fn (Action $action) => $action->slideOver())
-                            ->searchable()
-                            ->preload()
-                            ->required(),
+                        Address::getSelectWithNewOption(),
 
                         Forms\Components\Split::make([
                             Forms\Components\TextInput::make('name')

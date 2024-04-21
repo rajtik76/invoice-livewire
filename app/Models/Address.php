@@ -6,10 +6,13 @@ namespace App\Models;
 
 use App\Contracts\KeyValueOptions;
 use App\Enums\CountryEnum;
+use App\Filament\Resources\AddressResource;
 use App\Traits\HasCurrentUserScope;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -74,5 +77,32 @@ class Address extends Model implements KeyValueOptions
                         ->options(CountryEnum::options()),
                 ]),
         ];
+    }
+
+    /**
+     * Get address select with new option
+     */
+    public static function getSelectWithNewOption(): Select
+    {
+        return Select::make('address_id')
+            ->label(trans('base.address'))
+            ->relationship(
+                name: 'address',
+                modifyQueryUsing: function (Builder $query): void {
+                    $query->where('user_id', auth()->id())
+                        ->orderBy('country')
+                        ->orderBy('city')
+                        ->orderBy('street');
+                }
+            )
+            ->getOptionLabelFromRecordUsing(fn (Address $record): string => "{$record->street}, {$record->zip} {$record->city}, {$record->country->countryName()}")
+            ->createOptionForm(Address::getForm())
+            ->createOptionUsing(function (array $data): void {
+                AddressResource::createAddressForCurrentUser($data);
+            })
+            ->createOptionAction(fn (Action $action) => $action->slideOver())
+            ->searchable()
+            ->preload()
+            ->required();
     }
 }
