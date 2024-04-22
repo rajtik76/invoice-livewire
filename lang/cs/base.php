@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'task' => 'Úkol',
     'invoice' => 'Faktura',
     'contract' => 'Smlouva',
     'contract_name' => 'Název smlouvy',
@@ -32,6 +33,12 @@ return [
     'active' => 'Aktivní',
     'price_per_hour' => 'Sazba',
     'currency' => 'Měna',
+    'date' => 'Datum',
+    'hours' => 'Hodiny',
+    'comment' => 'Komentář',
+    'task_name' => 'Název úkolu',
+    'note' => 'Poznámka',
+    'entities' => 'Entity',
 
     'edit_invoice' => 'Upravit fakturu',
     'create_invoice' => 'Vytvořit fakturu',
@@ -45,9 +52,19 @@ return [
     'create_bank_account' => 'Vytvořit bankovní účet',
     'edit_contract' => 'Upravit smlouvu',
     'create_contract' => 'Vytvořit smlouvu',
+    'edit_task_hour' => 'Upravit odpracované hodiny',
+    'create_task_hour' => 'Vytvořit odpracované hodiny',
+    'edit_task' => 'Upravit úkol',
+    'create_task' => 'Vytvořit úkol',
+
+    'is_active' => 'Aktivní',
 
     'country_name' => [
         'germany' => 'Německo',
         'czech' => 'Česká republika',
+    ],
+
+    'validation' => [
+        'contract_supplier_customer_unique' => 'Smlouva s tímto dodavatelem a zákazníkem již existuje.',
     ],
 ];

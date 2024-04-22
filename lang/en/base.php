@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 return [
+    'task' => 'Task',
     'invoice' => 'Invoice',
     'contract' => 'Contract',
     'contract_name' => 'Contract name',
@@ -32,6 +33,12 @@ return [
     'active' => 'Active',
     'price_per_hour' => 'Price per hour',
     'currency' => 'Currency',
+    'date' => 'Date',
+    'hours' => 'Hours',
+    'comment' => 'Comment',
+    'task_name' => 'Task name',
+    'note' => 'Note',
+    'entities' => 'Entities',
 
     'edit_invoice' => 'Edit invoice',
     'create_invoice' => 'Create invoice',
@@ -45,9 +52,19 @@ return [
     'create_bank_account' => 'Create bank account',
     'edit_contract' => 'Edit contract',
     'create_contract' => 'Create contract',
+    'edit_task_hour' => 'Edit task hour',
+    'create_task_hour' => 'Create task hour',
+    'edit_task' => 'Edit task',
+    'create_task' => 'Create task',
+
+    'is_active' => 'Active',
 
     'country_name' => [
         'germany' => 'Germany',
         'czech' => 'Czech Republic',
+    ],
+
+    'validation' => [
+        'contract_supplier_customer_unique' => 'Contract with this customer and supplier already exists.',
     ],
 ];

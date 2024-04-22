@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-trait HasTranslatedBreadcrumbAndTitle
+trait HasTranslatedBreadcrumbAndNavigation
 {
     /**
      * Get navigation label
      */
     public static function getNavigationLabel(): string
     {
-        return static::getCustomTranslation();
+        return static::getBreadcrumbTranslation();
     }
 
     /**
@@ -19,14 +19,14 @@ trait HasTranslatedBreadcrumbAndTitle
      */
     public static function getBreadcrumb(): string
     {
-        return static::getCustomTranslation();
+        return static::getBreadcrumbTranslation();
     }
 
     /**
      * Get navigation translation from current breadcrumb name converted to snake string
      */
-    protected static function getCustomTranslation(): string
+    protected static function getBreadcrumbTranslation(): string
     {
-        return trans('navigation.'.str(parent::getBreadcrumb())->snake());
+        return trans('navigation.' . str(parent::getBreadcrumb())->snake());
     }
 }

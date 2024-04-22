@@ -33,7 +33,6 @@ return new class extends Migration
             $table->string('currency');
             $table->boolean('active');
             $table->timestamps();
-            $table->unique(['user_id', 'customer_id', 'supplier_id', 'signed_at']);
         });
     }
 

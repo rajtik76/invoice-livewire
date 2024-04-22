@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Invoice;
-use App\Models\Task;
 use App\Models\TaskHour;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
@@ -12,7 +11,7 @@ class InvoiceSeeder extends Seeder
 {
     public function run(): void
     {
-        TaskHour::with('task')->get()
+        TaskHour::with('task.contract')->get()
             // I need only task + year + month
             ->map(fn (TaskHour $taskHour) => [
                 'contract' => $taskHour->task->contract,

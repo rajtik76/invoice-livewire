@@ -14,7 +14,8 @@ use Illuminate\Support\Arr;
 
 class AddressResource extends Resource
 {
-    use HasTranslatedBreadcrumbAndTitle;
+    use HasEntitiesNavigationGroup;
+    use HasTranslatedBreadcrumbAndNavigation;
 
     protected static ?string $model = Address::class;
 

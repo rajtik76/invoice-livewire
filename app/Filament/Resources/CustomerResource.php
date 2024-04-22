@@ -13,7 +13,8 @@ use Illuminate\Support\Arr;
 
 class CustomerResource extends Resource
 {
-    use HasTranslatedBreadcrumbAndTitle;
+    use HasEntitiesNavigationGroup;
+    use HasTranslatedBreadcrumbAndNavigation;
 
     protected static ?string $model = Customer::class;
 

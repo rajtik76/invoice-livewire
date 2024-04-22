@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InvoiceResource extends Resource
 {
-    use HasTranslatedBreadcrumbAndTitle;
+    use HasTranslatedBreadcrumbAndNavigation;
 
     protected static ?string $model = Invoice::class;
 

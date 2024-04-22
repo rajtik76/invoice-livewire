@@ -14,7 +14,8 @@ use Illuminate\Support\Number;
 
 class ContractResource extends Resource
 {
-    use HasTranslatedBreadcrumbAndTitle;
+    use HasEntitiesNavigationGroup;
+    use HasTranslatedBreadcrumbAndNavigation;
 
     protected static ?string $model = Contract::class;
 
@@ -32,6 +33,10 @@ class ContractResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\IconColumn::make('active')
+                    ->label(trans('base.active'))
+                    ->boolean(),
+
                 Tables\Columns\TextColumn::make('customer.name')
                     ->label(trans('base.customer'))
                     ->numeric()
@@ -55,9 +60,6 @@ class ContractResource extends Resource
                     ->label(trans('base.price_per_hour'))
                     ->formatStateUsing(fn (Contract $record) => Number::currency($record->price_per_hour, $record->currency->value, app()->getLocale()))
                     ->sortable(),
-
-                Tables\Columns\ToggleColumn::make('active')
-                    ->label(trans('base.active')),
             ])
             ->filters([
                 //
