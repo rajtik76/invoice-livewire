@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 return [
     'invoices' => 'Faktury',
+    'reports' => 'Reporty',
     'contracts' => 'Smlouvy',
     'suppliers' => 'Dodavatelé',
     'customers' => 'Zákazníci',

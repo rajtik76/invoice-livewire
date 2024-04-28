@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Observers;
 
 use App\Models\Report;
-use App\Models\TaskHour;
+use App\Services\ReportService;
 
 class ReportObserver
 {
@@ -35,22 +35,10 @@ class ReportObserver
 
     private function updateContent(Report $report): void
     {
-        $report->updateQuietly([
-            'content' => TaskHour::with('task')
-                ->whereIn('task_id', $report->contract->tasks()->pluck('id'))
-                ->whereYear('date', strval($report->year))
-                ->whereMonth('date', strval($report->month))
-                ->orderBy('date')
-                ->get()
-                ->map(fn (TaskHour $taskHour) => [
-                    'name' => $taskHour->task->name,
-                    'url' => $taskHour->task->url,
-                    'date' => $taskHour->date->toDateString(),
-                    'hours' => $taskHour->hours,
-                    'comment' => $taskHour->comment,
-                ])
-                ->groupBy('date')
-                ->toArray(),
-        ]);
+        $report->updateQuietly(['content' => ReportService::createContent(
+            contract: $report->contract,
+            year: intval($report->year),
+            month: intval($report->month)
+        )]);
     }
 }

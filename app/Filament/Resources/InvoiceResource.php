@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InvoiceResource extends Resource
 {
+    use HasGetQueryForCurrentUser;
     use HasTranslatedBreadcrumbAndNavigation;
 
     protected static ?string $model = Invoice::class;
@@ -150,12 +151,5 @@ class InvoiceResource extends Resource
         return [
             'index' => Pages\ListInvoices::route('/'),
         ];
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->with(['contract'])
-            ->where('user_id', auth()->id());
     }
 }

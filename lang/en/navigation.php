@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 return [
     'invoices' => 'Invoices',
+    'reports' => 'Reports',
     'contracts' => 'Contracts',
     'suppliers' => 'Suppliers',
     'customers' => 'Customers',

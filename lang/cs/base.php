@@ -56,6 +56,8 @@ return [
     'create_task_hour' => 'Vytvořit odpracované hodiny',
     'edit_task' => 'Upravit úkol',
     'create_task' => 'Vytvořit úkol',
+    'edit_report' => 'Upravit report',
+    'create_report' => 'Vytvořit report',
 
     'is_active' => 'Aktivní',
 
@@ -66,5 +68,6 @@ return [
 
     'validation' => [
         'contract_supplier_customer_unique' => 'Smlouva s tímto dodavatelem a zákazníkem již existuje.',
+        'report_unique' => 'Report pro tuto smlouvu ve vybraném roce a měsíci již existuje.',
     ],
 ];

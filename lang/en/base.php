@@ -56,6 +56,8 @@ return [
     'create_task_hour' => 'Create task hour',
     'edit_task' => 'Edit task',
     'create_task' => 'Create task',
+    'edit_report' => 'Edit report',
+    'create_report' => 'Create report',
 
     'is_active' => 'Active',
 
@@ -66,5 +68,6 @@ return [
 
     'validation' => [
         'contract_supplier_customer_unique' => 'Contract with this customer and supplier already exists.',
+        'report_unique' => 'Report for this contract in selected year and month already exists.',
     ],
 ];
