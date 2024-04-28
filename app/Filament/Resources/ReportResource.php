@@ -29,6 +29,7 @@ class ReportResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('contract_id')
+                    ->label(trans('base.contract'))
                     ->relationship(
                         name: 'contract',
                         titleAttribute: 'name',
@@ -52,19 +53,18 @@ class ReportResource extends Resource
                     ]),
 
                 Forms\Components\TextInput::make('year')
+                    ->label(trans('base.year'))
                     ->numeric()
                     ->required()
                     ->default(now()->year),
 
                 Forms\Components\TextInput::make('month')
+                    ->label(trans('base.month'))
                     ->numeric()
                     ->required()
                     ->minValue(1)
                     ->maxValue(12)
                     ->default(now()->month),
-
-                Forms\Components\Textarea::make('content')
-                    ->columnSpanFull(),
             ]);
     }
 
