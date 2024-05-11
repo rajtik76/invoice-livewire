@@ -39,6 +39,10 @@ return [
     'task_name' => 'Název úkolu',
     'note' => 'Poznámka',
     'entities' => 'Entity',
+    'show' => 'Zobrazit',
+    'description' => 'Popis',
+    'subtotal' => 'Mezisoučet',
+    'registration' => 'IČO',
 
     'edit_invoice' => 'Upravit fakturu',
     'create_invoice' => 'Vytvořit fakturu',
@@ -60,6 +64,19 @@ return [
     'create_report' => 'Vytvořit report',
 
     'is_active' => 'Aktivní',
+
+    'report_list' => 'Report přehled',
+    'total' => 'Celkem',
+    'supplier_is_registered_in_trade_register' => 'Dodavatel je registrován v živnostenském rejstříku.',
+    'vat_reverse_charge_mode' => 'Daň odvede zákazník.',
+    'payment_advice' => 'Platební údaje',
+    'dates' => 'Datumy',
+    'invoice_content_note' => 'Na základě smlouvy ze dne: :contract_signed, vám fakturuji za práci odvedenou na níže uvedených úkonech. Součástí faktury je také příloha s přehledem vykonané práce.',
+    'unit_price' => 'Cena za kus',
+    'quantity' => 'Kusy',
+    'iban' => 'IBAN',
+    'swift' => 'SWIFT',
+    'reference_id' => 'Variabilní symbol',
 
     'country_name' => [
         'germany' => 'Německo',

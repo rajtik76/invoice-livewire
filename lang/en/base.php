@@ -39,6 +39,10 @@ return [
     'task_name' => 'Task name',
     'note' => 'Note',
     'entities' => 'Entities',
+    'show' => 'Show',
+    'description' => 'Description',
+    'subtotal' => 'Subtotal',
+    'registration' => 'Registration',
 
     'edit_invoice' => 'Edit invoice',
     'create_invoice' => 'Create invoice',
@@ -60,6 +64,19 @@ return [
     'create_report' => 'Create report',
 
     'is_active' => 'Active',
+
+    'report_list' => 'Report list',
+    'total' => 'Total',
+    'supplier_is_registered_in_trade_register' => 'The supplier is registered in the Trade Register.',
+    'vat_reverse_charge_mode' => 'The reverse charge is applicable.',
+    'payment_advice' => 'Payment advice',
+    'dates' => 'Dates',
+    'invoice_content_note' => 'On the basis of the contract of work dated: :contract_signed, I invoice you for the work done on the following tasks. This invoice includes an attachment with a overview of the hours worked.',
+    'unit_price' => 'Unit price',
+    'quantity' => 'Quantity',
+    'iban' => 'IBAN',
+    'swift' => 'SWIFT',
+    'reference_id' => 'Reference ID',
 
     'country_name' => [
         'germany' => 'Germany',

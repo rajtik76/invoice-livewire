@@ -5,13 +5,13 @@
         </div>
 
         @isset($price)
-            <div class="px-1 border-x text-center">
+            <div class="px-1 text-center">
                 {{ $price }}
             </div>
         @endisset
 
         @isset($quantity)
-            <div class="px-1 border-r text-center">
+            <div class="px-1 border-x border-slate-300 text-center">
                 {{ $quantity }}
             </div>
         @endisset

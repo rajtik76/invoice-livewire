@@ -100,6 +100,11 @@ class ReportResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('show')
+                    ->label(trans('base.show'))
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Report $record) => route('view.report', ['report' => $record->id, 'locale' => app()->getLocale()]))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -150,12 +150,12 @@
         </x-invoice-grid-panel>
 
         <!-- CONTENT -->
-        <x-invoice-grid-panel border="border-gray-200" span="col-span-2" class="bg-gray-200">
+        <x-invoice-grid-panel border="border-slate-500" span="col-span-2" class="bg-slate-300">
             <x-slot:title>
                 <div class="grid grid-cols-12">
-                    <div class="col-span-9">{{ __('description') }}</div>
-                    <div class="px-1 border-x border-gray-300 text-center">{{ __('base.unit_price') }}</div>
-                    <div class="px-1 border-r border-gray-300 text-center">{{ __('base.quantity') }}</div>
+                    <div class="col-span-9">{{ __('base.description') }}</div>
+                    <div class="px-1 border-x border-slate-300 text-center">{{ __('base.unit_price') }}</div>
+                    <div class="px-1 border-r border-slate-300 text-center">{{ __('base.quantity') }}</div>
                     <div class="text-right">{{ __('base.amount') }}</div>
                 </div>
             </x-slot:title>
@@ -163,18 +163,18 @@
             <!-- CONTRACT STATEMENT -->
             <x-invoice-grid-content>
                 <x-slot:item>
-                    <div class="mr-4">
-                        {{ __('base.invoice_content_note', ['date' => $invoice->contract->signed_at->format('d.m.Y')]) }}
+                    <div class="mr-4 text-sm italic">
+                        {{ __('base.invoice_content_note', ['contract_signed' => $invoice->contract->signed_at->format('d.m.Y')]) }}
                     </div>
                 </x-slot:item>
             </x-invoice-grid-content>
 
-            <x-invoice-grid-content class="bg-gray-50">
+            <x-invoice-grid-content>
                 <x-slot:item>&nbsp;</x-slot:item>
             </x-invoice-grid-content>
 
             @foreach($invoice->content as $content)
-                <x-invoice-grid-content class="even:bg-gray-50">
+                <x-invoice-grid-content class="odd:bg-slate-50/50">
                     <x-slot:item>
                         @if($content['url'])
                             <a href="{{ $content['url'] }}" target="_blank"
@@ -192,8 +192,8 @@
             <!-- SUBTOTAL -->
             <x-slot:footer>
                 <div class="grid grid-cols-12">
-                    <div class="col-span-10">{{ __('subtotal') }}</div>
-                    <div class="border-x border-gray-300 px-1 text-center">
+                    <div class="col-span-10">{{ __('base.subtotal') }}</div>
+                    <div class="border-x border-slate-300 px-1 text-center">
                         {{ Number::format($invoiceTotalHours, 1) }}
                     </div>
                     <div class="text-right normal-case">
@@ -206,7 +206,7 @@
 
     <!-- TOTAL -->
     <div class="flex justify-end mr-4 py-4">
-        <div class="font-bold text-5xl border-4 border-gray-500 rounded-xl p-4 text-right bg-gray-200">
+        <div class="font-bold text-5xl border-4 border-slate-500 rounded p-4 text-right bg-slate-100">
             <span class="uppercase">{{ __('base.total') }}: {{ Number::format($invoiceTotalAmount, 2) }}</span>
             {{ $invoiceCurrencySymbol }}
         </div>

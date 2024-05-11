@@ -1,4 +1,4 @@
-<div class="border-4 rounded-xl {{ $attributes['border'] }} {{ $attributes['span'] }}">
+<div class="border-4 rounded {{ $attributes['border'] }} {{ $attributes['span'] }}">
     <div {{ $attributes->merge(['class' => 'uppercase px-4 py-1']) }}>
         {{ $title }}
     </div>

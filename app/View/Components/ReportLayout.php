@@ -11,6 +11,8 @@ class ReportLayout extends Component
 {
     public function render(): View
     {
+        app()->setLocale(request()->get('locale'));
+
         return view('layouts.report');
     }
 }

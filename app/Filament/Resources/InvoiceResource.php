@@ -131,6 +131,11 @@ class InvoiceResource extends Resource
                 Tables\Actions\EditAction::make('edit')
                     ->modalHeading(trans('base.edit_invoice'))
                     ->slideOver(),
+                Tables\Actions\Action::make('show')
+                    ->label(trans('base.show'))
+                    ->icon('heroicon-o-eye')
+                    ->url(fn (Invoice $record) => route('view.invoice', ['invoice' => $record->id, 'locale' => app()->getLocale()]))
+                    ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
