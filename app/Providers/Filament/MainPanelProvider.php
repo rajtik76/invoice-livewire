@@ -10,7 +10,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -26,7 +25,7 @@ class MainPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('main')
-            ->brandLogo(fn () => view('filament.brand_logo'))
+            ->brandLogo(fn() => view('filament.brand_logo'))
             ->login()
             ->spa()
             ->colors([
@@ -40,8 +39,8 @@ class MainPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+//                Widgets\AccountWidget::class,
+//                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -59,11 +58,11 @@ class MainPanelProvider extends PanelProvider
             ])
             ->renderHook(
                 PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
-                fn () => view('filament.login_extra')
+                fn() => view('filament.login_extra')
             )
             ->renderHook(
                 PanelsRenderHook::TOPBAR_AFTER,
-                fn () => view('filament.nav_logo')
+                fn() => view('filament.nav_logo')
             );
     }
 }
