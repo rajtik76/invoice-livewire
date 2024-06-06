@@ -48,8 +48,7 @@ class User extends Authenticatable implements \Illuminate\Contracts\Auth\MustVer
         'password' => 'hashed',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
-    {
+    public function canAccessPanel(Panel $panel): bool {
         return true;
     }
 
