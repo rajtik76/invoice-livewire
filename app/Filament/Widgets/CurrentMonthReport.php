@@ -27,6 +27,7 @@ class CurrentMonthReport extends Widget implements HasForms
     {
         return $form->schema([
             Select::make('contract')
+                ->label(trans('base.contract'))
                 ->options(Contract::where('active', true)
                     ->orderBy('name')
                     ->pluck('name', 'id')

@@ -6,7 +6,7 @@
 
                 <div class="pt-4">
                     <x-filament::button type="submit">
-                        Show
+                        {{ __('base.show') }}
                     </x-filament::button>
                 </div>
             </form>
