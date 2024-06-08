@@ -16,6 +16,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class MainPanelProvider extends PanelProvider
@@ -57,12 +58,8 @@ class MainPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->renderHook(
-                PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE,
-                fn() => view('filament.login_extra')
-            )
-            ->renderHook(
-                PanelsRenderHook::TOPBAR_AFTER,
-                fn() => view('filament.nav_logo')
+                PanelsRenderHook::HEAD_END,
+                fn(): string => Blade::render('@vite(\'resources/css/app.css\')')
             );
     }
 }

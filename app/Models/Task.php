@@ -60,7 +60,7 @@ class Task extends Model implements KeyValueOptions
                             titleAttribute: 'name',
                             modifyQueryUsing: function (Builder $query, ?Task $record): void {
                                 $query->where('user_id', auth()->id())
-                                    ->when(! $record, fn (Builder $query) => $query->where('active', true))
+                                    ->when(!$record, fn(Builder $query) => $query->where('active', true))
                                     ->orderBy('name');
                             }
                         )
@@ -69,9 +69,15 @@ class Task extends Model implements KeyValueOptions
                         ->createOptionUsing(function (array $data): void {
                             ContractResource::createRecordForCurrentUser($data);
                         })
-                        ->createOptionAction(fn (Action $action) => $action->slideOver())
-                        ->searchable()
-                        ->preload()
+                        ->createOptionAction(fn(Action $action) => $action->slideOver())
+                        ->default(function (?Task $record): int {
+                            return key(Contract::where('user_id', auth()->id())
+                                ->when(!$record, fn(Builder $query) => $query->where('active', true))
+                                ->pluck('name', 'id')
+                                ->all()
+                            );
+                        })
+                        ->selectablePlaceholder(false)
                         ->required(),
 
                     Forms\Components\TextInput::make('name')

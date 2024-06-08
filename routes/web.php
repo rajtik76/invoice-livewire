@@ -21,5 +21,3 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('view/current-month/report/{contract}', ViewCurrentMonthReportController::class)->name('view.current-month-report');
     Route::get('view/invoice/{invoice}', ViewInvoiceController::class)->name('view.invoice');
 });
-
-//require __DIR__.'/auth.php';
