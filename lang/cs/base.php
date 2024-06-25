@@ -62,6 +62,7 @@ return [
     'create_task' => 'Vytvořit úkol',
     'edit_report' => 'Upravit report',
     'create_report' => 'Vytvořit report',
+    'deactivate_task' => 'Deaktivuj úkol',
 
     'is_active' => 'Aktivní',
 
