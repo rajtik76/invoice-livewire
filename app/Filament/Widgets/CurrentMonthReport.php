@@ -16,6 +16,7 @@ class CurrentMonthReport extends Widget implements HasForms
     public ?array $data = [];
 
     protected static string $view = 'filament.widgets.current-month-report';
+
     protected static ?int $sort = 1;
 
     public function mount(): void
@@ -32,7 +33,7 @@ class CurrentMonthReport extends Widget implements HasForms
                     ->orderBy('name')
                     ->pluck('name', 'id')
                 )
-                ->required()
+                ->required(),
         ])
             ->statePath('data');
     }

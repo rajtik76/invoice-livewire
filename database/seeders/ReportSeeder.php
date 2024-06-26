@@ -18,17 +18,17 @@ class ReportSeeder extends Seeder
         TaskHour::join('tasks', 'tasks.id', '=', 'task_hours.task_id')
             ->select(['tasks.contract_id', 'task_hours.user_id', 'task_hours.date'])
             ->get()
-            ->map(fn(TaskHour $taskHour) => [
+            ->map(fn (TaskHour $taskHour) => [
                 ...$taskHour->toArray(),
                 'year' => $taskHour->date->format('Y'),
                 'month' => $taskHour->date->format('m'),
             ])
             ->groupBy(['contract_id', 'user_id', 'year', 'month'])
             ->each(
-                fn(Collection $taskHour, $contractId) => $taskHour->each(
-                    fn(Collection $contractCollection, $userId) => $contractCollection->each(
-                        fn(Collection $yearCollection, $year) => $yearCollection->each(
-                            fn(Collection $monthCollection, $month) => $this->ttt[] = [
+                fn (Collection $taskHour, $contractId) => $taskHour->each(
+                    fn (Collection $contractCollection, $userId) => $contractCollection->each(
+                        fn (Collection $yearCollection, $year) => $yearCollection->each(
+                            fn (Collection $monthCollection, $month) => $this->ttt[] = [
                                 'contract_id' => intval($contractId),
                                 'user_id' => intval($userId),
                                 'year' => intval($year),

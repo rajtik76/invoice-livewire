@@ -45,14 +45,14 @@ class TaskResource extends Resource
                     ->label(trans('base.task'))
                     ->searchable()
                     ->sortable()
-                    ->url(fn(Task $record) => $record->url)
+                    ->url(fn (Task $record) => $record->url)
                     ->openUrlInNewTab(),
 
                 Tables\Columns\TextColumn::make('task_hours_sum_hours')
                     ->label(trans('base.hours'))
-                    ->getStateUsing(fn($record) => number_format(floatval($record->task_hours_sum_hours), 1))
+                    ->getStateUsing(fn ($record) => number_format(floatval($record->task_hours_sum_hours), 1))
                     ->color('info')
-                    ->url(fn(Task $record) => TaskHourResource::getUrl(parameters: ['tableFilters[task][value]' => $record->id])),
+                    ->url(fn (Task $record) => TaskHourResource::getUrl(parameters: ['tableFilters[task][value]' => $record->id])),
 
                 Tables\Columns\ToggleColumn::make('active')
                     ->label(trans('base.active'))
@@ -61,7 +61,7 @@ class TaskResource extends Resource
             ->filters([
                 Tables\Filters\Filter::make('active')
                     ->label(trans('base.active'))
-                    ->query(fn(Builder $query) => $query->where('active', true))
+                    ->query(fn (Builder $query) => $query->where('active', true))
                     ->default(),
             ])
             ->actions([
@@ -78,7 +78,7 @@ class TaskResource extends Resource
                             $records->each(function (Task $record) {
                                 $record->update(['active' => false]);
                             });
-                        })
+                        }),
                 ]),
             ]);
     }
