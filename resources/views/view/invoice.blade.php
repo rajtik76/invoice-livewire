@@ -150,9 +150,9 @@
         </x-invoice-grid-panel>
 
         <!-- CONTENT -->
-        <x-invoice-grid-panel border="border-slate-500" span="col-span-2" class="bg-slate-300">
+        <x-invoice-grid-panel border="border-slate-300" span="col-span-2" class="bg-slate-300">
             <x-slot:title>
-                <div class="grid grid-cols-12">
+                <div class="grid grid-cols-12 divide-x divide-white">
                     <div class="col-span-9">{{ __('base.description') }}</div>
                     <div class="px-1 border-x border-slate-300 text-center">{{ __('base.unit_price') }}</div>
                     <div class="px-1 border-r border-slate-300 text-center">{{ __('base.quantity') }}</div>
@@ -191,9 +191,10 @@
 
             <!-- SUBTOTAL -->
             <x-slot:footer>
-                <div class="grid grid-cols-12">
-                    <div class="col-span-10">{{ __('base.subtotal') }}</div>
-                    <div class="border-x border-slate-300 px-1 text-center">
+                <div class="grid grid-cols-12 divide-x divide-white">
+                    <div class="col-span-9">{{ __('base.subtotal') }}</div>
+                    <div class="col-span-1"></div>
+                    <div class="border-x border-slate-300 px-1 text-right pr-4">
                         {{ Number::format($invoiceTotalHours, 1) }}
                     </div>
                     <div class="text-right normal-case">
