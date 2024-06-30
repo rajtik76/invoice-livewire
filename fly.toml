@@ -14,8 +14,8 @@ PHP_VERSION = '8.3'
 
 [env]
 APP_ENV = 'production'
-APP_URL = 'https://invoice-livewire.fly.dev/'
-ASSET_URL = 'https://invoice-livewire.fly.dev/'
+APP_URL = 'https://invoice.rajtik.com/'
+ASSET_URL = 'https://invoice.rajtik.com/'
 DB_CONNECTION = 'sqlite'
 DB_DATABASE = '/var/www/html/sqlite_storage/database.sqlite'
 LOG_CHANNEL = 'stderr'
