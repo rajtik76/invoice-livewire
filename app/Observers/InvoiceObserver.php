@@ -22,17 +22,11 @@ class InvoiceObserver
         }
     }
 
-    public function deleted(Invoice $invoice): void
-    {
-    }
+    public function deleted(Invoice $invoice): void {}
 
-    public function restored(Invoice $invoice): void
-    {
-    }
+    public function restored(Invoice $invoice): void {}
 
-    public function forceDeleted(Invoice $invoice): void
-    {
-    }
+    public function forceDeleted(Invoice $invoice): void {}
 
     private function updateContentAndAmount(Invoice $invoice): void
     {

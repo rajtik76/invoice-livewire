@@ -21,17 +21,11 @@ class ReportObserver
         }
     }
 
-    public function deleted(Report $report): void
-    {
-    }
+    public function deleted(Report $report): void {}
 
-    public function restored(Report $report): void
-    {
-    }
+    public function restored(Report $report): void {}
 
-    public function forceDeleted(Report $report): void
-    {
-    }
+    public function forceDeleted(Report $report): void {}
 
     private function updateContent(Report $report): void
     {

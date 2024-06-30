@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
@@ -24,7 +25,7 @@ class ViewCurrentMonthReportController extends Controller
                 contract: $contract,
                 year: $year,
                 month: $month
-            )
+            ),
         ]);
 
         return view('view.report', ['report' => $report]);

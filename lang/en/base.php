@@ -62,6 +62,7 @@ return [
     'create_task' => 'Create task',
     'edit_report' => 'Edit report',
     'create_report' => 'Create report',
+    'deactivate_task' => 'Deactivate task',
 
     'is_active' => 'Active',
 

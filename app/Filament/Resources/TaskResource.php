@@ -10,6 +10,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class TaskResource extends Resource
 {
@@ -71,6 +72,13 @@ class TaskResource extends Resource
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\BulkAction::make('deactivate')
+                        ->label(trans('base.deactivate_task'))
+                        ->action(function (Collection $records) {
+                            $records->each(function (Task $record) {
+                                $record->update(['active' => false]);
+                            });
+                        }),
                 ]),
             ]);
     }
