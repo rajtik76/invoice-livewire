@@ -1,4 +1,4 @@
-APP_NAME=Laravel
+APP_NAME=Invoice
 APP_ENV=local
 APP_KEY=
 APP_DEBUG=true
@@ -9,12 +9,8 @@ LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
 LOG_LEVEL=debug
 
-DB_CONNECTION=mysql
-DB_HOST=mariadb
-DB_PORT=3306
-DB_DATABASE=invoice_livewire
-DB_USERNAME=root
-DB_PASSWORD=
+DB_CONNECTION=sqlite
+DB_DATABASE=/var/www/html/database/database.sqlite
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
