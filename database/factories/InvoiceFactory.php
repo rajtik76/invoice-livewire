@@ -22,6 +22,7 @@ class InvoiceFactory extends Factory
             'year' => fn (array $attributes) => \Carbon\Carbon::parse($attributes['issue_date'])->year,
             'month' => fn (array $attributes) => \Carbon\Carbon::parse($attributes['issue_date'])->month,
             'number' => fn (array $attributes) => $attributes['year'].$attributes['month'].$this->faker->unique()->numerify('###'),
+            'content' => [],
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

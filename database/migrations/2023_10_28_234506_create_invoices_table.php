@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedTinyInteger('month');
             $table->date('issue_date');
             $table->date('due_date');
-            $table->jsonb('content')->default('[]');
+            $table->jsonb('content');
             $table->decimal('total_amount')->default(0)->unsigned();
 
             $table->unique(['user_id', 'contract_id', 'number']);

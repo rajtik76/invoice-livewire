@@ -24,7 +24,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->unsignedSmallInteger('year');
             $table->unsignedTinyInteger('month');
-            $table->jsonb('content')->default('[]');
+            $table->jsonb('content');
             $table->timestamps();
 
             $table->unique(['user_id', 'contract_id', 'year', 'month']);
