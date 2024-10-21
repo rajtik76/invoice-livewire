@@ -74,6 +74,9 @@
             "@pint",
             "@phpstan",
             "@test"
+        ],
+        "sqlite-backup": [
+            "fly ssh sftp get /var/www/html/sqlite_storage/database.sqlite ~/Documents/database.sqlite.backup_$(date +\"%Y%m%d_%H%M%S\")"
         ]
     },
     "extra": {
