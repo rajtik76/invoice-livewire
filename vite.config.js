@@ -6,8 +6,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/filament/main/theme.css',
+                'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/app.css',
             ],
             refresh: [
                 ...refreshPaths,
