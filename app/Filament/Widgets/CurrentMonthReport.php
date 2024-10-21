@@ -9,6 +9,9 @@ use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Form;
 use Filament\Widgets\Widget;
 
+/**
+ * @property Form $form
+ */
 class CurrentMonthReport extends Widget implements HasForms
 {
     use InteractsWithForms;

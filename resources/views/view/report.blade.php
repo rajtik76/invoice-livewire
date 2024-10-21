@@ -51,9 +51,9 @@
                     @endforeach
 
                     <!-- Day total -->
-                    <tr class="uppercase bg-slate-100 rounded-lg border border-slate-200">
-                        <td class="pl-2">{{ $date }}</td>
-                        <td>{{ __('base.total') }}</td>
+                    <tr class="uppercase bg-sky-100 rounded-lg border border-slate-200 font-bold daily-total">
+                        <td></td>
+                        <td>{{ __('base.daily_total') }}</td>
                         <td>{{ number_format(collect($items)->sum('hours'), 1) }}</td>
                     </tr>
                 @endforeach

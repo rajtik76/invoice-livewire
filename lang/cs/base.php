@@ -68,6 +68,7 @@ return [
 
     'report_list' => 'Report přehled',
     'total' => 'Celkem',
+    'daily_total' => 'Denní součet',
     'supplier_is_registered_in_trade_register' => 'Dodavatel je registrován v živnostenském rejstříku.',
     'vat_reverse_charge_mode' => 'Daň odvede zákazník.',
     'payment_advice' => 'Platební údaje',

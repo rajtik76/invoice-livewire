@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Widgets;
 
 use App\Models\TaskHour;
@@ -13,14 +15,15 @@ class MonthHoursOverview extends BaseWidget
     protected function getStats(): array
     {
         $interval = CarbonPeriod::create(now()->startOfMonth(), '1 day', now());
-        $history = collect($interval->toArray())->map(function (Carbon $date) {
-            return [
-                'date' => $date,
-                'hours' => floatval(TaskHour::where('user_id', auth()->id())
-                    ->where('date', $date)
-                    ->sum('hours')),
-            ];
-        });
+        $history = collect($interval)
+            ->map(function (Carbon $date) {
+                return [
+                    'date' => $date,
+                    'hours' => floatval(TaskHour::where('user_id', auth()->id())
+                        ->where('date', $date)
+                        ->sum('hours')),
+                ];
+            });
 
         return [
             Stat::make(

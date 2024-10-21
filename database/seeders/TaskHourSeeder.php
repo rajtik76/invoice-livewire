@@ -14,10 +14,12 @@ class TaskHourSeeder extends Seeder
     {
         foreach (Task::all() as $task) {
             // each task can have a max 10 task hour records
-            TaskHour::factory(fake()->numberBetween(0, 10))->create([
-                'user_id' => $task->user_id,
-                'task_id' => $task->id,
-            ]);
+            TaskHour::factory()
+                ->count(fake()->numberBetween(0, 10))
+                ->create([
+                    'user_id' => $task->user_id,
+                    'task_id' => $task->id,
+                ]);
         }
     }
 }

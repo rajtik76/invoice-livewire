@@ -5,10 +5,9 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css',
-                'resources/css/login.css',
-                'resources/css/nav.css',
+                'resources/css/filament/main/theme.css',
                 'resources/js/app.js',
+                'resources/js/app.css',
             ],
             refresh: [
                 ...refreshPaths,

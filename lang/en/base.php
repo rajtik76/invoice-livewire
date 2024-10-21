@@ -68,6 +68,7 @@ return [
 
     'report_list' => 'Report list',
     'total' => 'Total',
+    'daily_total' => 'Daily Total',
     'supplier_is_registered_in_trade_register' => 'The supplier is registered in the Trade Register.',
     'vat_reverse_charge_mode' => 'The reverse charge is applicable.',
     'payment_advice' => 'Payment advice',
