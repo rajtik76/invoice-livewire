@@ -110,6 +110,11 @@ class TaskHourResource extends Resource
                     ->label(trans('base.hours'))
                     ->numeric()
                     ->sortable(),
+
+                Tables\Columns\TextColumn::make('comment')
+                    ->label(trans('base.comment'))
+                    ->size('xs')
+                    ->extraAttributes(['class' => 'italic']),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('task')

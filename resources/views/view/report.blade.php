@@ -29,7 +29,7 @@
                 @foreach($report->content as $date => $items)
                     @foreach($items as /** @var array{name: string, url: string|null, date: string, hours: float, comment: string|null} $task */$task)
                         <!-- Rows -->
-                        <tr class="px-8 text-gray-500">
+                        <tr class="px-8 text-gray-500 odd:bg-slate-100">
                             <td class="pl-2 py-0.5">{{ $task['date'] }}</td>
                             <td>
                                 <span class="flex flex-col">
