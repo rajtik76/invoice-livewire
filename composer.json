@@ -15,8 +15,7 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "livewire/volt": "^1.0",
-        "ramonrietdijk/livewire-tables": "^4.0",
-        "spatie/laravel-ray": "^1.36"
+        "ramonrietdijk/livewire-tables": "^4.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
