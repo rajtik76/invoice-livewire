@@ -94,7 +94,7 @@ class TaskHourResource extends Resource
                     $q->where('task_id', $task);
                 });
             })
-            ->defaultSort('created_at', 'desc')
+            ->defaultSort('date', 'desc')
             ->columns([
                 Tables\Columns\TextColumn::make('task.name')
                     ->label(trans('base.task'))
