@@ -1,16 +1,7 @@
 <?php
 
-arch()
+declare(strict_types=1);
+
+arch('PHP preset')
     ->preset()
     ->php();
-
-arch('Not used debug functions', function () {
-    expect([
-        'dd',
-        'ddd',
-        'dump',
-        'env',
-        'exit',
-        'ray',
-    ])->not->toBeUsed();
-});

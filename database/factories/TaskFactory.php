@@ -27,4 +27,24 @@ class TaskFactory extends Factory
             'updated_at' => Carbon::now(),
         ];
     }
+
+    /**
+     * Sets the state of the model as active by modifying the 'active' attribute.
+     */
+    public function active(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return ['active' => true];
+        });
+    }
+
+    /**
+     * Sets the state of the model as inactive by modifying the 'active' attribute.
+     */
+    public function inactive(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return ['active' => false];
+        });
+    }
 }
